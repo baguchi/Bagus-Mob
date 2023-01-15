@@ -6,10 +6,9 @@ import baguchan.tengu.client.model.TenguModel;
 import baguchan.tengu.entity.Tengu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -23,7 +22,8 @@ public class TenguRenderer <T extends Tengu> extends MobRenderer<T, TenguModel<T
 
 	public TenguRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new TenguModel<>(renderManagerIn.bakeLayer(ModModelLayers.TENGU)), 0.5F);
-		this.addLayer(new ItemInHandLayer<>(this, Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer()));
+		this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
+		this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
 	}
 
 	protected void setupRotations(T p_117802_, PoseStack p_117803_, float p_117804_, float p_117805_, float p_117806_) {

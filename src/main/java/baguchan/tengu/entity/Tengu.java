@@ -7,7 +7,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
@@ -22,11 +21,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class Tengu extends AbstractIllager {
@@ -93,10 +90,19 @@ public class Tengu extends AbstractIllager {
 	public boolean isAlliedTo(Entity p_33314_) {
 		if (super.isAlliedTo(p_33314_)) {
 			return true;
-		} else if (p_33314_ instanceof LivingEntity && ((LivingEntity)p_33314_).getMobType() == MobType.ILLAGER) {
+		} else if (p_33314_ instanceof LivingEntity && ((LivingEntity) p_33314_).getMobType() == MobType.ILLAGER) {
 			return this.getTeam() == null && p_33314_.getTeam() == null;
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+
+		if (this.isFallFlying()) {
+			this.setYRot(this.getYHeadRot());
 		}
 	}
 

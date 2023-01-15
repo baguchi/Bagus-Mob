@@ -5,10 +5,9 @@ package baguchan.tengu.client.model;// Made with Blockbench 4.5.2
 
 import baguchan.tengu.entity.Tengu;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -22,7 +21,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.phys.Vec3;
 
-public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements ArmedModel {
+public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart roots;
@@ -179,5 +178,10 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 
 	public void translateToHand(HumanoidArm p_102925_, PoseStack p_102926_) {
 		this.getArm(p_102925_).translateAndRotate(p_102926_);
+	}
+
+	@Override
+	public ModelPart getHead() {
+		return this.head;
 	}
 }
