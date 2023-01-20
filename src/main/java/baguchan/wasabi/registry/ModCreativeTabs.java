@@ -11,7 +11,7 @@ public class ModCreativeTabs {
 	@SubscribeEvent
 	public static void addCreativeTab(CreativeModeTabEvent.BuildContents event){
 		if(event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
-			event.accept(TenguItemRegistry.TENGU_SPAWNEGG.get());
+			event.accept(ModItemRegistry.TENGU_SPAWNEGG.get());
 		}
 	}
 }

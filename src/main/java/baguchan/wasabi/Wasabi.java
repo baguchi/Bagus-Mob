@@ -1,7 +1,7 @@
 package baguchan.wasabi;
 
-import baguchan.wasabi.registry.TenguEntityRegistry;
-import baguchan.wasabi.registry.TenguItemRegistry;
+import baguchan.wasabi.registry.ModEntityRegistry;
+import baguchan.wasabi.registry.ModItemRegistry;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,18 +16,18 @@ public class Wasabi {
     public static final String MODID = "wasabi";
 
     public Wasabi() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        TenguItemRegistry.ITEM_REGISTRY.register(modEventBus);
-        TenguEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
+		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
+		// Register the commonSetup method for modloading
+		modEventBus.addListener(this::commonSetup);
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        Raid.RaiderType.create("tengu", TenguEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
+		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
     }
 }

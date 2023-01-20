@@ -1,4 +1,6 @@
 {
-  "item.tengu.tengu_spawn_egg": "天狗のスポーンエッグ",
-  "entity.tengu.tengu":"天狗"
+  "item.wasabi.tengu_spawn_egg": "天狗のスポーンエッグ",
+  "item.wasabi.sharped_leaf": "尖った葉",
+  "item.wasabi.leaf_piece": "葉のかけら",
+  "entity.wasabi.tengu": "天狗"
 }

@@ -3,9 +3,9 @@ package baguchan.wasabi.client.model;// Made with Blockbench 4.5.2
 // Paste this class into your mod and generate all required imports
 
 
+import baguchan.wasabi.client.aniamtion.TenguAnimations;
 import baguchan.wasabi.entity.Tengu;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -136,19 +136,7 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 		}
 
 		AbstractIllager.IllagerArmPose abstractillager$illagerarmpose = entityIn.getArmPose();
-		if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.ATTACKING) {
-			AnimationUtils.swingWeaponDown(this.right_arm, this.left_arm, entityIn, this.attackTime, ageInTicks);
-		} else if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.BOW_AND_ARROW) {
-			this.right_arm.yRot = -0.1F + this.head.yRot;
-			this.right_arm.xRot = (-(float) Math.PI / 2F) + this.head.xRot;
-			this.left_arm.xRot = -0.9424779F + this.head.xRot;
-			this.left_arm.yRot = this.head.yRot - 0.4F;
-			this.left_arm.zRot = ((float) Math.PI / 2F);
-		} else if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CROSSBOW_HOLD) {
-			AnimationUtils.animateCrossbowHold(this.right_arm, this.left_arm, this.head, true);
-		} else if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE) {
-			AnimationUtils.animateCrossbowCharge(this.right_arm, this.left_arm, entityIn, true);
-		} else if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CELEBRATING) {
+		if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CELEBRATING) {
 			this.right_arm.z = 0.0F;
 			this.right_arm.x = -5.0F;
 			this.right_arm.xRot = Mth.cos(ageInTicks * 0.6662F) * 0.05F;
@@ -165,6 +153,8 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 
 		this.cape_right.zRot = -f1;
 		this.cape_left.zRot = f1;
+		this.animate(entityIn.slashRightAnimationState, TenguAnimations.SLASH_RIGHT, ageInTicks);
+		this.animate(entityIn.slashLeftAnimationState, TenguAnimations.SLASH_LEFT, ageInTicks);
 	}
 
 	@Override
@@ -173,7 +163,7 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 	}
 
 	private ModelPart getArm(HumanoidArm p_102923_) {
-		return p_102923_ == HumanoidArm.LEFT ? this.left_arm : this.right_arm;
+		return p_102923_ == HumanoidArm.LEFT ? this.right_arm : this.left_arm;
 	}
 
 	public void translateToHand(HumanoidArm p_102925_, PoseStack p_102926_) {

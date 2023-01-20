@@ -2,8 +2,9 @@ package baguchan.wasabi.client;
 
 import baguchan.wasabi.Wasabi;
 import baguchan.wasabi.client.model.TenguModel;
+import baguchan.wasabi.client.render.SlashAirRenderer;
 import baguchan.wasabi.client.render.TenguRenderer;
-import baguchan.wasabi.registry.TenguEntityRegistry;
+import baguchan.wasabi.registry.ModEntityRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,7 +16,8 @@ import net.minecraftforge.fml.common.Mod;
 public class TenguRenderingRegistry {
 	@SubscribeEvent
 	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(TenguEntityRegistry.TENGU.get(), TenguRenderer::new);
+		event.registerEntityRenderer(ModEntityRegistry.TENGU.get(), TenguRenderer::new);
+		event.registerEntityRenderer(ModEntityRegistry.SLASH_AIR.get(), SlashAirRenderer::new);
 	}
 
 	@SubscribeEvent
