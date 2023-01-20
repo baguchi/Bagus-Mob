@@ -75,7 +75,7 @@ public class SlashAir extends ThrowableProjectile {
 		double d0 = entity.getX() - this.getX();
 		double d1 = entity.getZ() - this.getZ();
 		double d2 = Math.max(d0 * d0 + d1 * d1, 0.00125D);
-		entity.push(d0 / d2 * 4.5D, 0.2D, d1 / d2 * 4.5D);
+		entity.push(d0 / d2 * 4.25D, 0.2D, d1 / d2 * 4.25D);
 	}
 
 	@Override
