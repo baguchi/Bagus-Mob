@@ -185,7 +185,7 @@ public class Tengu extends AbstractIllager {
 					this.resetAttackCooldown();
 				}
 
-				if (this.getTicksUntilNextAttack() <= 4) {
+				if (this.getTicksUntilNextAttack() == 4) {
 					Tengu.this.level.broadcastEntityEvent(Tengu.this, (byte) 4);
 				}
 			} else {
