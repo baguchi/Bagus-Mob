@@ -1,6 +1,6 @@
-package baguchan.tengu.mixin;
+package baguchan.wasabi.mixin;
 
-import baguchan.tengu.entity.Tengu;
+import baguchan.wasabi.entity.Tengu;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

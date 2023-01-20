@@ -1,11 +1,9 @@
-package baguchan.tengu.entity.goal;
+package baguchan.wasabi.entity.goal;
 
-import baguchan.tengu.entity.Tengu;
+import baguchan.wasabi.entity.Tengu;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.EnumSet;
 
 public class JumpTheSky extends Goal {
 	public final Tengu tengu;

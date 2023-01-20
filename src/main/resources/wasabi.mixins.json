@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "baguchan.tengu.mixin",
+  "package": "baguchan.wasabi.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "refmap": "tengu.refmap.json",
+  "refmap": "wasabi.refmap.json",
   "mixins": [
     "LivingEntityMixin"
   ],

@@ -1,9 +1,9 @@
-package baguchan.tengu.client.render;
+package baguchan.wasabi.client.render;
 
-import baguchan.tengu.TenguCore;
-import baguchan.tengu.client.ModModelLayers;
-import baguchan.tengu.client.model.TenguModel;
-import baguchan.tengu.entity.Tengu;
+import baguchan.wasabi.Wasabi;
+import baguchan.wasabi.client.ModModelLayers;
+import baguchan.wasabi.client.model.TenguModel;
+import baguchan.wasabi.entity.Tengu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TenguRenderer <T extends Tengu> extends MobRenderer<T, TenguModel<T>> {
-	private static final ResourceLocation ILLAGER = new ResourceLocation(TenguCore.MODID, "textures/entity/tengu.png");
+	private static final ResourceLocation ILLAGER = new ResourceLocation(Wasabi.MODID, "textures/entity/tengu.png");
 
 	public TenguRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new TenguModel<>(renderManagerIn.bakeLayer(ModModelLayers.TENGU)), 0.5F);

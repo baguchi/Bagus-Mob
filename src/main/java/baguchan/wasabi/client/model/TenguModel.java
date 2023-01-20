@@ -1,9 +1,9 @@
-package baguchan.tengu.client.model;// Made with Blockbench 4.5.2
+package baguchan.wasabi.client.model;// Made with Blockbench 4.5.2
 // Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
 
-import baguchan.tengu.entity.Tengu;
+import baguchan.wasabi.entity.Tengu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.ArmedModel;

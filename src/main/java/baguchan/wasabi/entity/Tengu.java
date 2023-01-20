@@ -1,6 +1,6 @@
-package baguchan.tengu.entity;
+package baguchan.wasabi.entity;
 
-import baguchan.tengu.entity.goal.JumpTheSky;
+import baguchan.wasabi.entity.goal.JumpTheSky;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
