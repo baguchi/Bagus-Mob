@@ -19,6 +19,7 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -46,6 +47,11 @@ public class Tengu extends AbstractIllager {
 	public Tengu(EntityType<? extends Tengu> p_32105_, Level p_32106_) {
 		super(p_32105_, p_32106_);
 		this.xpReward = 10;
+	}
+
+	@Override
+	protected BodyRotationControl createBodyControl() {
+		return new TenguBodyRotationControl(this);
 	}
 
 	protected void registerGoals() {
@@ -108,7 +114,13 @@ public class Tengu extends AbstractIllager {
 		super.aiStep();
 
 		if (this.isFallFlying()) {
-			this.setYRot(this.getYHeadRot());
+			if (this.isInFluidType() || this.isInPowderSnow) {
+				this.stopFallFlying();
+			}
+		}
+
+		if (!this.isFallFlying() && !this.isInFluidType() && this.fallDistance > 3.0F) {
+			this.startFallFlying();
 		}
 	}
 
@@ -177,7 +189,7 @@ public class Tengu extends AbstractIllager {
 
 		protected void checkAndPerformAttack(LivingEntity p_29589_, double p_29590_) {
 			double d0 = this.getAttackReachSqr(p_29589_);
-			if (p_29590_ <= d0 && this.isTimeToAttack()) {
+			if (p_29590_ <= d0 && this.getTicksUntilNextAttack() <= 12) {
 				this.resetAttackCooldown();
 				this.mob.doHurtTarget(p_29589_);
 			} else if (p_29590_ <= d0) {
@@ -185,13 +197,28 @@ public class Tengu extends AbstractIllager {
 					this.resetAttackCooldown();
 				}
 
-				if (this.getTicksUntilNextAttack() == 4) {
+				if (this.getTicksUntilNextAttack() == 16) {
 					Tengu.this.level.broadcastEntityEvent(Tengu.this, (byte) 4);
 				}
 			} else {
 				this.resetAttackCooldown();
 			}
 
+		}
+	}
+
+	class TenguBodyRotationControl extends BodyRotationControl {
+		public TenguBodyRotationControl(Mob p_33216_) {
+			super(p_33216_);
+		}
+
+		public void clientTick() {
+			if (Tengu.this.isFallFlying()) {
+				Tengu.this.setYRot(Tengu.this.getYHeadRot());
+				Tengu.this.setYBodyRot(Tengu.this.getYHeadRot());
+			} else {
+				super.clientTick();
+			}
 		}
 	}
 }
