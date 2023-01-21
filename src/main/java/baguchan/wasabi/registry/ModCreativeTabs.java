@@ -10,8 +10,11 @@ import net.minecraftforge.fml.common.Mod;
 public class ModCreativeTabs {
 	@SubscribeEvent
 	public static void addCreativeTab(CreativeModeTabEvent.BuildContents event){
-		if(event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
+		if (event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(ModItemRegistry.TENGU_SPAWNEGG.get());
+		}
+		if (event.getTab() == CreativeModeTabs.COMBAT) {
+			event.accept(ModItemRegistry.SHARPED_LEAF.get());
 		}
 	}
 }
