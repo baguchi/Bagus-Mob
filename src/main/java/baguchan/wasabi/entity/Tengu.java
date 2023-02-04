@@ -1,11 +1,13 @@
 package baguchan.wasabi.entity;
 
-import baguchan.wasabi.entity.goal.JumpTheSky;
+import baguchan.wasabi.entity.goal.JumpTheSkyGoal;
 import baguchan.wasabi.registry.ModItemRegistry;
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -24,12 +26,17 @@ import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 public class Tengu extends AbstractIllager {
 
@@ -49,7 +56,7 @@ public class Tengu extends AbstractIllager {
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new JumpTheSky(this));
+		this.goalSelector.addGoal(1, new JumpTheSkyGoal(this));
 		this.goalSelector.addGoal(2, new AbstractIllager.RaiderOpenDoorGoal(this));
 		this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
 		this.goalSelector.addGoal(4, new TenguMeleeAttackGoal());
@@ -146,7 +153,21 @@ public class Tengu extends AbstractIllager {
 
 	@Override
 	public void applyRaidBuffs(int p_37844_, boolean p_37845_) {
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItemRegistry.SHARPED_LEAF.get()));
+		ItemStack itemstack = new ItemStack(ModItemRegistry.SHARPED_LEAF.get());
+		Raid raid = this.getCurrentRaid();
+		int i = 1;
+		if (p_37844_ > raid.getNumGroups(Difficulty.NORMAL)) {
+			i = 2;
+		}
+
+		boolean flag = this.random.nextFloat() <= raid.getEnchantOdds();
+		if (flag) {
+			Map<Enchantment, Integer> map = Maps.newHashMap();
+			map.put(Enchantments.SHARPNESS, i);
+			EnchantmentHelper.setEnchantments(map, itemstack);
+		}
+
+		this.setItemSlot(EquipmentSlot.MAINHAND, itemstack);
 	}
 
 	@Override
@@ -188,7 +209,7 @@ public class Tengu extends AbstractIllager {
 
 	class TenguMeleeAttackGoal extends MeleeAttackGoal {
 		public TenguMeleeAttackGoal() {
-			super(Tengu.this, 1.0D, true);
+			super(Tengu.this, 1.2D, true);
 		}
 
 		protected void checkAndPerformAttack(LivingEntity p_29589_, double p_29590_) {
@@ -201,7 +222,7 @@ public class Tengu extends AbstractIllager {
 					this.resetAttackCooldown();
 				}
 
-				if (this.getTicksUntilNextAttack() == 16) {
+				if (this.getTicksUntilNextAttack() == 19) {
 					Tengu.this.level.broadcastEntityEvent(Tengu.this, (byte) 4);
 				}
 			} else {

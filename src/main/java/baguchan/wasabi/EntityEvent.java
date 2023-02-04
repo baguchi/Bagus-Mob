@@ -1,5 +1,6 @@
 package baguchan.wasabi;
 
+import baguchan.wasabi.entity.Ninjar;
 import baguchan.wasabi.entity.Tengu;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -17,7 +18,8 @@ public class EntityEvent {
 		if (event.getEntity() instanceof Villager) {
 			Villager abstractVillager = (Villager) event.getEntity();
 
-			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal((PathfinderMob) abstractVillager, Tengu.class, 16.0F, 0.8F, 0.85F));
+			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Tengu.class, 16.0F, 0.75F, 0.8F));
+			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Ninjar.class, 16.0F, 0.75F, 0.8F));
 		}
 
 		if (event.getEntity() instanceof WanderingTrader) {

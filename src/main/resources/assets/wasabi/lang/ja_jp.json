@@ -1,6 +1,8 @@
 {
   "item.wasabi.tengu_spawn_egg": "天狗のスポーンエッグ",
+  "item.wasabi.ninjar_spawn_egg": "ニンジャーのスポーンエッグ",
   "item.wasabi.sharped_leaf": "尖った葉",
-  "item.wasabi.leaf_piece": "葉のかけら",
-  "entity.wasabi.tengu": "天狗"
+  "item.wasabi.dagger": "ダガー",
+  "entity.wasabi.tengu": "天狗",
+  "entity.wasabi.ninjar": "ニンジャー"
 }

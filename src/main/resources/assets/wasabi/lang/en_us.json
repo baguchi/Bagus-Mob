@@ -1,6 +1,8 @@
 {
   "item.wasabi.tengu_spawn_egg": "Tengu Spawn Egg",
+  "item.wasabi.ninjar_spawn_egg": "Ninjar Spawn Egg",
   "item.wasabi.sharped_leaf": "Shaped Leaf",
-  "item.wasabi.leaf_piece": "Leaf Piece",
-  "entity.wasabi.tengu": "Tengu"
+  "item.wasabi.dagger": "Dagger",
+  "entity.wasabi.tengu": "Tengu",
+  "entity.wasabi.ninjar": "Ninjar"
 }

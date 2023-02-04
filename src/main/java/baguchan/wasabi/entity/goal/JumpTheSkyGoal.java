@@ -5,14 +5,14 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 
-public class JumpTheSky extends Goal {
+public class JumpTheSkyGoal extends Goal {
 	public final Tengu tengu;
 	private int cooldownTime;
 
 	public int tick;
 	private static final UniformInt TIME_BETWEEN_JUMP = UniformInt.of(200, 400);
 
-	public JumpTheSky(Tengu tengu) {
+	public JumpTheSkyGoal(Tengu tengu) {
 		this.tengu = tengu;
 	}
 

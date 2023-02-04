@@ -12,9 +12,11 @@ public class ModCreativeTabs {
 	public static void addCreativeTab(CreativeModeTabEvent.BuildContents event){
 		if (event.getTab() == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(ModItemRegistry.TENGU_SPAWNEGG.get());
+			event.accept(ModItemRegistry.NINJAR_SPAWNEGG.get());
 		}
 		if (event.getTab() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());
+			event.accept(ModItemRegistry.DAGGER.get());
 		}
 	}
 }
