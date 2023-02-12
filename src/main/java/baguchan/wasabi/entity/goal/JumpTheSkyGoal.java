@@ -19,7 +19,7 @@ public class JumpTheSkyGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		if(--this.cooldownTime <= 0){
-			if(this.tengu.isOnGround() && this.tengu.isAggressive() && this.tengu.level.canSeeSky(this.tengu.blockPosition())){
+			if (this.tengu.isOnGround() && this.tengu.isAggressive()) {
 				this.cooldownTime = TIME_BETWEEN_JUMP.sample(this.tengu.getRandom());
 				return true;
 			}

@@ -19,7 +19,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.phys.Vec3;
 
 public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -87,23 +86,13 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 
 		float f = 0.2617994F;
 		float f1 = -0.3491F;
-		float f2 = 0.0F;
-		float f3 = 0.0F;
 		if (entityIn.isFallFlying()) {
-			float f4 = 1.0F;
-			Vec3 vec3 = entityIn.getDeltaMovement();
-			if (vec3.y < 0.0D) {
-				Vec3 vec31 = vec3.normalize();
-				f4 = 1.0F - (float) Math.pow(-vec31.y, 1.5D);
-			}
-
-			f = f4 * 0.34906584F + (1.0F - f4) * f;
-			f1 = f4 * (-(float) Math.PI / 2F) + (1.0F - f4) * f1;
+			f1 -= Mth.cos(limbSwing * 0.8F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
 		}
 
 		if (flag) {
-			this.head.xRot = (-(float)Math.PI / 4F);
-		}else {
+			this.head.xRot = (-(float) Math.PI / 4F);
+		} else {
 			this.head.xRot = headPitch * ((float) Math.PI / 180F);
 		}
 
