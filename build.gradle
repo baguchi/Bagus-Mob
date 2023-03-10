@@ -143,6 +143,9 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    maven {
+        url "https://gitlab.com/api/v4/projects/21830712/packages/maven"
+    }
 }
 
 dependencies {
@@ -153,7 +156,7 @@ dependencies {
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
-
+    runtimeOnly fg.deobf("io.github.flemmli97:debugutils:1.19.3-1.0.2-forge")
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
