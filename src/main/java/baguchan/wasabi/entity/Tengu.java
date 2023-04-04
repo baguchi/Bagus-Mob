@@ -60,7 +60,7 @@ public class Tengu extends AbstractIllager {
 		this.goalSelector.addGoal(2, new AbstractIllager.RaiderOpenDoorGoal(this));
 		this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
 		this.goalSelector.addGoal(4, new TenguMeleeAttackGoal());
-		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
+		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
