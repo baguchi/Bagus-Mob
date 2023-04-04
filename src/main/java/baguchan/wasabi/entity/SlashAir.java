@@ -16,7 +16,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SlashAir extends ThrowableProjectile {
 	public float damage = 2;
-	private int totalHits;
 
 	public SlashAir(EntityType<? extends SlashAir> p_i50154_1_, Level p_i50154_2_) {
 		super(p_i50154_1_, p_i50154_2_);

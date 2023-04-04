@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -21,10 +20,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.SkullBlock;
 
@@ -86,9 +82,9 @@ public class CustomRootHeadLayer<T extends LivingEntity, M extends HierarchicalM
 				SkullModelBase skullmodelbase = this.skullModels.get(skullblock$type);
 				RenderType rendertype = SkullBlockRenderer.getRenderType(skullblock$type, gameprofile);
 				SkullBlockRenderer.renderSkull((Direction) null, 180.0F, p_116735_, p_116731_, p_116732_, p_116733_, skullmodelbase, rendertype);
-			} else if (!(item instanceof ArmorItem) || ((ArmorItem) item).getSlot() != EquipmentSlot.HEAD) {
+			} else if (!(item instanceof ArmorItem) || ((ArmorItem) item).getEquipmentSlot() != EquipmentSlot.HEAD) {
 				translateToHead(p_116731_, flag);
-				this.itemInHandRenderer.renderItem(p_116734_, itemstack, ItemTransforms.TransformType.HEAD, false, p_116731_, p_116732_, p_116733_);
+				this.itemInHandRenderer.renderItem(p_116734_, itemstack, ItemDisplayContext.HEAD, false, p_116731_, p_116732_, p_116733_);
 			}
 
 			p_116731_.popPose();

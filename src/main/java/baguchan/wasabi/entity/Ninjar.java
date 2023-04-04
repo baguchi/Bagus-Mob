@@ -10,7 +10,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -42,13 +44,15 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 
 public class Ninjar extends AbstractIllager {
-	public final AnimationState walkAnimationState = new AnimationState();
-	public final AnimationState dashAnimationState = new AnimationState();
+
+	private float runningScale;
 	public final AnimationState idleAnimationState = new AnimationState();
 	public final AnimationState slashRightAnimationState = new AnimationState();
 	public final AnimationState slashLeftAnimationState = new AnimationState();
@@ -60,6 +64,7 @@ public class Ninjar extends AbstractIllager {
 		this.xpReward = 10;
 	}
 
+	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> p_219422_) {
 		if (DATA_POSE.equals(p_219422_)) {
 			switch (this.getPose()) {
@@ -166,20 +171,18 @@ public class Ninjar extends AbstractIllager {
 
 	@Override
 	public void tick() {
-		if ((this.isMoving()) && level.isClientSide()) {
-			if (isDashing()) {
-				idleAnimationState.stop();
-				walkAnimationState.stop();
-				dashAnimationState.startIfStopped(this.tickCount);
+		if (level.isClientSide()) {
+			if ((this.isMoving())) {
+				if (isDashing()) {
+					idleAnimationState.stop();
+					runningScale = Mth.clamp(runningScale + 0.1F, 0, 1);
+				} else {
+					idleAnimationState.stop();
+					runningScale = Mth.clamp(runningScale - 0.1F, 0, 1);
+				}
 			} else {
-				dashAnimationState.stop();
-				idleAnimationState.stop();
-				walkAnimationState.startIfStopped(this.tickCount);
+				idleAnimationState.startIfStopped(this.tickCount);
 			}
-		} else if (level.isClientSide()) {
-			dashAnimationState.stop();
-			walkAnimationState.stop();
-			idleAnimationState.startIfStopped(this.tickCount);
 		}
 		super.tick();
 	}
@@ -253,7 +256,7 @@ public class Ninjar extends AbstractIllager {
 	public boolean hurt(DamageSource p_37849_, float p_37850_) {
 
 		if (this.getPose() == Pose.DIGGING || this.getPose() == Pose.EMERGING) {
-			if (!p_37849_.isExplosion()) {
+			if (!p_37849_.is(DamageTypeTags.IS_EXPLOSION)) {
 				return super.hurt(p_37849_, p_37850_ * 0.25F);
 			} else {
 				return false;
@@ -281,6 +284,11 @@ public class Ninjar extends AbstractIllager {
 	@Override
 	public boolean canBeLeader() {
 		return false;
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public float getRunningScale() {
+		return runningScale;
 	}
 
 	class NinjarMeleeAttackGoal extends MeleeAttackGoal {

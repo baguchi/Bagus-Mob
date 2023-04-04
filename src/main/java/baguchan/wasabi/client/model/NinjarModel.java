@@ -12,7 +12,6 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 
 public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
@@ -64,16 +63,13 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
 		this.head.xRot = headPitch * ((float) Math.PI / 180F);
 
+		this.animate(entity.idleAnimationState, NinjarAnimations.IDLE, ageInTicks);
+		this.animateWalk(NinjarAnimations.DASH, limbSwing, limbSwingAmount * (1.0F - entity.getRunningScale()), 1.0F, 5.0F);
+		this.animateWalk(NinjarAnimations.WALK, limbSwing, limbSwingAmount * (entity.getRunningScale()), 1.0F, 2.0F);
 		this.animate(entity.slashRightAnimationState, NinjarAnimations.SLASH_RIGHT, ageInTicks);
 		this.animate(entity.slashLeftAnimationState, NinjarAnimations.SLASH_LEFT, ageInTicks);
-		this.animate(entity.idleAnimationState, NinjarAnimations.IDLE, ageInTicks);
-		this.animate(entity.appearAnimationState, NinjarAnimations.SPAWN, ageInTicks);
 		this.animate(entity.disappearAnimationState, NinjarAnimations.DESPAWN, ageInTicks);
-		float f = (float) entity.getDeltaMovement().horizontalDistanceSqr();
-		float f1 = Mth.clamp(f * 200.0F, 0.2F, 2.0F);
-		float f2 = Mth.clamp(f * 100.0F, 0.3F, 1.0F);
-		this.animate(entity.dashAnimationState, NinjarAnimations.DASH, ageInTicks, f2);
-		this.animate(entity.walkAnimationState, NinjarAnimations.WALK, ageInTicks, f1);
+		this.animate(entity.appearAnimationState, NinjarAnimations.SPAWN, ageInTicks);
 	}
 
 	@Override
