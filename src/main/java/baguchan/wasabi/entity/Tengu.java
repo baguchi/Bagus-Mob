@@ -249,7 +249,7 @@ public class Tengu extends AbstractIllager {
 
 	class TenguMeleeAttackGoal extends MeleeAttackGoal {
 		public TenguMeleeAttackGoal() {
-			super(Tengu.this, 1.2D, true);
+			super(Tengu.this, 1.25D, true);
 		}
 
 		protected void checkAndPerformAttack(LivingEntity p_29589_, double p_29590_) {
