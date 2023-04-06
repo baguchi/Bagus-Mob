@@ -20,7 +20,7 @@ mixin {
     add sourceSets.main, "wasabi.refmap.json"
 }
 
-version = '2.0.0'
+version = '2.0.1'
 group = 'baguchan.wasabi' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Wasabi-1.19.4'
 
