@@ -1,3 +1,3 @@
-# Wasabi
+# Bagus Mob
 
-This mod is add Japanese Themed Illager!
+This mod is various unique mob!
