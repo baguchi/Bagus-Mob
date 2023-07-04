@@ -3,6 +3,8 @@ package baguchan.bagusmob.entity;
 import baguchan.bagusmob.entity.goal.ConstructGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -34,6 +36,8 @@ public class Modifiger extends AbstractIllager {
 
     private float walkScale;
     private Optional<BlockPos> buildingPos = Optional.empty();
+    private ResourceLocation buildingStructureName;
+    private int buildingStep;
 
     public Modifiger(EntityType<? extends Modifiger> p_32105_, Level p_32106_) {
         super(p_32105_, p_32106_);
@@ -97,6 +101,22 @@ public class Modifiger extends AbstractIllager {
         this.buildingPos = buildingPos;
     }
 
+    public int getBuildingStep() {
+        return buildingStep;
+    }
+
+    public void setBuildingStep(int buildingStep) {
+        this.buildingStep = buildingStep;
+    }
+
+    public ResourceLocation getBuildingStructureName() {
+        return buildingStructureName;
+    }
+
+    public void setBuildingStructureName(ResourceLocation buildingStructureName) {
+        this.buildingStructureName = buildingStructureName;
+    }
+
     public boolean isAlliedTo(Entity p_33314_) {
         if (super.isAlliedTo(p_33314_)) {
             return true;
@@ -124,6 +144,33 @@ public class Modifiger extends AbstractIllager {
     @Override
     public IllagerArmPose getArmPose() {
         return this.isCelebrating() ? IllagerArmPose.CELEBRATING : IllagerArmPose.CROSSED;
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag p_37870_) {
+        super.addAdditionalSaveData(p_37870_);
+        if (this.getBuildingPos().isPresent()) {
+            p_37870_.put("BuildingPos", NbtUtils.writeBlockPos(this.getBuildingPos().get()));
+        }
+
+        if (this.buildingStructureName != null) {
+            p_37870_.putString("BuildingName", this.buildingStructureName.toString());
+        }
+        p_37870_.putInt("BuildingStep", this.buildingStep);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag p_37862_) {
+        super.readAdditionalSaveData(p_37862_);
+        if (p_37862_.contains("BuildingPos", 10)) {
+            this.setBuildingPos(Optional.of(NbtUtils.readBlockPos(p_37862_.getCompound("BuildingPos"))));
+        }
+        if (p_37862_.contains("BuildingName")) {
+            this.setBuildingStructureName(ResourceLocation.tryParse(p_37862_.getString("BuildingName")));
+        }
+        if (p_37862_.contains("BuildingStep")) {
+            this.setBuildingStep(p_37862_.getInt("BuildingStep"));
+        }
     }
 
     @Override

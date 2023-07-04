@@ -4,13 +4,16 @@ import baguchan.bagusmob.entity.Modifiger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -22,8 +25,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 
+import static net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.processBlockInfos;
+
 public class ConstructGoal extends Goal {
-    private static final String[] STRUCTURE_LOCATION_PORTALS = new String[]{"ruined_portal/portal_1", "ruined_portal/portal_2", "ruined_portal/portal_3", "ruined_portal/portal_4", "ruined_portal/portal_5", "ruined_portal/portal_6", "ruined_portal/portal_7", "ruined_portal/portal_8", "ruined_portal/portal_9", "ruined_portal/portal_10"};
+    private static final String[] STRUCTURE_LOCATION_PORTALS = new String[]{"ancient_city/city_center/city_center_1", "ancient_city/city_center/city_center_2", "ancient_city/city_center/city_center_3"};
 
     private final Modifiger mob;
     private final float speedMultiplier;
@@ -36,7 +41,7 @@ public class ConstructGoal extends Goal {
     private Rotation rotation;
 
     private int step;
-    private int buildingTick = 3;
+    private int buildingTick = 4;
 
 
     public ConstructGoal(Modifiger p_25919_, float speedMultiplier) {
@@ -46,19 +51,34 @@ public class ConstructGoal extends Goal {
     }
 
     public boolean canUse() {
-        return !workOver && ForgeEventFactory.getMobGriefingEvent(this.mob.level(), this.mob) && this.mob.getBuildingPos().isPresent();
+        return ForgeEventFactory.getMobGriefingEvent(this.mob.level(), this.mob) && this.mob.getBuildingPos().isPresent();
+    }
+
+    @Override
+    public boolean canContinueToUse() {
+        return !workOver && super.canContinueToUse();
     }
 
     public void start() {
         this.workOver = false;
-        BlockPos globalPos = this.mob.blockPosition();
+        Optional<BlockPos> globalPos = this.mob.getBuildingPos();
         int i = this.mob.getRandom().nextInt(STRUCTURE_LOCATION_PORTALS.length);
         StructureTemplateManager structuretemplatemanager = this.mob.level().getServer().getStructureManager();
-        StructureTemplate structuretemplate = structuretemplatemanager.getOrCreate(ResourceLocation.tryParse(STRUCTURE_LOCATION_PORTALS[i]));
+
+        ResourceLocation resourceLocation = ResourceLocation.tryParse(STRUCTURE_LOCATION_PORTALS[i]);
+
+        if (this.mob.getBuildingStructureName() != null) {
+            resourceLocation = this.mob.getBuildingStructureName();
+            this.step = this.mob.getBuildingStep();
+        } else {
+            this.mob.setBuildingStructureName(resourceLocation);
+        }
+
+        StructureTemplate structuretemplate = structuretemplatemanager.getOrCreate(resourceLocation);
 
         this.template = structuretemplate;
         Rotation rotation = Rotation.getRandom(this.mob.getRandom());
-        ChunkPos chunkpos = new ChunkPos(globalPos);
+        ChunkPos chunkpos = new ChunkPos(globalPos.get());
         BoundingBox boundingbox = new BoundingBox(chunkpos.getMinBlockX() - 16, this.mob.level().getMinBuildHeight(), chunkpos.getMinBlockZ() - 16, chunkpos.getMaxBlockX() + 16, this.mob.level().getMaxBuildHeight(), chunkpos.getMaxBlockZ() + 16);
         StructurePlaceSettings structureplacesettings = (new StructurePlaceSettings()).setRotation(rotation).setBoundingBox(boundingbox).setRandom(this.mob.getRandom());
         Vec3i vec3i = structuretemplate.getSize(rotation);
@@ -74,64 +94,73 @@ public class ConstructGoal extends Goal {
     public void tick() {
         Optional<BlockPos> blockPos = this.mob.getBuildingPos();
 
+        if (this.mob.level() instanceof ServerLevel serverLevel) {
+            if (blockPos.isPresent()) {
+                BlockPos blockpos1 = blockPos.get().offset(-maxPos.getX(), 0, -maxPos.getZ());
 
-        if (blockPos.isPresent()) {
-            BlockPos blockpos1 = blockPos.get().offset(-maxPos.getX(), 0, -maxPos.getZ());
+                BlockPos blockpos2 = template.getZeroPositionWithTransform(blockpos1, Mirror.NONE, this.rotation);
 
-            BlockPos blockpos2 = template.getZeroPositionWithTransform(blockpos1, Mirror.NONE, this.rotation);
+                List<StructureTemplate.StructureBlockInfo> list = templateSettings.getRandomPalette(template.palettes, blockpos2).blocks();
 
-            List<StructureTemplate.StructureBlockInfo> list = templateSettings.getRandomPalette(template.palettes, blockpos2).blocks().stream().filter(info -> {
-                return !info.state().is(Blocks.STRUCTURE_VOID) && !(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir());
-            }).toList();
-            if (step > list.size() - 1) {
-                workOver = true;
-                return;
-            }
-            if (this.currentBlockPos == null) {
-                StructureTemplate.StructureBlockInfo structureBlockInfo = list.get(step);
-                BlockPos origin = blockPos.get().offset(structureBlockInfo.pos());
-                if (isReplaceable(this.mob.level().getBlockState(origin), mob.level(), mob)) {
-                    blockState = structureBlockInfo.state();
-                    currentBlockPos = origin;
-                    step += 1;
-                } else {
-                    step += 1;
+                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().toList();
+                if (step > list2.size() - 1) {
+                    workOver = true;
+                    return;
                 }
-            }
-            this.mob.getNavigation().moveTo(blockPos.get().getX(), blockPos.get().getY(), blockPos.get().getZ(), this.speedMultiplier);
-
-            if (--this.buildingTick < 0) {
-                if (currentBlockPos != null) {
-
-                    if (blockPos.get().distSqr(mob.blockPosition()) < 32F) {
-                        if (isReplaceable(this.mob.level().getBlockState(currentBlockPos), this.mob.level(), mob)) {
-                            if (blockState != null && !blockState.isAir() && blockState.getFluidState().isEmpty()) {
-                                SoundType soundType = blockState.getSoundType();
-                                this.mob.level().playSound(null, currentBlockPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), blockState.getSoundType().getPitch());
-                            }
-                            BlockState realState = blockState.mirror(templateSettings.getMirror()).rotate(templateSettings.getRotation());
-
-                            Block.pushEntitiesUp(this.mob.level().getBlockState(currentBlockPos), realState, this.mob.level(), currentBlockPos);
-                            this.mob.level().setBlock(currentBlockPos, realState, 3);
-
-                            currentBlockPos = null;
-                        } else {
-                            currentBlockPos = null;
-                        }
+                if (this.currentBlockPos == null) {
+                    StructureTemplate.StructureBlockInfo structureBlockInfo = list2.get(step);
+                    BlockPos origin = structureBlockInfo.pos();
+                    if (isReplaceable(serverLevel.getBlockState(origin), serverLevel, mob)) {
+                        blockState = structureBlockInfo.state();
+                        currentBlockPos = origin;
+                        step += 1;
+                    } else {
+                        step += 1;
                     }
                 }
-                this.buildingTick = 4;
+                this.mob.getNavigation().moveTo(blockPos.get().getX(), blockPos.get().getY(), blockPos.get().getZ(), this.speedMultiplier);
+
+                if (--this.buildingTick < 0) {
+                    if (currentBlockPos != null) {
+
+                        if (blockPos.get().distSqr(mob.blockPosition()) < 32F) {
+                            if (isReplaceable(serverLevel.getBlockState(currentBlockPos), serverLevel, mob)) {
+                                if (blockState != null && !blockState.isAir() && blockState.getFluidState().isEmpty()) {
+                                    SoundType soundType = blockState.getSoundType();
+                                    serverLevel.playSound(null, currentBlockPos, soundType.getPlaceSound(), SoundSource.BLOCKS, soundType.getVolume(), blockState.getSoundType().getPitch());
+                                }
+                                BlockState realState = blockState.mirror(templateSettings.getMirror()).rotate(templateSettings.getRotation());
+
+                                Block.pushEntitiesUp(serverLevel.getBlockState(currentBlockPos), realState, serverLevel, currentBlockPos);
+                                serverLevel.setBlock(currentBlockPos, realState, 3);
+
+                                currentBlockPos = null;
+                            } else {
+                                currentBlockPos = null;
+                            }
+                        }
+                    }
+                    this.buildingTick = 4;
+
+                }
+                this.mob.getNavigation().moveTo(blockPos.get().getX(), blockPos.get().getY(), blockPos.get().getZ(), this.speedMultiplier);
+
             }
         }
+        this.mob.setBuildingStep(this.step);
     }
 
     @Override
     public void stop() {
         super.stop();
-        this.mob.setBuildingPos(Optional.empty());
+        if (this.workOver) {
+            this.mob.setBuildingPos(Optional.empty());
+            this.mob.setBuildingStructureName(null);
+            this.mob.setBuildingStep(0);
+        }
     }
 
-    private boolean isReplaceable(BlockState blockState, Level level, PathfinderMob mob) {
+    private boolean isReplaceable(BlockState blockState, ServerLevel level, PathfinderMob mob) {
         return !blockState.is(BlockTags.FEATURES_CANNOT_REPLACE) && ForgeEventFactory.getMobGriefingEvent(level, mob);
     }
 
