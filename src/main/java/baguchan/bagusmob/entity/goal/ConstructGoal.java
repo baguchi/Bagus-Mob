@@ -102,7 +102,7 @@ public class ConstructGoal extends Goal {
 
                 List<StructureTemplate.StructureBlockInfo> list = templateSettings.getRandomPalette(template.palettes, blockpos2).blocks();
 
-                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().toList();
+                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().filter(info -> !(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir())).toList();
                 if (step > list2.size() - 1) {
                     workOver = true;
                     return;
