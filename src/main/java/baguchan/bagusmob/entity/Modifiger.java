@@ -33,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class Modifiger extends AbstractIllager {
+    private static final String[] STRUCTURE_LOCATIONS = new String[]{"pillager_outpost/watchtower"};
+
 
     private float walkScale;
     private Optional<BlockPos> buildingPos = Optional.empty();
@@ -50,7 +52,7 @@ public class Modifiger extends AbstractIllager {
         this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
         this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
 
-        this.goalSelector.addGoal(6, new ConstructGoal(this, 0.8F));
+        this.goalSelector.addGoal(6, new ConstructGoal(this, STRUCTURE_LOCATIONS, 0.8F));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.65D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));

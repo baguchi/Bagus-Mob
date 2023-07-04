@@ -10,10 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -28,7 +25,7 @@ import java.util.Optional;
 import static net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.processBlockInfos;
 
 public class ConstructGoal extends Goal {
-    private static final String[] STRUCTURE_LOCATION_PORTALS = new String[]{"ancient_city/city_center/city_center_1", "ancient_city/city_center/city_center_2", "ancient_city/city_center/city_center_3"};
+    private final String[] structures;
 
     private final Modifiger mob;
     private final float speedMultiplier;
@@ -44,8 +41,10 @@ public class ConstructGoal extends Goal {
     private int buildingTick = 4;
 
 
-    public ConstructGoal(Modifiger p_25919_, float speedMultiplier) {
+    public ConstructGoal(Modifiger p_25919_, String[] structures, float speedMultiplier) {
+
         this.mob = p_25919_;
+        this.structures = structures;
         this.speedMultiplier = speedMultiplier;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
     }
@@ -62,10 +61,10 @@ public class ConstructGoal extends Goal {
     public void start() {
         this.workOver = false;
         Optional<BlockPos> globalPos = this.mob.getBuildingPos();
-        int i = this.mob.getRandom().nextInt(STRUCTURE_LOCATION_PORTALS.length);
+        int i = this.mob.getRandom().nextInt(structures.length);
         StructureTemplateManager structuretemplatemanager = this.mob.level().getServer().getStructureManager();
 
-        ResourceLocation resourceLocation = ResourceLocation.tryParse(STRUCTURE_LOCATION_PORTALS[i]);
+        ResourceLocation resourceLocation = ResourceLocation.tryParse(structures[i]);
 
         if (this.mob.getBuildingStructureName() != null) {
             resourceLocation = this.mob.getBuildingStructureName();
@@ -102,7 +101,7 @@ public class ConstructGoal extends Goal {
 
                 List<StructureTemplate.StructureBlockInfo> list = templateSettings.getRandomPalette(template.palettes, blockpos2).blocks();
 
-                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().filter(info -> !(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir())).toList();
+                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().filter(info -> !info.state().is(Blocks.JIGSAW) && !(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir())).toList();
                 if (step > list2.size() - 1) {
                     workOver = true;
                     return;
