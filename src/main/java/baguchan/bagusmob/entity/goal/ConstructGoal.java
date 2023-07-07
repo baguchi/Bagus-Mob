@@ -112,6 +112,7 @@ public class ConstructGoal extends Goal {
                     if (isReplaceable(serverLevel.getBlockState(origin), serverLevel, mob)) {
                         blockState = structureBlockInfo.state();
                         currentBlockPos = origin;
+                        structureBlockInfo.nbt();
                         step += 1;
                     } else {
                         step += 1;

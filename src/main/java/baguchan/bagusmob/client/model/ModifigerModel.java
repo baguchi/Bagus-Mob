@@ -70,7 +70,6 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> {
         this.animateWalk(ModifigerAnimations.IDLE, 0, 1F - entity.getWalkScale(), 0, 1);
         this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 1.0F, 2.0F);
         this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount * entity.getWalkScale(), 1.0F, 2.0F);
-
     }
 
     @Override
