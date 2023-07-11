@@ -1,18 +1,25 @@
 package baguchan.bagusmob.entity.goal;
 
 import baguchan.bagusmob.entity.Modifiger;
+import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
@@ -36,6 +43,7 @@ public class ConstructGoal extends Goal {
     private StructurePlaceSettings templateSettings;
     private BlockState blockState;
     private Rotation rotation;
+    private CompoundTag compoundTag;
 
     private int step;
     private int buildingTick = 4;
@@ -79,7 +87,7 @@ public class ConstructGoal extends Goal {
         Rotation rotation = Rotation.getRandom(this.mob.getRandom());
         ChunkPos chunkpos = new ChunkPos(globalPos.get());
         BoundingBox boundingbox = new BoundingBox(chunkpos.getMinBlockX() - 16, this.mob.level().getMinBuildHeight(), chunkpos.getMinBlockZ() - 16, chunkpos.getMaxBlockX() + 16, this.mob.level().getMaxBuildHeight(), chunkpos.getMaxBlockZ() + 16);
-        StructurePlaceSettings structureplacesettings = (new StructurePlaceSettings()).setRotation(rotation).setBoundingBox(boundingbox).setRandom(this.mob.getRandom());
+        StructurePlaceSettings structureplacesettings = (new StructurePlaceSettings()).setRotation(rotation).addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false).setFinalizeEntities(true).setBoundingBox(boundingbox).setRandom(this.mob.getRandom());
         Vec3i vec3i = structuretemplate.getSize(rotation);
         this.templateSettings = structureplacesettings;
 
@@ -101,7 +109,9 @@ public class ConstructGoal extends Goal {
 
                 List<StructureTemplate.StructureBlockInfo> list = templateSettings.getRandomPalette(template.palettes, blockpos2).blocks();
 
-                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().filter(info -> !info.state().is(Blocks.JIGSAW) && !(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir())).toList();
+                List<StructureTemplate.StructureBlockInfo> list2 = processBlockInfos(serverLevel, blockpos2, blockpos2, this.templateSettings, list, this.template).stream().filter(info -> !info.state().is(Blocks.JIGSAW) && (!(mob.level().getBlockState(blockPos.get().offset(info.pos())).isAir() && info.state().isAir())) || compoundTag != null).toList();
+                List<Pair<BlockPos, CompoundTag>> list3 = Lists.newArrayListWithCapacity(list.size());
+
                 if (step > list2.size() - 1) {
                     workOver = true;
                     return;
@@ -112,7 +122,7 @@ public class ConstructGoal extends Goal {
                     if (isReplaceable(serverLevel.getBlockState(origin), serverLevel, mob)) {
                         blockState = structureBlockInfo.state();
                         currentBlockPos = origin;
-                        structureBlockInfo.nbt();
+                        compoundTag = structureBlockInfo.nbt();
                         step += 1;
                     } else {
                         step += 1;
@@ -132,7 +142,47 @@ public class ConstructGoal extends Goal {
                                 BlockState realState = blockState.mirror(templateSettings.getMirror()).rotate(templateSettings.getRotation());
 
                                 Block.pushEntitiesUp(serverLevel.getBlockState(currentBlockPos), realState, serverLevel, currentBlockPos);
-                                serverLevel.setBlock(currentBlockPos, realState, 3);
+
+                                if (compoundTag != null) {
+                                    BlockEntity blockentity = serverLevel.getBlockEntity(currentBlockPos);
+                                    Clearable.tryClear(blockentity);
+                                    serverLevel.setBlock(currentBlockPos, Blocks.BARRIER.defaultBlockState(), 20);
+                                }
+
+                                if (serverLevel.setBlock(currentBlockPos, realState, 3)) {
+                                    list3.add(Pair.of(currentBlockPos, compoundTag));
+                                    if (compoundTag != null) {
+                                        BlockEntity blockentity1 = serverLevel.getBlockEntity(currentBlockPos);
+
+                                        if (blockentity1 != null) {
+                                            if (blockentity1 instanceof RandomizableContainerBlockEntity) {
+                                                compoundTag.putLong("LootTableSeed", serverLevel.random.nextLong());
+                                            }
+
+                                            blockentity1.load(compoundTag);
+                                            blockentity1.setChanged();
+                                        }
+                                    }
+
+                                    for (Pair<BlockPos, CompoundTag> pair : list3) {
+                                        BlockPos blockpos4 = pair.getFirst();
+                                        BlockState blockstate2 = serverLevel.getBlockState(blockpos4);
+                                        BlockState blockstate3 = Block.updateFromNeighbourShapes(blockstate2, serverLevel, blockpos4);
+                                        if (blockstate2 != blockstate3) {
+                                            serverLevel.setBlock(blockpos4, blockstate3, 3 & -2 | 16);
+                                        }
+                                        serverLevel.blockUpdated(blockpos4, blockstate3.getBlock());
+
+
+                                        if (pair.getSecond() != null) {
+                                            BlockEntity blockentity2 = serverLevel.getBlockEntity(blockpos4);
+                                            if (blockentity2 != null) {
+                                                blockentity2.setChanged();
+                                            }
+                                        }
+                                    }
+                                }
+
 
                                 currentBlockPos = null;
                             } else {
