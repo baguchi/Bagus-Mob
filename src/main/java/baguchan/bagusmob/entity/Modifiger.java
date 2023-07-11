@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class Modifiger extends AbstractIllager {
-    private static final String[] STRUCTURE_LOCATIONS = new String[]{"woodland_mansion/1x1_as2"};
+    private static final String[] STRUCTURE_LOCATIONS = new String[]{"pillager_outpost/watchtower"};
 
 
     private float walkScale;

@@ -190,7 +190,7 @@ public class ConstructGoal extends Goal {
                             }
                         }
                     }
-                    this.buildingTick = 4;
+                    this.buildingTick = 1;
 
                 }
                 this.mob.getNavigation().moveTo(blockPos.get().getX(), blockPos.get().getY(), blockPos.get().getZ(), this.speedMultiplier);
