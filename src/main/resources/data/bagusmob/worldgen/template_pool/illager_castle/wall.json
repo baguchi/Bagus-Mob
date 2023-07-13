@@ -1,11 +1,11 @@
 {
-  "name": "bagusmob:illager_castle/sub",
+  "name": "bagusmob:illager_castle/wall",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 3,
       "element": {
-        "location": "bagusmob:illager_castle/sub/sub_1",
+        "location": "bagusmob:illager_castle/wall/wall_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
