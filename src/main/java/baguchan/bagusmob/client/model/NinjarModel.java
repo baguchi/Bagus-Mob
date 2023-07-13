@@ -22,6 +22,7 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 	private final ModelPart roots;
 	private final ModelPart head;
 	private final ModelPart waist;
+	private final ModelPart body;
 	private final ModelPart right_arm;
 	private final ModelPart left_arm;
 	private final ModelPart right_leg;
@@ -32,6 +33,7 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 		this.roots = root.getChild("roots");
 		this.head = this.roots.getChild("head");
 		this.waist = this.roots.getChild("waist");
+		this.body = this.waist.getChild("Body");
 		this.right_arm = this.roots.getChild("RightArm");
 		this.left_arm = this.roots.getChild("LeftArm");
 		this.right_leg = this.roots.getChild("RightLeg");
@@ -103,7 +105,9 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 	@Override
 	public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
 		this.roots.translateAndRotate(poseStack);
+		this.waist.translateAndRotate(poseStack);
 		modelPart.translateAndRotate(poseStack);
+		poseStack.translate(0, -(24F / 16F), 0);
 	}
 
 	@Override
@@ -140,7 +144,7 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 
 	@Override
 	public Iterable<ModelPart> bodyPartArmors() {
-		return ImmutableList.of(this.waist);
+		return ImmutableList.of(this.body);
 	}
 
 	@Override
