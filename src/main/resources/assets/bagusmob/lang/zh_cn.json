@@ -1,0 +1,10 @@
+{
+  "item.bagusmob.tengu_spawn_egg": "天狗刷怪蛋",
+  "item.bagusmob.ninjar_spawn_egg": "忍者刷怪蛋",
+  "item.bagusmob.modifiger_spawn_egg": "建造者刷怪蛋",
+  "item.bagusmob.sharped_leaf": "叶刃",
+  "item.bagusmob.dagger": "匕首",
+  "entity.bagusmob.tengu": "天狗",
+  "entity.bagusmob.ninjar": "忍者",
+  "entity.bagusmob.modifiger": "建造者"
+}
