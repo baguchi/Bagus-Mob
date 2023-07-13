@@ -3,8 +3,10 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.5.2
 // Paste this class into your mod and generate all required imports
 
 
+import bagu_chan.bagus_lib.client.layer.IArmor;
 import baguchan.bagusmob.client.aniamtion.TenguAnimations;
 import baguchan.bagusmob.entity.Tengu;
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HeadedModel;
@@ -16,7 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.monster.AbstractIllager;
 
-public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements ArmedModel, HeadedModel {
+public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements ArmedModel, HeadedModel, IArmor {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart roots;
@@ -158,5 +160,55 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 	@Override
 	public ModelPart getHead() {
 		return this.head;
+	}
+
+	@Override
+	public void translateToHead(ModelPart modelPart, PoseStack poseStack) {
+		modelPart.translateAndRotate(poseStack);
+	}
+
+	@Override
+	public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
+		modelPart.translateAndRotate(poseStack);
+	}
+
+	@Override
+	public void translateToLeg(ModelPart modelPart, PoseStack poseStack) {
+		modelPart.translateAndRotate(poseStack);
+	}
+
+	@Override
+	public void translateToChestPat(ModelPart modelPart, PoseStack poseStack) {
+		modelPart.translateAndRotate(poseStack);
+	}
+
+	@Override
+	public Iterable<ModelPart> rightHandArmors() {
+		return ImmutableList.of(this.right_arm);
+	}
+
+	@Override
+	public Iterable<ModelPart> leftHandArmors() {
+		return ImmutableList.of(this.left_arm);
+	}
+
+	@Override
+	public Iterable<ModelPart> rightLegPartArmors() {
+		return ImmutableList.of(this.right_leg);
+	}
+
+	@Override
+	public Iterable<ModelPart> leftLegPartArmors() {
+		return ImmutableList.of(this.left_leg);
+	}
+
+	@Override
+	public Iterable<ModelPart> bodyPartArmors() {
+		return ImmutableList.of(this.body);
+	}
+
+	@Override
+	public Iterable<ModelPart> headPartArmors() {
+		return ImmutableList.of(this.head);
 	}
 }

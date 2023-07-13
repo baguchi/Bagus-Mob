@@ -1,5 +1,6 @@
 package baguchan.bagusmob.client.render;
 
+import bagu_chan.bagus_lib.client.layer.CustomArmorLayer;
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.ModModelLayers;
 import baguchan.bagusmob.client.model.TenguModel;
@@ -22,6 +23,7 @@ public class TenguRenderer <T extends Tengu> extends MobRenderer<T, TenguModel<T
 
 	public TenguRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new TenguModel<>(renderManagerIn.bakeLayer(ModModelLayers.TENGU)), 0.5F);
+		this.addLayer(new CustomArmorLayer<>(this, renderManagerIn));
 		this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
 	}

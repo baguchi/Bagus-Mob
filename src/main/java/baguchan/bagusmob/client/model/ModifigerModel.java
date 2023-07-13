@@ -3,14 +3,20 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.7.4
 // Paste this class into your mod and generate all required imports
 
 
+import bagu_chan.bagus_lib.client.layer.IArmor;
 import baguchan.bagusmob.client.aniamtion.ModifigerAnimations;
 import baguchan.bagusmob.entity.Modifiger;
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.HumanoidArm;
 
-public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> {
+public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> implements ArmedModel, HeadedModel, IArmor {
     private final ModelPart root;
     private final ModelPart head;
     private final ModelPart body;
@@ -70,6 +76,69 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> {
         this.animateWalk(ModifigerAnimations.IDLE, 0, 1F - entity.getWalkScale(), 0, 1);
         this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 1.0F, 2.0F);
         this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount * entity.getWalkScale(), 1.0F, 2.0F);
+    }
+
+    private ModelPart getArm(HumanoidArm p_102923_) {
+        return p_102923_ == HumanoidArm.LEFT ? this.RightArm : this.LeftArm;
+    }
+
+    public void translateToHand(HumanoidArm p_102925_, PoseStack p_102926_) {
+        this.getArm(p_102925_).translateAndRotate(p_102926_);
+    }
+
+    @Override
+    public ModelPart getHead() {
+        return this.head;
+    }
+
+    @Override
+    public void translateToHead(ModelPart modelPart, PoseStack poseStack) {
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToLeg(ModelPart modelPart, PoseStack poseStack) {
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToChestPat(ModelPart modelPart, PoseStack poseStack) {
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public Iterable<ModelPart> rightHandArmors() {
+        return ImmutableList.of(this.RightArm);
+    }
+
+    @Override
+    public Iterable<ModelPart> leftHandArmors() {
+        return ImmutableList.of(this.LeftArm);
+    }
+
+    @Override
+    public Iterable<ModelPart> rightLegPartArmors() {
+        return ImmutableList.of(this.RightLeg);
+    }
+
+    @Override
+    public Iterable<ModelPart> leftLegPartArmors() {
+        return ImmutableList.of(this.LeftLeg);
+    }
+
+    @Override
+    public Iterable<ModelPart> bodyPartArmors() {
+        return ImmutableList.of(this.body);
+    }
+
+    @Override
+    public Iterable<ModelPart> headPartArmors() {
+        return ImmutableList.of(this.head);
     }
 
     @Override

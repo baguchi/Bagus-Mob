@@ -1,5 +1,6 @@
 package baguchan.bagusmob.client.render;
 
+import bagu_chan.bagus_lib.client.layer.CustomArmorLayer;
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.ModModelLayers;
 import baguchan.bagusmob.client.model.NinjarModel;
@@ -18,6 +19,7 @@ public class NinjarRenderer<T extends Ninjar> extends MobRenderer<T, NinjarModel
 
 	public NinjarRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new NinjarModel<>(renderManagerIn.bakeLayer(ModModelLayers.NINJAR)), 0.5F);
+		this.addLayer(new CustomArmorLayer<>(this, renderManagerIn));
 		this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
 	}

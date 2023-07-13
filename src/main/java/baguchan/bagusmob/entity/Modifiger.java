@@ -71,7 +71,7 @@ public class Modifiger extends AbstractIllager {
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_37856_, DifficultyInstance p_37857_, MobSpawnType p_37858_, @Nullable SpawnGroupData p_37859_, @Nullable CompoundTag p_37860_) {
-        this.buildingPos = Optional.of(this.blockPosition());
+        //this.buildingPos = Optional.of(this.blockPosition());
         return super.finalizeSpawn(p_37856_, p_37857_, p_37858_, p_37859_, p_37860_);
     }
 

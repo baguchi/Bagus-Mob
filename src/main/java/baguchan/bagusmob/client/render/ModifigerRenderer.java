@@ -1,11 +1,14 @@
 package baguchan.bagusmob.client.render;
 
+import bagu_chan.bagus_lib.client.layer.CustomArmorLayer;
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.ModModelLayers;
 import baguchan.bagusmob.client.model.ModifigerModel;
 import baguchan.bagusmob.entity.Modifiger;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,9 +18,10 @@ public class ModifigerRenderer<T extends Modifiger> extends MobRenderer<T, Modif
     private static final ResourceLocation ILLAGER = new ResourceLocation(BagusMob.MODID, "textures/entity/modifiger.png");
 
     public ModifigerRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new ModifigerModel<>(renderManagerIn.bakeLayer(ModModelLayers.MODIFIGER)), 0.5F);/*
-		this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
-		this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));*/
+        super(renderManagerIn, new ModifigerModel<>(renderManagerIn.bakeLayer(ModModelLayers.MODIFIGER)), 0.5F);
+        this.addLayer(new CustomArmorLayer<>(this, renderManagerIn));
+        this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
+        this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
     }
 
     @Override
