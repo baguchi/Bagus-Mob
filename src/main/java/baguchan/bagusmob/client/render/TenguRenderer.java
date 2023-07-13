@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -24,7 +23,6 @@ public class TenguRenderer <T extends Tengu> extends MobRenderer<T, TenguModel<T
 	public TenguRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new TenguModel<>(renderManagerIn.bakeLayer(ModModelLayers.TENGU)), 0.5F);
 		this.addLayer(new CustomArmorLayer<>(this, renderManagerIn));
-		this.addLayer(new CustomHeadLayer<>(this, renderManagerIn.getModelSet(), renderManagerIn.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
 	}
 
