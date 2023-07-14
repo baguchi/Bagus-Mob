@@ -1,5 +1,4 @@
 {
-  "name": "bagusmob:illager_castle/main",
   "fallback": "minecraft:empty",
   "elements": [
     {

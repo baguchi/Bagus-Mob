@@ -1,11 +1,55 @@
 {
-  "name": "bagusmob:illager_castle/sub",
-  "fallback": "minecraft:empty",
+  "fallback": "bagusmob:illager_castle/end_wall",
   "elements": [
     {
       "weight": 3,
       "element": {
         "location": "bagusmob:illager_castle/sub/sub_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "bagusmob:illager_castle/sub/food_room",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "bagusmob:illager_castle/sub/sub_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "bagusmob:illager_castle/sub/sub_3",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "bagusmob:illager_castle/sub/sub_4",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "bagusmob:illager_castle/sub/sub_5",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

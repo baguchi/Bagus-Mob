@@ -4,7 +4,7 @@
     {
       "weight": 3,
       "element": {
-        "location": "bagusmob:illager_castle/entrance",
+        "location": "bagusmob:illager_castle/end_wall/end_wall",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

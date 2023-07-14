@@ -9,6 +9,34 @@
       "entries": [
         {
           "type": "item",
+          "name": "minecraft:cooked_porkchop",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:cooked_beef",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "minecraft:cooked_salmon",
           "weight": 15,
           "functions": [

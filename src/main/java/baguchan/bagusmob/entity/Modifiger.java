@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -49,6 +50,7 @@ public class Modifiger extends AbstractIllager {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
         this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
         this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
 
