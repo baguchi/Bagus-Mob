@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
@@ -95,6 +96,15 @@ public class Ninjar extends AbstractIllager {
 		this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.65D));
 		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+	}
+
+	@Override
+	protected PathNavigation createNavigation(Level p_218342_) {
+		GroundPathNavigation path = new GroundPathNavigation(this, p_218342_);
+		path.setCanOpenDoors(true);
+		path.setCanFloat(true);
+		path.setCanPassDoors(true);
+		return path;
 	}
 
 	public boolean teleport() {

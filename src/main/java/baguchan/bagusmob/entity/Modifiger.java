@@ -19,6 +19,8 @@ import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
@@ -63,6 +65,15 @@ public class Modifiger extends AbstractIllager {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
 
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level p_218342_) {
+        GroundPathNavigation path = new GroundPathNavigation(this, p_218342_);
+        path.setCanOpenDoors(true);
+        path.setCanFloat(true);
+        path.setCanPassDoors(true);
+        return path;
     }
 
     @Override

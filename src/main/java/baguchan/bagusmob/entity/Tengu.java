@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
@@ -71,15 +72,24 @@ public class Tengu extends AbstractIllager {
 		return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, 28.0D).add(Attributes.ATTACK_DAMAGE, 3.0D).add(Attributes.FOLLOW_RANGE, 32.0D);
 	}
 
-    @Override
-    public void addAdditionalSaveData(CompoundTag p_250330_) {
-        super.addAdditionalSaveData(p_250330_);
-        p_250330_.putBoolean("IsFallFlying", this.getPose() == Pose.FALL_FLYING);
-    }
+	@Override
+	protected PathNavigation createNavigation(Level p_218342_) {
+		GroundPathNavigation path = new GroundPathNavigation(this, p_218342_);
+		path.setCanOpenDoors(true);
+		path.setCanFloat(true);
+		path.setCanPassDoors(true);
+		return path;
+	}
 
-    @Override
-    public void readAdditionalSaveData(CompoundTag p_250781_) {
-        super.readAdditionalSaveData(p_250781_);
+	@Override
+	public void addAdditionalSaveData(CompoundTag p_250330_) {
+		super.addAdditionalSaveData(p_250330_);
+		p_250330_.putBoolean("IsFallFlying", this.getPose() == Pose.FALL_FLYING);
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag p_250781_) {
+		super.readAdditionalSaveData(p_250781_);
         if (p_250781_.getBoolean("IsFallFlying")) {
             this.setPose(Pose.FALL_FLYING);
         }
