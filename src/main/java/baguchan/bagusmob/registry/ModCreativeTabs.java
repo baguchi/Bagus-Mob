@@ -14,6 +14,7 @@ public class ModCreativeTabs {
 			event.accept(ModItemRegistry.TENGU_SPAWNEGG.get());
 			event.accept(ModItemRegistry.NINJAR_SPAWNEGG.get());
 			event.accept(ModItemRegistry.MODIFIGER_SPAWNEGG.get());
+			event.accept(ModItemRegistry.VILER_VEX_SPAWNEGG.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());

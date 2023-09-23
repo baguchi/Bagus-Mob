@@ -1,5 +1,6 @@
 package baguchan.bagusmob.entity;
 
+import bagu_chan.bagus_lib.entity.goal.AnimatedAttackGoal;
 import baguchan.bagusmob.entity.goal.AppearGoal;
 import baguchan.bagusmob.entity.goal.DisappearGoal;
 import baguchan.bagusmob.registry.ModItemRegistry;
@@ -57,6 +58,9 @@ public class Ninjar extends AbstractIllager {
 	public final AnimationState appearAnimationState = new AnimationState();
 	public final AnimationState disappearAnimationState = new AnimationState();
 
+    public int attackAnimationTick;
+    private final int attackAnimationLength = (int) (20 * 0.4F);
+    private final int attackAnimationLeftActionPoint = (int) ((int) attackAnimationLength - (3));
 	public Ninjar(EntityType<? extends Ninjar> p_32105_, Level p_32106_) {
 		super(p_32105_, p_32106_);
 		this.xpReward = 10;
@@ -88,7 +92,7 @@ public class Ninjar extends AbstractIllager {
 		this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
 		this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
 		this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
-		this.goalSelector.addGoal(4, new NinjarMeleeAttackGoal());
+        this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
@@ -176,6 +180,35 @@ public class Ninjar extends AbstractIllager {
 			return false;
 		}
 	}
+
+    @Override
+    public void baseTick() {
+        super.baseTick();
+        if (this.level().isClientSide) {
+            if (this.attackAnimationTick < this.attackAnimationLength) {
+                this.attackAnimationTick++;
+            }
+
+            if (this.attackAnimationTick >= this.attackAnimationLength) {
+                this.slashLeftAnimationState.stop();
+                this.slashRightAnimationState.stop();
+            }
+        }
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_21375_) {
+        if (p_21375_ == 4) {
+            if (this.isLeftHanded()) {
+                this.slashLeftAnimationState.start(this.tickCount);
+            } else {
+                this.slashRightAnimationState.start(this.tickCount);
+            }
+            this.attackAnimationTick = 0;
+        } else {
+            super.handleEntityEvent(p_21375_);
+        }
+    }
 
 	@Override
 	public void tick() {
@@ -275,18 +308,6 @@ public class Ninjar extends AbstractIllager {
 			this.setPose(Pose.DIGGING);
 		}
 		return super.hurt(p_37849_, p_37850_);
-	}
-
-	public void handleEntityEvent(byte p_219360_) {
-		if (p_219360_ == 4) {
-			if (this.isLeftHanded()) {
-				this.slashLeftAnimationState.start(this.tickCount);
-			} else {
-				this.slashRightAnimationState.start(this.tickCount);
-			}
-		} else {
-			super.handleEntityEvent(p_219360_);
-		}
 	}
 
 	@Override

@@ -22,6 +22,10 @@ public class ModifigerRenderer<T extends Modifiger> extends MobRenderer<T, Modif
         this.addLayer(new ItemInHandLayer<>(this, renderManagerIn.getItemInHandRenderer()));
     }
 
+    protected float getFlipDegrees(T p_115337_) {
+        return 0.0F;
+    }
+
     @Override
     public ResourceLocation getTextureLocation(T p_110775_1_) {
         return ILLAGER;

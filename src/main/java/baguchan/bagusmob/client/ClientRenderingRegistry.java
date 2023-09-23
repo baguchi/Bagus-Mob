@@ -4,10 +4,8 @@ import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.model.ModifigerModel;
 import baguchan.bagusmob.client.model.NinjarModel;
 import baguchan.bagusmob.client.model.TenguModel;
-import baguchan.bagusmob.client.render.ModifigerRenderer;
-import baguchan.bagusmob.client.render.NinjarRenderer;
-import baguchan.bagusmob.client.render.SlashAirRenderer;
-import baguchan.bagusmob.client.render.TenguRenderer;
+import baguchan.bagusmob.client.model.VilerVexModel;
+import baguchan.bagusmob.client.render.*;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,6 +22,7 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.NINJAR.get(), NinjarRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.SLASH_AIR.get(), SlashAirRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.MODIFIGER.get(), ModifigerRenderer::new);
+		event.registerEntityRenderer(ModEntityRegistry.VILER_VEX.get(), VilerVexRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -31,5 +30,6 @@ public class ClientRenderingRegistry {
 		event.registerLayerDefinition(ModModelLayers.TENGU, TenguModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.NINJAR, NinjarModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.MODIFIGER, ModifigerModel::createBodyLayer);
+		event.registerLayerDefinition(ModModelLayers.VILER_VEX, VilerVexModel::createBodyLayer);
 	}
 }

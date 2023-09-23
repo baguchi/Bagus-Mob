@@ -1,10 +1,12 @@
 {
   "item.bagusmob.tengu_spawn_egg": "天狗のスポーンエッグ",
   "item.bagusmob.ninjar_spawn_egg": "ニンジャーのスポーンエッグ",
-  "item.bagusmob.modifiger_spawn_egg": "改変者ののスポーンエッグ",
+  "item.bagusmob.modifiger_spawn_egg": "改変者のスポーンエッグ",
+  "item.bagusmob.viler_vex_spawn_egg": "卑怯なヴェックスのスポーンエッグ",
   "item.bagusmob.sharped_leaf": "尖った葉",
   "item.bagusmob.dagger": "ダガー",
   "entity.bagusmob.tengu": "天狗",
   "entity.bagusmob.ninjar": "ニンジャー",
-  "entity.bagusmob.modifiger": "改変者"
+  "entity.bagusmob.modifiger": "改変者",
+  "entity.bagusmob.viler_vex": "卑怯なヴェックス"
 }

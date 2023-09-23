@@ -1,26 +1,27 @@
 package baguchan.bagusmob.entity;
 
-import baguchan.bagusmob.entity.goal.ConstructGoal;
-import net.minecraft.core.BlockPos;
+import baguchan.bagusmob.entity.goal.LockCastGoal;
+import baguchan.bagusmob.entity.goal.SummonVilerVexCastGoal;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
@@ -29,34 +30,92 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 public class Modifiger extends AbstractIllager {
-    private static final String[] STRUCTURE_LOCATIONS = new String[]{"pillager_outpost/watchtower"};
 
+    protected static final EntityDataAccessor<Boolean> IS_TIME_LOCK_CAST = SynchedEntityData.defineId(Modifiger.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> IS_SUMMON_CAST = SynchedEntityData.defineId(Modifiger.class, EntityDataSerializers.BOOLEAN);
 
-    private float walkScale;
-    private Optional<BlockPos> buildingPos = Optional.empty();
-    private ResourceLocation buildingStructureName;
-    private int buildingStep;
+    public final AnimationState lockSpellAnimationState = new AnimationState();
+    public final AnimationState deathAnimationState = new AnimationState();
+    public final AnimationState summonSpellAnimationState = new AnimationState();
+    private final int maxLockSpellTick = (int) 2.75f * 20;
+    private int lockSpellTick = maxLockSpellTick;
+
+    private final int maxSummonTick = (int) 2.75f * 20;
+    private int summonSpellTick = maxSummonTick;
 
     public Modifiger(EntityType<? extends Modifiger> p_32105_, Level p_32106_) {
         super(p_32105_, p_32106_);
         this.xpReward = 20;
     }
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_TIME_LOCK_CAST, false);
+        this.entityData.define(IS_SUMMON_CAST, false);
+    }
+
+    @Override
+    protected void tickDeath() {
+        if (this.level().isClientSide()) {
+            if (this.deathTime == 0) {
+                this.deathAnimationState.start(this.tickCount);
+                this.lockSpellAnimationState.stop();
+            }
+        }
+        if (++this.deathTime >= 60 && !this.level().isClientSide() && !this.isRemoved()) {
+            this.level().broadcastEntityEvent(this, (byte) 60);
+            this.remove(Entity.RemovalReason.KILLED);
+        }
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
+        super.onSyncedDataUpdated(p_21104_);
+        if (this.level().isClientSide()) {
+            if (IS_TIME_LOCK_CAST.equals(p_21104_)) {
+                if (this.isTimeLockCast()) {
+                    this.lockSpellAnimationState.start(this.tickCount);
+                    this.lockSpellTick = 0;
+                }
+            }
+            if (IS_SUMMON_CAST.equals(p_21104_)) {
+                if (this.isSummonCast()) {
+                    this.summonSpellAnimationState.start(this.tickCount);
+                    this.summonSpellTick = 0;
+                }
+            }
+        }
+    }
+
+    public boolean isTimeLockCast() {
+        return this.entityData.get(IS_TIME_LOCK_CAST);
+    }
+
+    public void setTimeLockCast(boolean p_37900_) {
+        this.entityData.set(IS_TIME_LOCK_CAST, p_37900_);
+    }
+
+    public boolean isSummonCast() {
+        return this.entityData.get(IS_SUMMON_CAST);
+    }
+
+    public void setSummonCast(boolean p_37900_) {
+        this.entityData.set(IS_SUMMON_CAST, p_37900_);
+    }
+
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-        this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, AbstractGolem.class, 8.0F, 0.6D, 1.0D));
         this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
+        this.goalSelector.addGoal(4, new LockCastGoal(this, (int) (1.5F * 20)));
+        this.goalSelector.addGoal(5, new SummonVilerVexCastGoal(this, (int) (1.5F * 20)));
 
-        this.goalSelector.addGoal(6, new ConstructGoal(this, STRUCTURE_LOCATIONS, 0.8F));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.65D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -74,6 +133,28 @@ public class Modifiger extends AbstractIllager {
         path.setCanFloat(true);
         path.setCanPassDoors(true);
         return path;
+    }
+
+    @Override
+    public void baseTick() {
+        super.baseTick();
+        if (this.level().isClientSide) {
+            if (this.lockSpellTick < this.maxLockSpellTick) {
+                this.lockSpellTick++;
+            }
+
+            if (this.lockSpellTick >= this.maxLockSpellTick) {
+                this.lockSpellAnimationState.stop();
+            }
+
+            if (this.summonSpellTick < this.maxSummonTick) {
+                this.summonSpellTick++;
+            }
+
+            if (this.summonSpellTick >= this.maxSummonTick) {
+                this.summonSpellAnimationState.stop();
+            }
+        }
     }
 
     @Override
@@ -108,30 +189,6 @@ public class Modifiger extends AbstractIllager {
         return SoundEvents.PILLAGER_CELEBRATE;
     }
 
-    public Optional<BlockPos> getBuildingPos() {
-        return this.buildingPos;
-    }
-
-    public void setBuildingPos(Optional<BlockPos> buildingPos) {
-        this.buildingPos = buildingPos;
-    }
-
-    public int getBuildingStep() {
-        return buildingStep;
-    }
-
-    public void setBuildingStep(int buildingStep) {
-        this.buildingStep = buildingStep;
-    }
-
-    public ResourceLocation getBuildingStructureName() {
-        return buildingStructureName;
-    }
-
-    public void setBuildingStructureName(ResourceLocation buildingStructureName) {
-        this.buildingStructureName = buildingStructureName;
-    }
-
     public boolean isAlliedTo(Entity p_33314_) {
         if (super.isAlliedTo(p_33314_)) {
             return true;
@@ -144,15 +201,6 @@ public class Modifiger extends AbstractIllager {
 
     @Override
     public void tick() {
-        if (this.level().isClientSide()) {
-            if ((this.walkAnimation.isMoving())) {
-                walkScale = Mth.clamp(walkScale + 0.1F, 0, 1);
-
-            } else {
-
-                walkScale = Mth.clamp(walkScale - 0.1F, 0, 1);
-            }
-        }
         super.tick();
     }
 
@@ -164,37 +212,15 @@ public class Modifiger extends AbstractIllager {
     @Override
     public void addAdditionalSaveData(CompoundTag p_37870_) {
         super.addAdditionalSaveData(p_37870_);
-        if (this.getBuildingPos().isPresent()) {
-            p_37870_.put("BuildingPos", NbtUtils.writeBlockPos(this.getBuildingPos().get()));
-        }
-
-        if (this.buildingStructureName != null) {
-            p_37870_.putString("BuildingName", this.buildingStructureName.toString());
-        }
-        p_37870_.putInt("BuildingStep", this.buildingStep);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag p_37862_) {
         super.readAdditionalSaveData(p_37862_);
-        if (p_37862_.contains("BuildingPos", 10)) {
-            this.setBuildingPos(Optional.of(NbtUtils.readBlockPos(p_37862_.getCompound("BuildingPos"))));
-        }
-        if (p_37862_.contains("BuildingName")) {
-            this.setBuildingStructureName(ResourceLocation.tryParse(p_37862_.getString("BuildingName")));
-        }
-        if (p_37862_.contains("BuildingStep")) {
-            this.setBuildingStep(p_37862_.getInt("BuildingStep"));
-        }
     }
 
     @Override
     public boolean canBeLeader() {
         return true;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public float getWalkScale() {
-        return walkScale;
     }
 }

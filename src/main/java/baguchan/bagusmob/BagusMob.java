@@ -1,5 +1,6 @@
 package baguchan.bagusmob;
 
+import baguchan.bagusmob.registry.ModEffects;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraft.world.entity.raid.Raid;
@@ -18,6 +19,7 @@ public class BagusMob {
 	public BagusMob() {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+		ModEffects.MOB_EFFECTS.register(modEventBus);
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
 		// Register the commonSetup method for modloading
@@ -30,5 +32,6 @@ public class BagusMob {
     {
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
 		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{1, 1, 2, 1, 2, 3, 3, 4});
-    }
+		Raid.RaiderType.create("modifiger", ModEntityRegistry.MODIFIGER.get(), new int[]{0, 0, 0, 0, 1, 1, 2, 3});
+	}
 }

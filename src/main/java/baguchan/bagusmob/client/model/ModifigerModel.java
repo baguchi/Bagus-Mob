@@ -73,9 +73,15 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         this.head.xRot = headPitch * ((float) Math.PI / 180F);
-        this.animateWalk(ModifigerAnimations.IDLE, 0, 1F - entity.getWalkScale(), 0, 1);
-        this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 1.0F, 2.0F);
-        this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount * entity.getWalkScale(), 1.0F, 2.0F);
+
+        this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+        if (!entity.lockSpellAnimationState.isStarted() && !entity.summonSpellAnimationState.isStarted()) {
+            this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+        }
+        this.animate(entity.lockSpellAnimationState, ModifigerAnimations.LOCK_SPELL, ageInTicks);
+        this.animate(entity.deathAnimationState, ModifigerAnimations.DEATH, ageInTicks);
+        this.animate(entity.summonSpellAnimationState, ModifigerAnimations.SUMMON_SPELL, ageInTicks);
+
     }
 
     private ModelPart getArm(HumanoidArm p_102923_) {

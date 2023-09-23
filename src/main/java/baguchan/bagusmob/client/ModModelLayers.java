@@ -9,5 +9,6 @@ public class ModModelLayers {
 	public static ModelLayerLocation NINJAR = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "ninjar"), "ninjar");
 
 	public static final ModelLayerLocation MODIFIGER = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "modifiger"), "modifiger");
+	public static ModelLayerLocation VILER_VEX = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "viler_vex"), "viler_vex");
 
 }

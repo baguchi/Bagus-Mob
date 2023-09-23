@@ -1,8 +1,0 @@
-{
-  "type": "bagusmob:illager_castle",
-  "config": {
-  },
-  "biomes": "#bagusmob:has_structure/illager_castle",
-  "adapt_noise": false,
-  "spawn_overrides": {}
-}
