@@ -11,7 +11,7 @@ import java.util.EnumSet;
 
 public class LockCastGoal extends Goal {
     private final Modifiger mob;
-    private static final UniformInt TIME_BETWEEN_COOLDOWN = UniformInt.of(400, 800);
+    private static final UniformInt TIME_BETWEEN_COOLDOWN = UniformInt.of(300, 400);
 
     private int cooldown;
     private int tick;
