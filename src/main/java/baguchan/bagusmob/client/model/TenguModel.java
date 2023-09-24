@@ -97,6 +97,8 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 		this.cape_left.zRot = f1;
 		this.animate(entityIn.slashRightAnimationState, TenguAnimations.SLASH_RIGHT, ageInTicks);
 		this.animate(entityIn.slashLeftAnimationState, TenguAnimations.SLASH_LEFT, ageInTicks);
+		this.animate(entityIn.fallAnimationState, TenguAnimations.STUN, ageInTicks);
+		this.animateWalk(TenguAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
 	}
 
 	@Override
