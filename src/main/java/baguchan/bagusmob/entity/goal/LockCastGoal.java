@@ -56,7 +56,7 @@ public class LockCastGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.tick < this.maxTick && !this.mob.hurtMarked;
+        return this.tick < this.maxTick && this.mob.hurtTime <= 0;
     }
 
     public void tick() {

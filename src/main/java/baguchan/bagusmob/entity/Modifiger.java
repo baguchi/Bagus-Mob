@@ -117,10 +117,10 @@ public class Modifiger extends AbstractIllager {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
         this.goalSelector.addGoal(4, new LockCastGoal(this, (int) (1.5F * 20)));
-        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
-        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, AbstractGolem.class, 8.0F, 0.6D, 1.0D));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.8D, 1.2D));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, AbstractGolem.class, 8.0F, 0.8D, 1.2D));
 
-        this.goalSelector.addGoal(6, new SummonVilerVexCastGoal(this, (int) (1.5F * 20)));
+        this.goalSelector.addGoal(6, new SummonVilerVexCastGoal(this, (int) 80));
 
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.65D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
