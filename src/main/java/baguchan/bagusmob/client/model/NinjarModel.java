@@ -4,6 +4,7 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.6.3
 
 
 import bagu_chan.bagus_lib.client.layer.IArmor;
+import baguchan.bagusmob.client.aniamtion.IllagerAnimations;
 import baguchan.bagusmob.client.aniamtion.NinjarAnimations;
 import baguchan.bagusmob.entity.Ninjar;
 import com.google.common.collect.ImmutableList;
@@ -80,6 +81,10 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 		this.animate(entity.slashLeftAnimationState, NinjarAnimations.SLASH_LEFT, ageInTicks);
 		this.animate(entity.disappearAnimationState, NinjarAnimations.DESPAWN, ageInTicks);
 		this.animate(entity.appearAnimationState, NinjarAnimations.SPAWN, ageInTicks);
+        if (entity.isCelebrating()) {
+            this.animateWalk(IllagerAnimations.CEREBRATE, ageInTicks, 1, 1, 1);
+
+        }
 	}
 
 	@Override

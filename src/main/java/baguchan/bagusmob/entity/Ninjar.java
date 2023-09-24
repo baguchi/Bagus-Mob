@@ -154,6 +154,20 @@ public class Ninjar extends AbstractIllager {
 		}
 	}
 
+	@Override
+	protected float getSoundVolume() {
+		return 0.35F;
+	}
+
+	public boolean isSteppingCarefully() {
+		return true;
+	}
+
+	@Override
+	public boolean dampensVibrations() {
+		return true;
+	}
+
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, 26.0D).add(Attributes.ATTACK_DAMAGE, 3.0D).add(Attributes.ARMOR, 8.0D).add(Attributes.FOLLOW_RANGE, 30.0D);
 	}

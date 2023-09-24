@@ -1,10 +1,7 @@
 package baguchan.bagusmob.client;
 
 import baguchan.bagusmob.BagusMob;
-import baguchan.bagusmob.client.model.ModifigerModel;
-import baguchan.bagusmob.client.model.NinjarModel;
-import baguchan.bagusmob.client.model.TenguModel;
-import baguchan.bagusmob.client.model.VilerVexModel;
+import baguchan.bagusmob.client.model.*;
 import baguchan.bagusmob.client.render.*;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import net.minecraftforge.api.distmarker.Dist;
@@ -31,5 +28,6 @@ public class ClientRenderingRegistry {
 		event.registerLayerDefinition(ModModelLayers.NINJAR, NinjarModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.MODIFIGER, ModifigerModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_VEX, VilerVexModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.NINJA_ARMOR, NinjaArmorModel::createBodyLayer);
 	}
 }

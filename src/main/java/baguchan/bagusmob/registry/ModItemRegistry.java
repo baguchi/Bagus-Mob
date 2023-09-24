@@ -2,7 +2,9 @@ package baguchan.bagusmob.registry;
 
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.item.DaggerItem;
+import baguchan.bagusmob.item.NinjaArmorItem;
 import baguchan.bagusmob.item.ShapedLeafItem;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,5 +20,9 @@ public class ModItemRegistry {
 
 	public static final RegistryObject<Item> SHARPED_LEAF = ITEM_REGISTRY.register("sharped_leaf", () -> new ShapedLeafItem((new Item.Properties().durability(128))));
 	public static final RegistryObject<Item> DAGGER = ITEM_REGISTRY.register("dagger", () -> new DaggerItem((new Item.Properties().durability(242))));
+
+	public static final RegistryObject<Item> NINJA_BOOTS = ITEM_REGISTRY.register("ninja_boots", () -> new NinjaArmorItem(ArmorItem.Type.BOOTS, (new Item.Properties())));
+	public static final RegistryObject<Item> NINJA_CHESTPLATE = ITEM_REGISTRY.register("ninja_chestplate", () -> new NinjaArmorItem(ArmorItem.Type.CHESTPLATE, (new Item.Properties())));
+	public static final RegistryObject<Item> NINJA_HOOD = ITEM_REGISTRY.register("ninja_hood", () -> new NinjaArmorItem(ArmorItem.Type.BOOTS, (new Item.Properties())));
 
 }

@@ -2,12 +2,15 @@ package baguchan.bagusmob.mixin;
 
 import baguchan.bagusmob.entity.Tengu;
 import baguchan.bagusmob.registry.ModEffects;
+import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +39,10 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     protected abstract void tickEffects();
 
-	@Inject(method = "updateFallFlying", at = @At("HEAD"), cancellable = true)
+    @Shadow
+    public abstract ItemStack getItemBySlot(EquipmentSlot p_21127_);
+
+    @Inject(method = "updateFallFlying", at = @At("HEAD"), cancellable = true)
 	private void updateFallFlying(CallbackInfo callbackInfo) {
 		LivingEntity livingEntity = (LivingEntity) ((Object) this);
 		if(livingEntity instanceof Tengu){
@@ -64,5 +70,10 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
             this.lockTickCount = 0;
         }
+    }
+
+    @Override
+    public boolean isSteppingCarefully() {
+        return this.getItemBySlot(EquipmentSlot.FEET).is(ModItemRegistry.NINJA_BOOTS.get()) || super.isSteppingCarefully();
     }
 }

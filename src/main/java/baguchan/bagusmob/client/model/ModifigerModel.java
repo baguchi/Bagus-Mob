@@ -4,6 +4,7 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.7.4
 
 
 import bagu_chan.bagus_lib.client.layer.IArmor;
+import baguchan.bagusmob.client.aniamtion.IllagerAnimations;
 import baguchan.bagusmob.client.aniamtion.ModifigerAnimations;
 import baguchan.bagusmob.entity.Modifiger;
 import com.google.common.collect.ImmutableList;
@@ -74,14 +75,20 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
         this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         this.head.xRot = headPitch * ((float) Math.PI / 180F);
 
-        this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
-        if (!entity.lockSpellAnimationState.isStarted() && !entity.summonSpellAnimationState.isStarted()) {
-            this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
-        }
-        this.animate(entity.lockSpellAnimationState, ModifigerAnimations.LOCK_SPELL, ageInTicks);
-        this.animate(entity.deathAnimationState, ModifigerAnimations.DEATH, ageInTicks);
-        this.animate(entity.summonSpellAnimationState, ModifigerAnimations.SUMMON_SPELL, ageInTicks);
+        if (!entity.deathAnimationState.isStarted()) {
+            this.animateWalk(ModifigerAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+            if (!entity.lockSpellAnimationState.isStarted() && !entity.summonSpellAnimationState.isStarted()) {
+                this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+            }
+            this.animate(entity.lockSpellAnimationState, ModifigerAnimations.LOCK_SPELL, ageInTicks);
+            this.animate(entity.summonSpellAnimationState, ModifigerAnimations.SUMMON_SPELL, ageInTicks);
 
+        }
+        this.animate(entity.deathAnimationState, ModifigerAnimations.DEATH, ageInTicks);
+        if (entity.isCelebrating()) {
+            this.animateWalk(IllagerAnimations.CEREBRATE, ageInTicks, 1, 1, 1);
+
+        }
     }
 
     private ModelPart getArm(HumanoidArm p_102923_) {

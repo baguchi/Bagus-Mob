@@ -4,6 +4,7 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.5.2
 
 
 import bagu_chan.bagus_lib.client.layer.IArmor;
+import baguchan.bagusmob.client.aniamtion.IllagerAnimations;
 import baguchan.bagusmob.client.aniamtion.TenguAnimations;
 import baguchan.bagusmob.entity.Tengu;
 import com.google.common.collect.ImmutableList;
@@ -99,6 +100,10 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 		this.animate(entityIn.slashLeftAnimationState, TenguAnimations.SLASH_LEFT, ageInTicks);
 		this.animate(entityIn.fallAnimationState, TenguAnimations.STUN, ageInTicks);
 		this.animateWalk(TenguAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+        if (entityIn.isCelebrating()) {
+            this.animateWalk(IllagerAnimations.CEREBRATE, ageInTicks, 1, 1, 1);
+
+        }
 	}
 
 	@Override
