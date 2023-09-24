@@ -31,7 +31,7 @@ public class BagusMob {
     private void commonSetup(final FMLCommonSetupEvent event)
     {
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
-		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{1, 1, 2, 1, 2, 3, 3, 4});
+		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 2, 2, 3, 3, 4});
 		Raid.RaiderType.create("modifiger", ModEntityRegistry.MODIFIGER.get(), new int[]{0, 0, 0, 0, 1, 1, 2, 3});
 	}
 }

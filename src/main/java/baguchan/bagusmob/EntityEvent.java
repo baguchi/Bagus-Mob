@@ -45,15 +45,15 @@ public class EntityEvent {
 		if (event.getLookingEntity() != null) {
 			ItemStack itemstack = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
 			if (itemstack.is(ModItemRegistry.NINJA_HOOD.get())) {
-				event.modifyVisibility(0.8D);
+				event.modifyVisibility(0.5D);
 			}
 			ItemStack itemstack2 = event.getEntity().getItemBySlot(EquipmentSlot.CHEST);
 			if (itemstack2.is(ModItemRegistry.NINJA_CHESTPLATE.get())) {
-				event.modifyVisibility(0.75D);
+				event.modifyVisibility(0.5D);
 			}
 			ItemStack itemstack3 = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
 			if (itemstack3.is(ModItemRegistry.NINJA_BOOTS.get())) {
-				event.modifyVisibility(0.5D);
+				event.modifyVisibility(0.85D);
 			}
 		}
 	}

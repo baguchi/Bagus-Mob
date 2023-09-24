@@ -23,6 +23,6 @@ public class ModItemRegistry {
 
 	public static final RegistryObject<Item> NINJA_BOOTS = ITEM_REGISTRY.register("ninja_boots", () -> new NinjaArmorItem(ArmorItem.Type.BOOTS, (new Item.Properties())));
 	public static final RegistryObject<Item> NINJA_CHESTPLATE = ITEM_REGISTRY.register("ninja_chestplate", () -> new NinjaArmorItem(ArmorItem.Type.CHESTPLATE, (new Item.Properties())));
-	public static final RegistryObject<Item> NINJA_HOOD = ITEM_REGISTRY.register("ninja_hood", () -> new NinjaArmorItem(ArmorItem.Type.BOOTS, (new Item.Properties())));
+	public static final RegistryObject<Item> NINJA_HOOD = ITEM_REGISTRY.register("ninja_hood", () -> new NinjaArmorItem(ArmorItem.Type.HELMET, (new Item.Properties())));
 
 }

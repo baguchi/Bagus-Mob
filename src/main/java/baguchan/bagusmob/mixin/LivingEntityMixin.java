@@ -73,12 +73,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Override
-    public boolean isSteppingCarefully() {
-        return this.getItemBySlot(EquipmentSlot.FEET).is(ModItemRegistry.NINJA_BOOTS.get()) || super.isSteppingCarefully();
-    }
-
-    @Override
     public boolean isInvisible() {
-        return super.isInvisible() || this.isShiftKeyDown() && this.isSteppingCarefully();
+        return super.isInvisible() || this.isSteppingCarefully() && this.getItemBySlot(EquipmentSlot.CHEST).is(ModItemRegistry.NINJA_CHESTPLATE.get()) && this.getItemBySlot(EquipmentSlot.HEAD).is(ModItemRegistry.NINJA_HOOD.get());
     }
 }

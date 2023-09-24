@@ -4,9 +4,9 @@ import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.ModModelLayers;
 import baguchan.bagusmob.client.model.NinjaArmorModel;
 import baguchan.bagusmob.registry.ModArmorMaterials;
+import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
@@ -38,18 +38,20 @@ public class NinjaArmorItem extends ArmorItem {
 
     @Override
     public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
-        return stack.is(this);
+        return stack.is(ModItemRegistry.NINJA_BOOTS.get());
     }
 
     public static class NinjaArmorRender implements IClientItemExtensions {
         @Override
-        public @NotNull Model getGenericArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+        public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
             EntityModelSet models = Minecraft.getInstance().getEntityModels();
             ModelPart root = models.bakeLayer(ModModelLayers.NINJA_ARMOR);
 
             NinjaArmorModel<?> model2 = new NinjaArmorModel<>(root);
             ForgeHooksClient.copyModelProperties(original, model2);
             this.setPartVisibility(model2, equipmentSlot);
+            model2.setAllVisible(!livingEntity.isInvisible());
+
             return model2;
         }
 
