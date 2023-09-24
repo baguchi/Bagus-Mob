@@ -104,6 +104,17 @@ public class VilerVex extends Vex implements CrossbowAttackMob {
         }
     }
 
+    public boolean isAlliedTo(Entity p_33314_) {
+        if (super.isAlliedTo(p_33314_)) {
+            return true;
+        } else if (p_33314_ instanceof VilerVex) {
+            return ((VilerVex) p_33314_).getOwner() == this.getOwner();
+        } else {
+            return false;
+        }
+    }
+
+
     class VexBackGoal extends Goal {
 
         public Vec3 vec3Target = Vec3.ZERO;
