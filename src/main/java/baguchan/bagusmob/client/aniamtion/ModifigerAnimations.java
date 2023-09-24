@@ -44,7 +44,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(1f, KeyframeAnimations.degreeVec(0f, 0f, -8.75f),
                                     AnimationChannel.Interpolations.LINEAR)))
-            .addAnimation("RightLeg",
+            .addAnimation("right_leg",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -56,7 +56,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("RightLeg",
+            .addAnimation("right_leg",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -68,7 +68,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftLeg",
+            .addAnimation("left_leg",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 1f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -80,7 +80,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1f, KeyframeAnimations.posVec(0f, 1f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftLeg",
+            .addAnimation("left_leg",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -93,7 +93,7 @@ public class ModifigerAnimations {
                             new Keyframe(1f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
     public static final AnimationDefinition LOCK_SPELL = AnimationDefinition.Builder.withLength(2.75f)
-            .addAnimation("RightArm",
+            .addAnimation("right_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -113,7 +113,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(2.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftArm",
+            .addAnimation("left_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -124,7 +124,7 @@ public class ModifigerAnimations {
                             new Keyframe(2.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM))).build();
     public static final AnimationDefinition WALK_SWING = AnimationDefinition.Builder.withLength(1f).looping()
-            .addAnimation("RightArm",
+            .addAnimation("right_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(-35f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -132,7 +132,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1f, KeyframeAnimations.degreeVec(-35f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftArm",
+            .addAnimation("left_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(35f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -211,7 +211,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("RightLeg",
+            .addAnimation("right_leg",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -219,7 +219,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.5f, KeyframeAnimations.posVec(0f, 0f, -5f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("RightLeg",
+            .addAnimation("right_leg",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -227,7 +227,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.5f, KeyframeAnimations.degreeVec(-17.5f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftLeg",
+            .addAnimation("left_leg",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -235,7 +235,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.5f, KeyframeAnimations.posVec(0f, -3f, -4f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("LeftLeg",
+            .addAnimation("left_leg",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM),
@@ -243,20 +243,20 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.CATMULLROM),
                             new Keyframe(1.5f, KeyframeAnimations.degreeVec(52.5f, 0f, 0f),
                                     AnimationChannel.Interpolations.CATMULLROM)))
-            .addAnimation("RightArm",
+            .addAnimation("right_arm",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(0.25f, KeyframeAnimations.posVec(0f, -2f, -2f),
                                     AnimationChannel.Interpolations.LINEAR)))
-            .addAnimation("LeftArm",
+            .addAnimation("left_arm",
                     new AnimationChannel(AnimationChannel.Targets.POSITION,
                             new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(0.25f, KeyframeAnimations.posVec(0f, -2f, -2f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
     public static final AnimationDefinition SUMMON_SPELL = AnimationDefinition.Builder.withLength(0.75f).looping()
-            .addAnimation("RightArm",
+            .addAnimation("right_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(-179.67f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
@@ -264,7 +264,7 @@ public class ModifigerAnimations {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(0.75f, KeyframeAnimations.degreeVec(-179.67f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR)))
-            .addAnimation("LeftArm",
+            .addAnimation("left_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(-179.67f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),

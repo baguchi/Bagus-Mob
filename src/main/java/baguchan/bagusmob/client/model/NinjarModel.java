@@ -34,10 +34,10 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 		this.head = this.roots.getChild("head");
 		this.waist = this.roots.getChild("waist");
 		this.body = this.waist.getChild("Body");
-		this.right_arm = this.roots.getChild("RightArm");
-		this.left_arm = this.roots.getChild("LeftArm");
-		this.right_leg = this.roots.getChild("RightLeg");
-		this.left_leg = this.roots.getChild("LeftLeg");
+		this.right_arm = this.roots.getChild("right_arm");
+		this.left_arm = this.roots.getChild("left_arm");
+		this.right_leg = this.roots.getChild("right_leg");
+		this.left_leg = this.roots.getChild("left_leg");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -56,13 +56,13 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 
 		PartDefinition nose = head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
-		PartDefinition LeftLeg = roots.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -12.0F, 0.0F));
+		PartDefinition left_leg = roots.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -12.0F, 0.0F));
 
-		PartDefinition RightLeg = roots.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, -12.0F, 0.0F));
+		PartDefinition right_leg = roots.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, -12.0F, 0.0F));
 
-		PartDefinition RightArm = roots.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(40, 46).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -22.0F, 0.0F));
+		PartDefinition right_arm = roots.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 46).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -22.0F, 0.0F));
 
-		PartDefinition LeftArm = roots.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(40, 46).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, -22.0F, 0.0F));
+		PartDefinition left_arm = roots.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(40, 46).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, -22.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}

@@ -8,7 +8,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 public class NinjarAnimations {
 
 	public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(2.08f).looping()
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -16,7 +16,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(2.08f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -33,7 +33,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(0.76f, KeyframeAnimations.scaleVec(1f, 1f, 1f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(-48.08f, -28f, -20f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -41,7 +41,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.72f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(-52.13f, 28f, 20f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -50,7 +50,7 @@ public class NinjarAnimations {
 							new Keyframe(0.72f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM))).build();
 	public static final AnimationDefinition WALK = AnimationDefinition.Builder.withLength(1.12f).looping()
-			.addAnimation("LeftLeg",
+			.addAnimation("left_leg",
 					new AnimationChannel(AnimationChannel.Targets.POSITION,
 							new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR),
@@ -60,7 +60,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(0.64f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("LeftLeg",
+			.addAnimation("left_leg",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR),
@@ -72,7 +72,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(0.64f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("RightLeg",
+			.addAnimation("right_leg",
 					new AnimationChannel(AnimationChannel.Targets.POSITION,
 							new Keyframe(0.48f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR),
@@ -82,7 +82,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(1.12f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("RightLeg",
+			.addAnimation("right_leg",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR),
@@ -96,7 +96,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(1.12f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -108,7 +108,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(1.12f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -121,7 +121,7 @@ public class NinjarAnimations {
 							new Keyframe(1.12f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM))).build();
 	public static final AnimationDefinition DASH = AnimationDefinition.Builder.withLength(0.8f).looping()
-			.addAnimation("LeftLeg",
+			.addAnimation("left_leg",
 					new AnimationChannel(AnimationChannel.Targets.POSITION,
 							new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -139,7 +139,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.72f, KeyframeAnimations.posVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftLeg",
+			.addAnimation("left_leg",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -163,7 +163,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.8f, KeyframeAnimations.degreeVec(-12.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("RightLeg",
+			.addAnimation("right_leg",
 					new AnimationChannel(AnimationChannel.Targets.POSITION,
 							new Keyframe(0.08f, KeyframeAnimations.posVec(0f, 0f, -2f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -181,7 +181,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.72f, KeyframeAnimations.posVec(0f, 2f, -2f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("RightLeg",
+			.addAnimation("right_leg",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(-12.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -205,7 +205,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.8f, KeyframeAnimations.degreeVec(-12.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(22.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -217,7 +217,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.8f, KeyframeAnimations.degreeVec(22.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(22.5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -242,7 +242,7 @@ public class NinjarAnimations {
 							new Keyframe(0.8f, KeyframeAnimations.degreeVec(5f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM))).build();
 	public static final AnimationDefinition SLASH_RIGHT = AnimationDefinition.Builder.withLength(0.4f)
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -253,7 +253,7 @@ public class NinjarAnimations {
 							new Keyframe(0.36f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM))).build();
 	public static final AnimationDefinition SLASH_LEFT = AnimationDefinition.Builder.withLength(0.32f)
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -272,7 +272,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.LINEAR),
 							new Keyframe(0.72f, KeyframeAnimations.scaleVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.LINEAR)))
-			.addAnimation("RightArm",
+			.addAnimation("right_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
@@ -280,7 +280,7 @@ public class NinjarAnimations {
 									AnimationChannel.Interpolations.CATMULLROM),
 							new Keyframe(0.76f, KeyframeAnimations.degreeVec(-48.08f, -28f, -20f),
 									AnimationChannel.Interpolations.CATMULLROM)))
-			.addAnimation("LeftArm",
+			.addAnimation("left_arm",
 					new AnimationChannel(AnimationChannel.Targets.ROTATION,
 							new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
 									AnimationChannel.Interpolations.CATMULLROM),
