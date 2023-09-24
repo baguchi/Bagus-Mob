@@ -25,6 +25,7 @@ import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
@@ -114,11 +115,12 @@ public class Modifiger extends AbstractIllager {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, AbstractGolem.class, 8.0F, 0.6D, 1.0D));
         this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
         this.goalSelector.addGoal(4, new LockCastGoal(this, (int) (1.5F * 20)));
-        this.goalSelector.addGoal(5, new SummonVilerVexCastGoal(this, (int) (1.5F * 20)));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, Player.class, 8.0F, 0.6D, 1.0D));
+        this.goalSelector.addGoal(5, new AvoidEntityGoal<>(this, AbstractGolem.class, 8.0F, 0.6D, 1.0D));
+
+        this.goalSelector.addGoal(6, new SummonVilerVexCastGoal(this, (int) (1.5F * 20)));
 
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.65D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -198,6 +200,8 @@ public class Modifiger extends AbstractIllager {
             return true;
         } else if (p_33314_ instanceof LivingEntity && ((LivingEntity) p_33314_).getMobType() == MobType.ILLAGER) {
             return this.getTeam() == null && p_33314_.getTeam() == null;
+        } else if (p_33314_ instanceof Vex) {
+            return this.isAlliedTo(((Vex) p_33314_).getOwner());
         } else {
             return false;
         }

@@ -20,19 +20,19 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
     private final ModelPart root;
     private final ModelPart head;
     private final ModelPart body;
-    private final ModelPart RightLeg;
-    private final ModelPart LeftLeg;
-    private final ModelPart RightArm;
-    private final ModelPart LeftArm;
+    private final ModelPart right_leg;
+    private final ModelPart left_leg;
+    private final ModelPart right_arm;
+    private final ModelPart left_arm;
 
     public ModifigerModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
         this.body = root.getChild("body");
-        this.RightLeg = root.getChild("RightLeg");
-        this.LeftLeg = root.getChild("LeftLeg");
-        this.RightArm = root.getChild("RightArm");
-        this.LeftArm = root.getChild("LeftArm");
+        this.right_leg = root.getChild("right_leg");
+        this.left_leg = root.getChild("left_leg");
+        this.right_arm = root.getChild("right_arm");
+        this.left_arm = root.getChild("left_arm");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -57,13 +57,13 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
 
         PartDefinition left_box = cloth.addOrReplaceChild("left_box", CubeListBuilder.create().texOffs(0, 61).addBox(-1.0F, -1.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(-0.5F)), PartPose.offset(4.5F, 13.0F, 0.25F));
 
-        PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 12.0F, 0.0F));
+        PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 12.0F, 0.0F));
 
-        PartDefinition LeftLeg = partdefinition.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(2.0F, 12.0F, 0.0F));
+        PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(2.0F, 12.0F, 0.0F));
 
-        PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(0, 40).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, 2.0F, 0.0F));
+        PartDefinition right_arm = partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 40).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, 2.0F, 0.0F));
 
-        PartDefinition LeftArm = partdefinition.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(0, 40).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, 2.0F, 0.0F));
+        PartDefinition left_arm = partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 40).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, 2.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 128);
     }
@@ -85,7 +85,7 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
     }
 
     private ModelPart getArm(HumanoidArm p_102923_) {
-        return p_102923_ == HumanoidArm.LEFT ? this.RightArm : this.LeftArm;
+        return p_102923_ == HumanoidArm.LEFT ? this.right_arm : this.left_arm;
     }
 
     public void translateToHand(HumanoidArm p_102925_, PoseStack p_102926_) {
@@ -119,22 +119,22 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
 
     @Override
     public Iterable<ModelPart> rightHandArmors() {
-        return ImmutableList.of(this.RightArm);
+        return ImmutableList.of(this.right_arm);
     }
 
     @Override
     public Iterable<ModelPart> leftHandArmors() {
-        return ImmutableList.of(this.LeftArm);
+        return ImmutableList.of(this.left_arm);
     }
 
     @Override
     public Iterable<ModelPart> rightLegPartArmors() {
-        return ImmutableList.of(this.RightLeg);
+        return ImmutableList.of(this.right_leg);
     }
 
     @Override
     public Iterable<ModelPart> leftLegPartArmors() {
-        return ImmutableList.of(this.LeftLeg);
+        return ImmutableList.of(this.left_leg);
     }
 
     @Override
