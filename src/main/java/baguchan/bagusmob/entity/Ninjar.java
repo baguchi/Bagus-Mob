@@ -22,7 +22,10 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
@@ -92,10 +95,8 @@ public class Ninjar extends AbstractIllager {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(0, new AppearGoal(this, 20));
 		this.goalSelector.addGoal(0, new DisappearGoal(this, 20));
-		this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
 		this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
-		this.goalSelector.addGoal(3, new HoldGroundAttackGoal(this, 10.0F));
-        this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength));
+		this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
@@ -179,7 +180,7 @@ public class Ninjar extends AbstractIllager {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, 26.0D).add(Attributes.ATTACK_DAMAGE, 3.0D).add(Attributes.ARMOR, 8.0D).add(Attributes.FOLLOW_RANGE, 30.0D);
+		return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, 26.0D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.ARMOR, 8.0D).add(Attributes.FOLLOW_RANGE, 22.0D);
 	}
 
 	protected SoundEvent getAmbientSound() {
