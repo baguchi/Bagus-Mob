@@ -11,7 +11,7 @@ import java.util.EnumSet;
 
 public class LockCastGoal extends Goal {
     private final Modifiger mob;
-    private static final UniformInt TIME_BETWEEN_COOLDOWN = UniformInt.of(400, 600);
+    private static final UniformInt TIME_BETWEEN_COOLDOWN = UniformInt.of(400, 800);
 
     private int cooldown;
     private int tick;
@@ -47,10 +47,6 @@ public class LockCastGoal extends Goal {
     @Override
     public void stop() {
         super.stop();
-        LivingEntity livingEntity = this.mob.getTarget();
-        if (livingEntity != null && livingEntity.isAlive() && this.mob.hasLineOfSight(livingEntity)) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.TIME_LOCK.get(), 100 - 8 * 4), this.mob);
-        }
         this.mob.setTimeLockCast(false);
     }
 
@@ -60,7 +56,7 @@ public class LockCastGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.tick < this.maxTick;
+        return this.tick < this.maxTick && !this.mob.hurtMarked;
     }
 
     public void tick() {
@@ -68,6 +64,11 @@ public class LockCastGoal extends Goal {
         LivingEntity livingEntity = this.mob.getTarget();
         if (livingEntity != null && livingEntity.isAlive() && this.mob.getSensing().hasLineOfSight(livingEntity)) {
             this.mob.getLookControl().setLookAt(livingEntity, 30F, 30F);
+        }
+        if (this.tick >= this.maxTick) {
+            if (livingEntity != null && livingEntity.isAlive() && this.mob.hasLineOfSight(livingEntity)) {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.TIME_LOCK.get(), 100 - 8 * 4), this.mob);
+            }
         }
     }
 }

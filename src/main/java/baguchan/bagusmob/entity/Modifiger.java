@@ -79,6 +79,10 @@ public class Modifiger extends AbstractIllager {
                 if (this.isTimeLockCast()) {
                     this.lockSpellAnimationState.start(this.tickCount);
                     this.lockSpellTick = 0;
+                } else {
+                    if (this.lockSpellTick < this.maxSummonTick) {
+                        this.lockSpellAnimationState.stop();
+                    }
                 }
             }
             if (IS_SUMMON_CAST.equals(p_21104_)) {
