@@ -156,9 +156,19 @@ public class Ninjar extends AbstractIllager {
 
 	@Override
 	protected float getSoundVolume() {
-		return 0.35F;
+		return this.isInvisible() ? 0.35F : 1.0F;
 	}
 
+
+	@Override
+	public void setTarget(@org.jetbrains.annotations.Nullable LivingEntity p_21544_) {
+		super.setTarget(p_21544_);
+		if (p_21544_ != null) {
+			this.setInvisible(false);
+		} else {
+			this.setInvisible(true);
+		}
+	}
 	public boolean isSteppingCarefully() {
 		return true;
 	}
