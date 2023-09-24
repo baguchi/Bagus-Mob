@@ -175,7 +175,7 @@ public class Ninjar extends AbstractIllager {
 
 	@Override
 	public boolean dampensVibrations() {
-		return true;
+		return this.isInvisible();
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
