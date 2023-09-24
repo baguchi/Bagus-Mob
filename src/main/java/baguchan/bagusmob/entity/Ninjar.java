@@ -78,6 +78,9 @@ public class Ninjar extends AbstractIllager {
 					this.appearAnimationState.stop();
 					this.disappearAnimationState.start(this.tickCount);
 					break;
+				default:
+					this.disappearAnimationState.stop();
+					this.appearAnimationState.stop();
 			}
 		}
 
