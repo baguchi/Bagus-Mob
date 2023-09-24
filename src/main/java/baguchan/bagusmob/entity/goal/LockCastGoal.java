@@ -67,7 +67,7 @@ public class LockCastGoal extends Goal {
         }
         if (this.tick >= this.maxTick) {
             if (livingEntity != null && livingEntity.isAlive() && this.mob.hasLineOfSight(livingEntity)) {
-                livingEntity.addEffect(new MobEffectInstance(ModEffects.TIME_LOCK.get(), 100 - 8 * 4), this.mob);
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.TIME_LOCK.get(), 100 - 8 * 9), this.mob);
             }
         }
     }
