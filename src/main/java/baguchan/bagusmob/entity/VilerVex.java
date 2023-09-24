@@ -141,10 +141,6 @@ public class VilerVex extends Vex implements CrossbowAttackMob {
         public void tick() {
             LivingEntity livingentity = VilerVex.this.getTarget();
             if (livingentity != null) {
-                if (VilerVex.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                    VilerVex.this.doHurtTarget(livingentity);
-                    VilerVex.this.setIsCharging(false);
-                } else {
                     double d0 = VilerVex.this.distanceToSqr(livingentity);
 
                     if (vec3Target != null) {
@@ -159,7 +155,6 @@ public class VilerVex extends Vex implements CrossbowAttackMob {
                         vec3Target = DefaultRandomPos.getPosTowards(VilerVex.this, 6, 6, livingentity.position(), (double) ((float) Math.PI / 2F));
 
                     }
-                }
 
             }
         }
