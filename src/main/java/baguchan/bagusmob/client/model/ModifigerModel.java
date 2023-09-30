@@ -80,7 +80,7 @@ public class ModifigerModel<T extends Modifiger> extends HierarchicalModel<T> im
             if (!entity.lockSpellAnimationState.isStarted() && !entity.summonSpellAnimationState.isStarted()) {
                 this.animateWalk(ModifigerAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
             }
-            this.animate(entity.lockSpellAnimationState, ModifigerAnimations.LOCK_SPELL, ageInTicks);
+            this.animate(entity.lockSpellAnimationState, ModifigerAnimations.LOCK_SPELL, ageInTicks, 0.5F);
             this.animate(entity.summonSpellAnimationState, ModifigerAnimations.SUMMON_SPELL, ageInTicks);
 
         }

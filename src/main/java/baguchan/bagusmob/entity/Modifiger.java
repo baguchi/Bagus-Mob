@@ -41,10 +41,10 @@ public class Modifiger extends AbstractIllager {
     public final AnimationState lockSpellAnimationState = new AnimationState();
     public final AnimationState deathAnimationState = new AnimationState();
     public final AnimationState summonSpellAnimationState = new AnimationState();
-    private final int maxLockSpellTick = (int) 2.75f * 20;
+    private final int maxLockSpellTick = (int) 2.75f * 40;
     private int lockSpellTick = maxLockSpellTick;
 
-    private final int maxSummonTick = (int) 2.75f * 20;
+    private final int maxSummonTick = (int) 2.0f * 30;
     private int summonSpellTick = maxSummonTick;
 
     public Modifiger(EntityType<? extends Modifiger> p_32105_, Level p_32106_) {
