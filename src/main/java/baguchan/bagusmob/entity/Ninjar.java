@@ -166,9 +166,9 @@ public class Ninjar extends AbstractIllager {
 		super.aiStep();
 
 		if (!this.level().isClientSide) {
-			if (this.isInvisible() && (this.getTarget() != null || this.isCelebrating())) {
+			if (this.isInvisible() && (this.hurtTime > 0 || this.getTarget() == null || this.isCelebrating())) {
 				this.setInvisible(false);
-			} else if (!this.isInvisible() && (this.getTarget() == null && !this.isCelebrating())) {
+			} else if (!this.isInvisible() && this.hurtTime <= 0 && this.tickCount % 100 == 0 && (this.getTarget() != null && !this.isCelebrating())) {
 				this.setInvisible(true);
 			}
 		}
