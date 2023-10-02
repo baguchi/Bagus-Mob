@@ -4,9 +4,11 @@ import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.model.*;
 import baguchan.bagusmob.client.render.*;
 import baguchan.bagusmob.registry.ModEntityRegistry;
+import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -20,6 +22,9 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.SLASH_AIR.get(), SlashAirRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.MODIFIGER.get(), ModifigerRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.VILER_VEX.get(), VilerVexRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.RUDEHOG.get(), RudeHogRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), HunterBoarRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.SPIN_BLADE.get(), SpinBladeRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -29,5 +34,13 @@ public class ClientRenderingRegistry {
 		event.registerLayerDefinition(ModModelLayers.MODIFIGER, ModifigerModel::createBodyLayer);
 		event.registerLayerDefinition(ModModelLayers.VILER_VEX, VilerVexModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.NINJA_ARMOR, NinjaArmorModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.RUDEHOG, RudeHogModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.SPIN_BLADE, SpinBladeModel::createBodyLayer);
+
+    }
+
+    @SubscribeEvent
+    public static void modelBake(ModelEvent.ModifyBakingResult event) {
+        ModItemRegistry.addItemModelProperties();
 	}
 }

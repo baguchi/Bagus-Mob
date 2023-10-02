@@ -15,6 +15,8 @@ public class ModCreativeTabs {
 			event.accept(ModItemRegistry.NINJAR_SPAWNEGG.get());
 			event.accept(ModItemRegistry.MODIFIGER_SPAWNEGG.get());
 			event.accept(ModItemRegistry.VILER_VEX_SPAWNEGG.get());
+			event.accept(ModItemRegistry.SPAWNEGG_RUDEHOG.get());
+			event.accept(ModItemRegistry.SPAWNEGG_HUNTER_BOAR.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());
@@ -22,6 +24,8 @@ public class ModCreativeTabs {
 			event.accept(ModItemRegistry.NINJA_HOOD.get());
 			event.accept(ModItemRegistry.NINJA_CHESTPLATE.get());
 			event.accept(ModItemRegistry.NINJA_BOOTS.get());
+			event.accept(ModItemRegistry.BEAST_CUDGEL.get());
+			event.accept(ModItemRegistry.SPIN_BLADE.get());
 		}
 	}
 }

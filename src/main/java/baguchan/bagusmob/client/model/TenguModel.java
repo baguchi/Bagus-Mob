@@ -4,8 +4,8 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.5.2
 
 
 import bagu_chan.bagus_lib.client.layer.IArmor;
-import baguchan.bagusmob.client.aniamtion.IllagerAnimations;
-import baguchan.bagusmob.client.aniamtion.TenguAnimations;
+import baguchan.bagusmob.client.animation.IllagerAnimations;
+import baguchan.bagusmob.client.animation.TenguAnimations;
 import baguchan.bagusmob.entity.Tengu;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;

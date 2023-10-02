@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "bagusmob:item/spin_blade_gui"
+  },
+  "base": {
+    "parent": "bagusmob:item/spin_blade_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "bagusmob:item/spin_blade_gui"
+    },
+    "fixed": {
+      "parent": "bagusmob:item/spin_blade_gui"
+    }
+  },
+  "overrides": [
+    {
+      "model": "bagusmob:item/spin_blade_thrown",
+      "predicate": {
+        "bagusmob:thrown": 1.0
+      }
+    }
+  ]
+}

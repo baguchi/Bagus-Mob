@@ -3,7 +3,7 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.8.3
 // Paste this class into your mod and generate all required imports
 
 
-import baguchan.bagusmob.client.aniamtion.VilerVexAnimations;
+import baguchan.bagusmob.client.animation.VilerVexAnimations;
 import baguchan.bagusmob.entity.VilerVex;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.AnimationUtils;

@@ -8,8 +8,16 @@
   "item.bagusmob.ninja_hood": "Ninja Hood",
   "item.bagusmob.ninja_chestplate": "Ninja Tunic",
   "item.bagusmob.ninja_boots": "Ninja Boots",
+  "item.bagusmob.spawnegg_rudehog": "RudeHog Spawn Egg",
+  "item.bagusmob.spawnegg_hunter_boar": "Hunter Boar Spawn Egg",
+  "item.bagusmob.beast_cudgel": "Beast Cudgel",
+  "item.bagusmob.spin_blade": "Hunter's Spin Blade",
   "entity.bagusmob.tengu": "Tengu",
   "entity.bagusmob.ninjar": "Ninjar",
   "entity.bagusmob.modifiger": "Modifiger",
-  "entity.bagusmob.viler_vex": "Viler Vex"
+  "entity.bagusmob.viler_vex": "Viler Vex",
+  "entity.bagusmob.spin_blade": "Spin Blade",
+  "entity.bagusmob.rudehog": "RudeHog",
+  "entity.bagusmob.hunter_boar": "Hunter Boar",
+  "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade"
 }

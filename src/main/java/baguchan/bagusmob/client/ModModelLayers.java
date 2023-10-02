@@ -12,4 +12,7 @@ public class ModModelLayers {
 	public static ModelLayerLocation VILER_VEX = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "viler_vex"), "viler_vex");
     public static ModelLayerLocation NINJA_ARMOR = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "ninja_armor"), "ninja_armor");
 
+    public static ModelLayerLocation RUDEHOG = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "rudehog"), "rudehog");
+    public static ModelLayerLocation SPIN_BLADE = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "spin_blade"), "spin_blade");
+
 }

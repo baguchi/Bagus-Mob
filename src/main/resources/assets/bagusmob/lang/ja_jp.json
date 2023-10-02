@@ -8,8 +8,13 @@
   "item.bagusmob.ninja_hood": "ニンジャの頭巾",
   "item.bagusmob.ninja_chestplate": "ニンジャの服",
   "item.bagusmob.ninja_boots": "ニンジャのブーツ",
+  "item.bagusmob.spawnegg_rudehog": "ルードホッグのスポーンエッグ",
+  "item.bagusmob.spawnegg_hunter_boar": "ハンターイノシシのスポーンエッグ",
+  "item.bagusmob.beast_cudgel": "ビーストのこん棒",
+  "item.bagusmob.spin_blade": "ハンターのスピンブレード",
   "entity.bagusmob.tengu": "天狗",
   "entity.bagusmob.ninjar": "ニンジャー",
   "entity.bagusmob.modifiger": "改変者",
-  "entity.bagusmob.viler_vex": "卑怯なヴェックス"
+  "entity.bagusmob.viler_vex": "卑怯なヴェックス",
+  "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった"
 }
