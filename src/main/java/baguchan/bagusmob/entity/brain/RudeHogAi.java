@@ -92,7 +92,7 @@ public class RudeHogAi {
         return p_34842_;
     }
 
-    protected static void initMemories(RudeHog p_219206_, RandomSource p_219207_) {
+    public static void initMemories(RudeHog p_219206_, RandomSource p_219207_) {
         int i = TIME_BETWEEN_HUNTS.sample(p_219207_);
         p_219206_.getBrain().setMemoryWithExpiry(MemoryModuleType.HUNTED_RECENTLY, true, (long) i);
     }

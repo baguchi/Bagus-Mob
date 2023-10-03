@@ -7,6 +7,7 @@ import baguchan.bagusmob.registry.ModEntityRegistry;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
@@ -108,6 +109,11 @@ public class BurnerHogAi {
     private static void initRideHoglinActivity(Brain<BurnerHog> p_34974_) {
     }
 
+    public static void initMemories(BurnerHog p_35095_) {
+        GlobalPos globalpos = GlobalPos.of(p_35095_.level().dimension(), p_35095_.blockPosition());
+        p_35095_.getBrain().setMemory(MemoryModuleType.HOME, globalpos);
+    }
+
     private static ImmutableList<Pair<OneShot<LivingEntity>, Integer>> createLookBehaviors() {
         return ImmutableList.of(Pair.of(SetEntityLookTarget.create(EntityType.PLAYER, 8.0F), 1), Pair.of(SetEntityLookTarget.create(EntityType.PIGLIN, 8.0F), 1), Pair.of(SetEntityLookTarget.create(ModEntityRegistry.BURNER_HOG.get(), 8.0F), 1), Pair.of(SetEntityLookTarget.create(8.0F), 1));
     }
@@ -117,7 +123,7 @@ public class BurnerHogAi {
     }
 
     private static RunOne<Piglin> createIdleMovementBehaviors() {
-        return new RunOne<>(ImmutableList.of(Pair.of(RandomStroll.stroll(0.6F), 2), Pair.of(InteractWith.of(EntityType.PIGLIN, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(InteractWith.of(ModEntityRegistry.BURNER_HOG.get(), 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(new DoNothing(30, 60), 1)));
+        return new RunOne<>(ImmutableList.of(Pair.of(RandomStroll.stroll(0.6F), 2), Pair.of(InteractWith.of(EntityType.PIGLIN, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(InteractWith.of(ModEntityRegistry.BURNER_HOG.get(), 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(StrollToPoi.create(MemoryModuleType.HOME, 0.6F, 2, 100), 2), Pair.of(StrollAroundPoi.create(MemoryModuleType.HOME, 0.6F, 5), 2), Pair.of(new DoNothing(30, 60), 1)));
     }
 
 

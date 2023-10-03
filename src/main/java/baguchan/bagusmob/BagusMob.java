@@ -44,6 +44,9 @@ public class BagusMob {
 		JigsawHelper.registerJigsaw(event.getServer(),
 				new ResourceLocation("minecraft:bastion/mobs/piglin_melee"),
 				new ResourceLocation(BagusMob.MODID, "bastion/rude_hog"), 1);
+		JigsawHelper.registerJigsaw(event.getServer(),
+				new ResourceLocation("minecraft:bastion/mobs/piglin"),
+				new ResourceLocation(BagusMob.MODID, "bastion/burner_hog"), 1);
 
 	}
 }

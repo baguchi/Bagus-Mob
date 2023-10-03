@@ -84,6 +84,7 @@ public class RudeHog extends Piglin {
         if (p_34719_ != MobSpawnType.STRUCTURE) {
             this.spawnPartner(p_34717_, p_34718_, p_34720_);
         }
+        RudeHogAi.initMemories(this, p_34717_.getRandom());
         return super.finalizeSpawn(p_34717_, p_34718_, p_34719_, p_34720_, p_34721_);
     }
 
