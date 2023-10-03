@@ -55,6 +55,7 @@ import java.util.Map;
 public class Ninjar extends AbstractIllager {
 
 	private float runningScale;
+    private float runningScaleO;
 	public final AnimationState idleAnimationState = new AnimationState();
 	public final AnimationState slashRightAnimationState = new AnimationState();
 	public final AnimationState slashLeftAnimationState = new AnimationState();
@@ -245,7 +246,9 @@ public class Ninjar extends AbstractIllager {
 	@Override
 	public void tick() {
 		if (this.level().isClientSide()) {
+            runningScaleO = runningScale;
 			if ((this.isMoving())) {
+
 				if (isDashing()) {
 					idleAnimationState.stop();
 					runningScale = Mth.clamp(runningScale + 0.1F, 0, 1);
@@ -348,8 +351,8 @@ public class Ninjar extends AbstractIllager {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public float getRunningScale() {
-		return runningScale;
+    public float getRunningScale(float p_29570_) {
+        return Mth.lerp(p_29570_, this.runningScaleO, this.runningScale);
 	}
 
 	class NinjarMeleeAttackGoal extends MeleeAttackGoal {

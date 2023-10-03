@@ -75,8 +75,9 @@ public class NinjarModel<T extends Ninjar> extends HierarchicalModel<T> implemen
 		this.head.xRot = headPitch * ((float) Math.PI / 180F);
 
 		this.animate(entity.idleAnimationState, NinjarAnimations.IDLE, ageInTicks);
-		this.animateWalk(NinjarAnimations.DASH, limbSwing, limbSwingAmount * (entity.getRunningScale()), 1.0F, 5.0F);
-		this.animateWalk(NinjarAnimations.WALK, limbSwing, limbSwingAmount * (1.0F - entity.getRunningScale()), 3.0F, 4.0F);
+        float f = ageInTicks - (float) entity.tickCount;
+        this.animateWalk(NinjarAnimations.DASH, limbSwing, limbSwingAmount * (entity.getRunningScale(f)), 1.0F, 5.0F);
+        this.animateWalk(NinjarAnimations.WALK, limbSwing, limbSwingAmount * (1.0F - entity.getRunningScale(f)), 3.0F, 4.0F);
 		this.animate(entity.slashRightAnimationState, NinjarAnimations.SLASH_RIGHT, ageInTicks);
 		this.animate(entity.slashLeftAnimationState, NinjarAnimations.SLASH_LEFT, ageInTicks);
 		this.animate(entity.disappearAnimationState, NinjarAnimations.DESPAWN, ageInTicks);

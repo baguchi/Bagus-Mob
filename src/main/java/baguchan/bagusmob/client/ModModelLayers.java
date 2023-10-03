@@ -14,5 +14,6 @@ public class ModModelLayers {
 
     public static ModelLayerLocation RUDEHOG = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "rudehog"), "rudehog");
     public static ModelLayerLocation SPIN_BLADE = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "spin_blade"), "spin_blade");
+    public static ModelLayerLocation BURNER_HOG = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "burner_hog"), "burner_hog");
 
 }

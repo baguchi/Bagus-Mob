@@ -15,8 +15,9 @@ public class ModCreativeTabs {
 			event.accept(ModItemRegistry.NINJAR_SPAWNEGG.get());
 			event.accept(ModItemRegistry.MODIFIGER_SPAWNEGG.get());
 			event.accept(ModItemRegistry.VILER_VEX_SPAWNEGG.get());
-			event.accept(ModItemRegistry.SPAWNEGG_RUDEHOG.get());
-			event.accept(ModItemRegistry.SPAWNEGG_HUNTER_BOAR.get());
+            event.accept(ModItemRegistry.RUDEHOG_SPAWNEGG.get());
+            event.accept(ModItemRegistry.HUNTER_BOAR_SPAWNEGG.get());
+            event.accept(ModItemRegistry.BURNER_HOG_SPAWNEGG.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());

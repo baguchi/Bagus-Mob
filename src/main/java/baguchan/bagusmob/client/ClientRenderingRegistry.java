@@ -25,6 +25,7 @@ public class ClientRenderingRegistry {
         event.registerEntityRenderer(ModEntityRegistry.RUDEHOG.get(), RudeHogRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), HunterBoarRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.SPIN_BLADE.get(), SpinBladeRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.BURNER_HOG.get(), BurnerHogRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -36,7 +37,7 @@ public class ClientRenderingRegistry {
         event.registerLayerDefinition(ModModelLayers.NINJA_ARMOR, NinjaArmorModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.RUDEHOG, RudeHogModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPIN_BLADE, SpinBladeModel::createBodyLayer);
-
+        event.registerLayerDefinition(ModModelLayers.BURNER_HOG, BurnerHogModel::createBodyLayer);
     }
 
     @SubscribeEvent
