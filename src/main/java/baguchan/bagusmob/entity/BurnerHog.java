@@ -63,7 +63,7 @@ public class BurnerHog extends Piglin {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 50.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.35D).add(Attributes.ARMOR, 8.0D).add(Attributes.ARMOR_TOUGHNESS, 0.5F).add(Attributes.ATTACK_DAMAGE, 6.0D);
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 50.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.35D).add(Attributes.ARMOR, 10.0D).add(Attributes.ARMOR_TOUGHNESS, 1F).add(Attributes.ATTACK_DAMAGE, 6.0D);
     }
 
     @Override
