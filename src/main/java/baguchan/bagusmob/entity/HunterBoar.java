@@ -31,6 +31,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zoglin;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.hoglin.HoglinBase;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.Level;
@@ -38,7 +39,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 
-public class HunterBoar extends Monster implements Enemy, HoglinBase {
+public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
     private static final EntityDataAccessor<Boolean> DATA_IMMUNE_TO_ZOMBIFICATION = SynchedEntityData.defineId(HunterBoar.class, EntityDataSerializers.BOOLEAN);
 
     protected static final ImmutableList<? extends SensorType<? extends Sensor<? super HunterBoar>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS);
@@ -51,12 +52,12 @@ public class HunterBoar extends Monster implements Enemy, HoglinBase {
         this.xpReward = 8;
     }
 
-    protected Brain.Provider<HunterBoar> brainProvider() {
+    protected Brain.Provider<HunterBoar> revampBrainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
     protected Brain<?> makeBrain(Dynamic<?> p_34221_) {
-        Brain<HunterBoar> brain = this.brainProvider().makeBrain(p_34221_);
+        Brain<HunterBoar> brain = this.revampBrainProvider().makeBrain(p_34221_);
         initCoreActivity(brain);
         initIdleActivity(brain);
         initFightActivity(brain);
@@ -95,10 +96,6 @@ public class HunterBoar extends Monster implements Enemy, HoglinBase {
     private void setAttackTarget(LivingEntity p_34255_) {
         this.brain.eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
         this.brain.setMemoryWithExpiry(MemoryModuleType.ATTACK_TARGET, p_34255_, 200L);
-    }
-
-    public Brain<HunterBoar> getBrain() {
-        return (Brain<HunterBoar>) super.getBrain();
     }
 
     protected void updateActivity() {

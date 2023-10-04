@@ -23,7 +23,7 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.MODIFIGER.get(), ModifigerRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.VILER_VEX.get(), VilerVexRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.RUDEHOG.get(), RudeHogRenderer::new);
-        event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), HunterBoarRenderer::new);
+		event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), (p_174165_) -> new HunterBoarRenderer(p_174165_));
         event.registerEntityRenderer(ModEntityRegistry.SPIN_BLADE.get(), SpinBladeRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.BURNER_HOG.get(), BurnerHogRenderer::new);
 	}
