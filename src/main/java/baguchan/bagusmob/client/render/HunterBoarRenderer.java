@@ -12,13 +12,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HunterBoarRenderer<T extends HunterBoar> extends HoglinRenderer {
     private static final ResourceLocation HOGLIN_LOCATION = new ResourceLocation(BagusMob.MODID, "textures/entity/hoglin.png");
+    private static final ResourceLocation GB_HOGLIN_LOCATION = new ResourceLocation(BagusMob.MODID, "textures/entity/gb_hoglin.png");
 
     public HunterBoarRenderer(EntityRendererProvider.Context p_174165_) {
         super(p_174165_);
     }
 
     public ResourceLocation getTextureLocation(Hoglin p_114862_) {
-        return HOGLIN_LOCATION;
+        return BagusMob.greedLoaded ? GB_HOGLIN_LOCATION : HOGLIN_LOCATION;
     }
 
     protected boolean isShaking(Hoglin p_114864_) {

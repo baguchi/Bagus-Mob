@@ -10,6 +10,7 @@ import net.minecraft.world.entity.raid.Raid;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -20,6 +21,7 @@ public class BagusMob {
 	// Define mod id in a common place for everything to reference
 	public static final String MODID = "bagusmob";
 
+	public static boolean greedLoaded;
 	public BagusMob() {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -35,6 +37,7 @@ public class BagusMob {
 	}
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+		greedLoaded = ModList.get().isLoaded("greedandbleed");
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
 		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 2, 2, 3, 3, 4});
 		Raid.RaiderType.create("modifiger", ModEntityRegistry.MODIFIGER.get(), new int[]{0, 0, 0, 0, 1, 1, 2, 3});

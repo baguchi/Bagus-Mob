@@ -94,6 +94,7 @@ public class RudeHog extends Piglin {
 
             mob.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
             mob.finalizeSpawn(p_33882_, p_33883_, MobSpawnType.JOCKEY, p_33885_, (CompoundTag) null);
+            mob.setBaby(false);
             p_33882_.addFreshEntity(mob);
             this.startRiding(mob, true);
         }
