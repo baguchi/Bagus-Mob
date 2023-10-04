@@ -4,6 +4,7 @@ import bagu_chan.bagus_lib.entity.brain.behaviors.AttackWithAnimation;
 import bagu_chan.bagus_lib.util.BrainUtils;
 import baguchan.bagusmob.entity.RudeHog;
 import baguchan.bagusmob.entity.brain.behaviors.NoticedHoglin;
+import baguchan.bagusmob.entity.brain.behaviors.Pacified;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -102,11 +103,11 @@ public class RudeHogAi {
     }
 
     private static void initIdleActivity(Brain<RudeHog> p_34892_) {
-        p_34892_.addActivity(Activity.IDLE, 10, ImmutableList.of(SetEntityLookTarget.create(RudeHogAi::isPlayerHoldingLovedItem, 14.0F), StartAttacking.<Piglin>create(AbstractPiglin::isAdult, RudeHogAi::findNearestValidAttackTarget), BehaviorBuilder.triggerIf(RudeHog::canHunt, StartHuntingHoglin.create()), babySometimesRideBabyHoglin(), createIdleLookBehaviors(), createIdleMovementBehaviors(), SetLookAndInteract.create(EntityType.PLAYER, 4)));
+        p_34892_.addActivity(Activity.IDLE, 10, ImmutableList.of(Pacified.create(), SetEntityLookTarget.create(RudeHogAi::isPlayerHoldingLovedItem, 14.0F), StartAttacking.<Piglin>create(AbstractPiglin::isAdult, RudeHogAi::findNearestValidAttackTarget), BehaviorBuilder.triggerIf(RudeHog::canHunt, StartHuntingHoglin.create()), babySometimesRideBabyHoglin(), createIdleLookBehaviors(), createIdleMovementBehaviors(), SetLookAndInteract.create(EntityType.PLAYER, 4)));
     }
 
     private static void initFightActivity(RudeHog p_34904_, Brain<RudeHog> p_34905_) {
-        p_34905_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.<BehaviorControl<? super RudeHog>>of(StopAttackingIfTargetInvalid.<Piglin>create((p_34981_) -> {
+        p_34905_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.<BehaviorControl<? super RudeHog>>of(Pacified.create(), StopAttackingIfTargetInvalid.<Piglin>create((p_34981_) -> {
             return !isNearestValidAttackTarget(p_34904_, p_34981_);
         }), new AttackWithAnimation<>(p_34904_.attackAnimationLength - p_34904_.attackAnimationActionPoint, p_34904_.attackAnimationLength, 40, 1.0F), new NoticedHoglin<>(), RememberIfHoglinWasKilled.create()), MemoryModuleType.ATTACK_TARGET);
     }
