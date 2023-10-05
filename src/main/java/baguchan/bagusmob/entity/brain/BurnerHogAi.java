@@ -3,6 +3,7 @@ package baguchan.bagusmob.entity.brain;
 import bagu_chan.bagus_lib.util.BrainUtils;
 import baguchan.bagusmob.entity.BurnerHog;
 import baguchan.bagusmob.entity.brain.behaviors.BurnerActive;
+import baguchan.bagusmob.entity.brain.behaviors.SetWalkTargetFromAttackTargetIfTargetFar;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -97,7 +98,7 @@ public class BurnerHogAi {
     private static void initFightActivity(BurnerHog p_34904_, Brain<BurnerHog> p_34905_) {
         p_34905_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.<BehaviorControl<? super BurnerHog>>of(StopAttackingIfTargetInvalid.<Piglin>create((p_34981_) -> {
             return !isNearestValidAttackTarget(p_34904_, p_34981_);
-        }), BackUpIfTooClose.create(10, 0.75F), new BurnerActive<>(), RememberIfHoglinWasKilled.create()), MemoryModuleType.ATTACK_TARGET);
+        }), SetWalkTargetFromAttackTargetIfTargetFar.create(1.0F, 10), SetWalkTargetAwayFrom.entity(MemoryModuleType.ATTACK_TARGET, 1.0F, 6, false), new BurnerActive<>(), RememberIfHoglinWasKilled.create()), MemoryModuleType.ATTACK_TARGET);
     }
 
     private static void initCelebrateActivity(Brain<BurnerHog> p_34921_) {

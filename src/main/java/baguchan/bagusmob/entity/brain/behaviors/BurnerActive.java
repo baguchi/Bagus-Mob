@@ -6,9 +6,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.phys.Vec3;
 
@@ -18,7 +18,7 @@ public class BurnerActive<E extends BurnerHog> extends Behavior<E> {
     protected int ticks;
 
     public BurnerActive() {
-        super(ImmutableMap.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED));
+        super(ImmutableMap.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED));
     }
 
     @Override
@@ -40,9 +40,7 @@ public class BurnerActive<E extends BurnerHog> extends Behavior<E> {
     @Override
     protected void stop(ServerLevel p_22548_, E p_22549_, long p_22550_) {
         super.stop(p_22548_, p_22549_, p_22550_);
-        if (p_22549_.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isEmpty()) {
-            p_22549_.setCharge(false);
-        }
+        p_22549_.setCharge(false);
     }
 
     @Override
@@ -52,9 +50,9 @@ public class BurnerActive<E extends BurnerHog> extends Behavior<E> {
 
         if (optional.isPresent()) {
             LivingEntity livingEntity = optional.get();
-            if (p_22552_.hasLineOfSight(optional.get()) && p_22552_.distanceToSqr(optional.get()) < 64F) {
+            p_22552_.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new EntityTracker(optional.get(), true));
+            if (p_22552_.getSensing().hasLineOfSight(optional.get())) {
                 if (this.ticks == 40) {
-                    p_22552_.setCharge(true);
                     p_22552_.playSound(SoundEvents.FIRE_EXTINGUISH);
                 }
                 if (++this.ticks >= 60 && this.ticks <= 70 && this.ticks % 5 == 0) {
@@ -73,14 +71,10 @@ public class BurnerActive<E extends BurnerHog> extends Behavior<E> {
                 }
                 if (this.ticks > 80) {
                     this.ticks = 0;
-                    p_22552_.setCharge(false);
                 }
-            } else {
-                p_22552_.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(optional.get(), 0.8F, 6));
             }
         } else {
             this.ticks = 0;
-            p_22552_.setCharge(true);
         }
     }
 }
