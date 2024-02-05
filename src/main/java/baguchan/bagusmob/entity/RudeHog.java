@@ -33,6 +33,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 
 public class RudeHog extends Piglin {
@@ -100,9 +101,13 @@ public class RudeHog extends Piglin {
         }
     }
 
+
     @Override
-    public double getMeleeAttackRangeSqr(LivingEntity p_147273_) {
-        return this.getMainHandItem().is(ModItemRegistry.BEAST_CUDGEL.get()) ? super.getMeleeAttackRangeSqr(p_147273_) + 3.0F : super.getMeleeAttackRangeSqr(p_147273_);
+    protected AABB getAttackBoundingBox() {
+        if (this.getMainHandItem().is(ModItemRegistry.BEAST_CUDGEL.get())) {
+            return super.getAttackBoundingBox().inflate(0.5F);
+        }
+        return super.getAttackBoundingBox();
     }
 
     @Override

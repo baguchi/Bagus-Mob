@@ -1,5 +1,6 @@
 package baguchan.bagusmob.entity;
 
+import bagu_chan.bagus_lib.entity.goal.AnimatedAttackGoal;
 import baguchan.bagusmob.entity.goal.JumpTheSkyGoal;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import com.google.common.collect.Maps;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -62,7 +62,7 @@ public class Tengu extends AbstractIllager {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new JumpTheSkyGoal(this));
         this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
-        this.goalSelector.addGoal(4, new TenguMeleeAttackGoal());
+        this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.0F, 19, 19 - 12));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
@@ -288,31 +288,6 @@ public class Tengu extends AbstractIllager {
             super.handleEntityEvent(p_219360_);
         }
 
-    }
-
-    class TenguMeleeAttackGoal extends MeleeAttackGoal {
-        public TenguMeleeAttackGoal() {
-            super(Tengu.this, 1.25D, true);
-        }
-
-        protected void checkAndPerformAttack(LivingEntity p_29589_, double p_29590_) {
-            double d0 = this.getAttackReachSqr(p_29589_);
-            if (p_29590_ <= d0 && this.getTicksUntilNextAttack() <= 12) {
-                this.resetAttackCooldown();
-                this.mob.doHurtTarget(p_29589_);
-            } else if (p_29590_ <= d0) {
-                if (this.isTimeToAttack()) {
-                    this.resetAttackCooldown();
-                }
-
-                if (this.getTicksUntilNextAttack() == 19) {
-                    Tengu.this.level().broadcastEntityEvent(Tengu.this, (byte) 4);
-                }
-            } else {
-                this.resetAttackCooldown();
-            }
-
-        }
     }
 
     class TenguBodyRotationControl extends BodyRotationControl {

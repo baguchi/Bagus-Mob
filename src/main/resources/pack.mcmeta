@@ -1,8 +1,6 @@
 {
     "pack": {
-        "description": "wasabi resources",
-        "pack_format": 15,
-        "forge:resource_pack_format": 15,
-        "forge:data_pack_format": 15
+      "description": "revampedwolf resources",
+      "pack_format": 18
     }
 }

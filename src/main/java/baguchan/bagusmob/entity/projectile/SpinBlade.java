@@ -31,6 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 
 import javax.annotation.Nullable;
 
@@ -172,7 +173,7 @@ public class SpinBlade extends Projectile {
             }
         }
 
-        if (hitresult.getType() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+        if (hitresult.getType() != HitResult.Type.MISS && !flag && !EventHooks.onProjectileImpact(this, hitresult)) {
             this.onHit(hitresult);
         }
         this.updateRotation();

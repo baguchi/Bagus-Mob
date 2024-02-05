@@ -16,8 +16,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +48,7 @@ public class NinjaArmorItem extends ArmorItem {
             ModelPart root = models.bakeLayer(ModModelLayers.NINJA_ARMOR);
 
             NinjaArmorModel<?> model2 = new NinjaArmorModel<>(root);
-            ForgeHooksClient.copyModelProperties(original, model2);
+            ClientHooks.copyModelProperties(original, model2);
             this.setPartVisibility(model2, equipmentSlot);
             model2.setAllVisible(!livingEntity.isInvisible());
 

@@ -21,10 +21,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -46,8 +44,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -138,10 +136,8 @@ public class Ninjar extends AbstractIllager {
 		boolean flag = blockstate.blocksMotion();
 		boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
 		if (flag && !flag1) {
-			net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, p_32544_, p_32545_, p_32546_);
-			if (event.isCanceled()) return false;
 			Vec3 vec3 = this.position();
-			boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), false);
+            boolean flag2 = this.randomTeleport(p_32544_, p_32545_, p_32546_, false);
 			if (flag2) {
 				this.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(this));
 				if (!this.isSilent()) {
@@ -353,45 +349,5 @@ public class Ninjar extends AbstractIllager {
 	@OnlyIn(Dist.CLIENT)
     public float getRunningScale(float p_29570_) {
         return Mth.lerp(p_29570_, this.runningScaleO, this.runningScale);
-	}
-
-	class NinjarMeleeAttackGoal extends MeleeAttackGoal {
-		public NinjarMeleeAttackGoal() {
-			super(Ninjar.this, 1.2D, true);
-		}
-
-		protected void checkAndPerformAttack(LivingEntity p_29589_, double p_29590_) {
-			double d0 = this.getAttackReachSqr(p_29589_);
-			if (p_29590_ <= d0 && this.getTicksUntilNextAttack() <= 16) {
-				this.resetAttackCooldown();
-				this.mob.doHurtTarget(p_29589_);
-			} else if (p_29590_ <= d0) {
-				if (this.isTimeToAttack()) {
-					this.resetAttackCooldown();
-				}
-
-				if (this.getTicksUntilNextAttack() == 19) {
-					Ninjar.this.level().broadcastEntityEvent(Ninjar.this, (byte) 4);
-				}
-			} else {
-				this.resetAttackCooldown();
-			}
-
-		}
-	}
-
-	class TenguBodyRotationControl extends BodyRotationControl {
-		public TenguBodyRotationControl(Mob p_33216_) {
-			super(p_33216_);
-		}
-
-		public void clientTick() {
-			if (Ninjar.this.isFallFlying()) {
-				Ninjar.this.setYRot(Ninjar.this.getYHeadRot());
-				Ninjar.this.setYBodyRot(Ninjar.this.getYHeadRot());
-			} else {
-				super.clientTick();
-			}
-		}
 	}
 }

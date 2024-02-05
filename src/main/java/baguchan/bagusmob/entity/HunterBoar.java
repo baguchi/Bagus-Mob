@@ -37,6 +37,7 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
 
@@ -142,7 +143,7 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         this.updateActivity();
         if (this.isConverting()) {
             ++this.timeInOverworld;
-            if (this.timeInOverworld > 300 && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, EntityType.ZOGLIN, (timer) -> this.timeInOverworld = timer)) {
+            if (this.timeInOverworld > 300 && EventHooks.canLivingConvert(this, EntityType.ZOGLIN, (timer) -> this.timeInOverworld = timer)) {
                 this.playSoundEvent(SoundEvents.HOGLIN_CONVERTED_TO_ZOMBIFIED);
                 this.finishConversion((ServerLevel) this.level());
             }
@@ -157,7 +158,7 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         Zoglin zoglin = this.convertTo(EntityType.ZOGLIN, true);
         if (zoglin != null) {
             zoglin.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
-            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, zoglin);
+            EventHooks.onLivingConvert(this, zoglin);
         }
 
     }

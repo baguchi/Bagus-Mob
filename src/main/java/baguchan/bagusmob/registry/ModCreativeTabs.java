@@ -2,9 +2,9 @@ package baguchan.bagusmob.registry;
 
 import baguchan.bagusmob.BagusMob;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = BagusMob.MODID)
 public class ModCreativeTabs {

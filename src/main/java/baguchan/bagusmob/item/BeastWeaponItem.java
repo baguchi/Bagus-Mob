@@ -16,7 +16,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeMod;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 import java.util.UUID;
 
@@ -36,8 +36,8 @@ public class BeastWeaponItem extends Item implements Vanishable {
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 8.0D, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double) -2.95F, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(BASE_ATTACK_KNOCKBACK_UUID, "Tool modifier", (double) 1.75F, AttributeModifier.Operation.ADDITION));
-        builder.put(ForgeMod.BLOCK_REACH.get(), new AttributeModifier(BASE_BLOCK_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
-        builder.put(ForgeMod.ENTITY_REACH.get(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
+        builder.put(NeoForgeMod.BLOCK_REACH.value(), new AttributeModifier(BASE_BLOCK_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
+        builder.put(NeoForgeMod.ENTITY_REACH.value(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
     }
 

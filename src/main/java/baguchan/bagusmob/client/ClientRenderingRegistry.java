@@ -5,12 +5,12 @@ import baguchan.bagusmob.client.model.*;
 import baguchan.bagusmob.client.render.*;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import baguchan.bagusmob.registry.ModItemRegistry;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = BagusMob.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
