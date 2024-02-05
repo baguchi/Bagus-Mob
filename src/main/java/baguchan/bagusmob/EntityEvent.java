@@ -1,9 +1,7 @@
 package baguchan.bagusmob;
 
-import baguchan.bagusmob.entity.Modifiger;
 import baguchan.bagusmob.entity.Ninjar;
 import baguchan.bagusmob.entity.Tengu;
-import baguchan.bagusmob.entity.VilerVex;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -25,8 +23,6 @@ public class EntityEvent {
 
 			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Tengu.class, 16.0F, 0.75F, 0.8F));
 			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Ninjar.class, 16.0F, 0.75F, 0.8F));
-			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, VilerVex.class, 16.0F, 0.75F, 0.8F));
-			abstractVillager.goalSelector.addGoal(1, new AvoidEntityGoal(abstractVillager, Modifiger.class, 16.0F, 0.75F, 0.8F));
 		}
 
 		if (event.getEntity() instanceof WanderingTrader) {
@@ -34,8 +30,6 @@ public class EntityEvent {
 
 			wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Tengu.class, 16.0F, 0.75F, 0.8F));
 			wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Ninjar.class, 16.0F, 0.75F, 0.8F));
-			wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, VilerVex.class, 16.0F, 0.75F, 0.8F));
-			wanderingTraderEntity.goalSelector.addGoal(1, new AvoidEntityGoal(wanderingTraderEntity, Modifiger.class, 16.0F, 0.75F, 0.8F));
 		}
 
 	}

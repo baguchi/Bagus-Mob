@@ -1,5 +1,6 @@
 package baguchan.bagusmob.client.render;
 
+import bagu_chan.bagus_lib.client.layer.CustomArmorLayer;
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.ModModelLayers;
 import baguchan.bagusmob.client.model.BurnerHogModel;
@@ -16,6 +17,7 @@ public class BurnerHogRenderer<T extends BurnerHog> extends MobRenderer<T, Burne
 
     public BurnerHogRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new BurnerHogModel<>(renderManagerIn.bakeLayer(ModModelLayers.BURNER_HOG)), 0.5F);
+        this.addLayer(new CustomArmorLayer<>(this, renderManagerIn));
     }
 
     protected boolean isShaking(T p_114864_) {

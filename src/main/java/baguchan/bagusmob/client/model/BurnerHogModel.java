@@ -3,23 +3,36 @@ package baguchan.bagusmob.client.model;// Made with Blockbench 4.8.3
 // Paste this class into your mod and generate all required imports
 
 
+import bagu_chan.bagus_lib.client.layer.IArmor;
 import baguchan.bagusmob.client.animation.BurnerHogAnimations;
 import baguchan.bagusmob.client.animation.HumanoidAnimations;
 import baguchan.bagusmob.entity.BurnerHog;
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class BurnerHogModel<T extends BurnerHog> extends HierarchicalModel<T> {
+public class BurnerHogModel<T extends BurnerHog> extends HierarchicalModel<T> implements IArmor {
     private final ModelPart root;
     private final ModelPart bone;
+    private final ModelPart body;
     private final ModelPart head;
+    private final ModelPart right_arm;
+    private final ModelPart left_arm;
+    private final ModelPart right_leg;
+    private final ModelPart left_leg;
 
     public BurnerHogModel(ModelPart root) {
         this.root = root;
         this.bone = root.getChild("bone");
-        this.head = this.bone.getChild("body").getChild("head");
+        this.body = this.bone.getChild("body");
+        this.head = this.body.getChild("head");
+        this.right_arm = this.body.getChild("right_arm");
+        this.left_arm = this.body.getChild("left_arm");
+        this.right_leg = this.bone.getChild("right_leg");
+        this.left_leg = this.bone.getChild("left_leg");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -93,5 +106,56 @@ public class BurnerHogModel<T extends BurnerHog> extends HierarchicalModel<T> {
     @Override
     public ModelPart root() {
         return this.root;
+    }
+
+    @Override
+    public void translateToHead(ModelPart modelPart, PoseStack poseStack) {
+        this.bone.translateAndRotate(poseStack);
+        this.body.translateAndRotate(poseStack);
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
+        this.bone.translateAndRotate(poseStack);
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToLeg(ModelPart modelPart, PoseStack poseStack) {
+        this.bone.translateAndRotate(poseStack);
+        modelPart.translateAndRotate(poseStack);
+    }
+
+    @Override
+    public void translateToChestPat(ModelPart modelPart, PoseStack poseStack) {
+        this.bone.translateAndRotate(poseStack);
+        this.body.translateAndRotate(poseStack);
+        modelPart.translateAndRotate(poseStack);
+        poseStack.scale(1.05F, 1.05F, 1.05F);
+    }
+
+    public Iterable<ModelPart> rightHandArmors() {
+        return ImmutableList.of(this.right_arm);
+    }
+
+    public Iterable<ModelPart> leftHandArmors() {
+        return ImmutableList.of(this.left_arm);
+    }
+
+    public Iterable<ModelPart> rightLegPartArmors() {
+        return ImmutableList.of(this.right_leg);
+    }
+
+    public Iterable<ModelPart> leftLegPartArmors() {
+        return ImmutableList.of(this.left_leg);
+    }
+
+    public Iterable<ModelPart> bodyPartArmors() {
+        return ImmutableList.of(this.body);
+    }
+
+    public Iterable<ModelPart> headPartArmors() {
+        return ImmutableList.of(this.head);
     }
 }

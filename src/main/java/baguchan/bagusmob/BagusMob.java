@@ -1,6 +1,5 @@
 package baguchan.bagusmob;
 
-import baguchan.bagusmob.registry.ModEffects;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import baguchan.bagusmob.registry.ModSensors;
@@ -25,7 +24,6 @@ public class BagusMob {
 	public BagusMob() {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		ModEffects.MOB_EFFECTS.register(modEventBus);
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
 		ModSensors.SENSOR_TYPES.register(modEventBus);
@@ -40,7 +38,6 @@ public class BagusMob {
 		greedLoaded = ModList.get().isLoaded("greedandbleed");
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
 		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 2, 2, 3, 3, 4});
-		Raid.RaiderType.create("modifiger", ModEntityRegistry.MODIFIGER.get(), new int[]{0, 0, 0, 0, 1, 1, 2, 3});
 	}
 
 	private void serverStart(final ServerAboutToStartEvent event) {

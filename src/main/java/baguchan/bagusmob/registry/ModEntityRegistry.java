@@ -22,8 +22,6 @@ public class ModEntityRegistry {
 
 	public static final RegistryObject<EntityType<Tengu>> TENGU = ENTITIES_REGISTRY.register("tengu", () -> EntityType.Builder.of(Tengu::new, MobCategory.MONSTER).sized(0.6F, 2.0F).clientTrackingRange(8).build(prefix("tengu")));
 	public static final RegistryObject<EntityType<Ninjar>> NINJAR = ENTITIES_REGISTRY.register("ninjar", () -> EntityType.Builder.of(Ninjar::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(prefix("ninjar")));
-	public static final RegistryObject<EntityType<Modifiger>> MODIFIGER = ENTITIES_REGISTRY.register("modifiger", () -> EntityType.Builder.of(Modifiger::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(prefix("modifiger")));
-	public static final RegistryObject<EntityType<VilerVex>> VILER_VEX = ENTITIES_REGISTRY.register("viler_vex", () -> EntityType.Builder.of(VilerVex::new, MobCategory.MONSTER).fireImmune().sized(0.4F, 0.8F).clientTrackingRange(8).build(prefix("viler_vex")));
 	public static final RegistryObject<EntityType<RudeHog>> RUDEHOG = ENTITIES_REGISTRY.register("rudehog", () -> EntityType.Builder.of(RudeHog::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(prefix("rudehog")));
     public static final RegistryObject<EntityType<BurnerHog>> BURNER_HOG = ENTITIES_REGISTRY.register("burner_hog", () -> EntityType.Builder.of(BurnerHog::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build(prefix("burner_hog")));
 
@@ -37,8 +35,6 @@ public class ModEntityRegistry {
 	public static void registerEntityAttribute(EntityAttributeCreationEvent event) {
 		event.put(TENGU.get(), Tengu.createAttributes().build());
 		event.put(NINJAR.get(), Ninjar.createAttributes().build());
-		event.put(MODIFIGER.get(), Modifiger.createAttributes().build());
-		event.put(VILER_VEX.get(), VilerVex.createAttributes().build());
 		event.put(RUDEHOG.get(), RudeHog.createAttributes().build());
         event.put(BURNER_HOG.get(), BurnerHog.createAttributes().build());
 		event.put(HUNTER_BOAR.get(), HunterBoar.createAttributes().build());
@@ -48,9 +44,7 @@ public class ModEntityRegistry {
 	public static void registerEntityAttribute(SpawnPlacementRegisterEvent event) {
 		event.register(TENGU.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 		event.register(NINJAR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-		event.register(MODIFIGER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-		event.register(VILER_VEX.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        event.register(RUDEHOG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RudeHog::checkRudeHogSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+		event.register(RUDEHOG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RudeHog::checkRudeHogSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(BURNER_HOG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 	}
 

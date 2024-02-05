@@ -13,8 +13,6 @@ public class ModCreativeTabs {
 		if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			event.accept(ModItemRegistry.TENGU_SPAWNEGG.get());
 			event.accept(ModItemRegistry.NINJAR_SPAWNEGG.get());
-			event.accept(ModItemRegistry.MODIFIGER_SPAWNEGG.get());
-			event.accept(ModItemRegistry.VILER_VEX_SPAWNEGG.get());
             event.accept(ModItemRegistry.RUDEHOG_SPAWNEGG.get());
             event.accept(ModItemRegistry.HUNTER_BOAR_SPAWNEGG.get());
             event.accept(ModItemRegistry.BURNER_HOG_SPAWNEGG.get());
