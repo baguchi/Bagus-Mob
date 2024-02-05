@@ -119,6 +119,7 @@ public class BurnerHogModel<T extends BurnerHog> extends HierarchicalModel<T> im
     public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
         this.bone.translateAndRotate(poseStack);
         modelPart.translateAndRotate(poseStack);
+        poseStack.translate(0, -12 / 16F, 0);
     }
 
     @Override
