@@ -119,7 +119,7 @@ public class Ninjar extends AbstractIllager {
 			double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 40.0D;
 			double d1 = this.getY() + (double) (this.random.nextInt(40) - 20);
 			double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 40.0D;
-			return this.teleport(d0, d1, d2);
+			return (this.level().canSeeSky(new BlockPos((int) d0, (int) d1, (int) d2)) || this.level().dimensionType().hasCeiling()) && this.teleport(d0, d1, d2);
 		} else {
 			return false;
 		}
@@ -141,8 +141,8 @@ public class Ninjar extends AbstractIllager {
 			if (flag2) {
 				this.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(this));
 				if (!this.isSilent()) {
-					this.level().playSound((Player) null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
-					this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+					//this.level().playSound((Player) null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
+					//this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
 				}
 			}
 

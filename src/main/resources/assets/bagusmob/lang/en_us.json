@@ -20,5 +20,6 @@
   "entity.bagusmob.spin_blade": "Spin Blade",
   "entity.bagusmob.rudehog": "RudeHog",
   "entity.bagusmob.hunter_boar": "Hunter Boar",
+  "entity.bagusmob.burner_hog": "Burner Hog",
   "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade"
 }
