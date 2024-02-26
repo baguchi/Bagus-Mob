@@ -3,6 +3,7 @@
   "item.bagusmob.ninjar_spawn_egg": "ニンジャーのスポーンエッグ",
   "item.bagusmob.modifiger_spawn_egg": "改変者のスポーンエッグ",
   "item.bagusmob.viler_vex_spawn_egg": "卑怯なヴェックスのスポーンエッグ",
+  "item.bagusmob.pot_snake_spawn_egg": "ツボヘビのスポーンエッグ",
   "item.bagusmob.sharped_leaf": "尖った葉",
   "item.bagusmob.dagger": "ダガー",
   "item.bagusmob.ninja_hood": "ニンジャの頭巾",
@@ -13,10 +14,12 @@
   "item.bagusmob.burner_hog_spawn_egg": "バーナーホッグのスポーンエッグ",
   "item.bagusmob.beast_cudgel": "ビーストのこん棒",
   "item.bagusmob.spin_blade": "ハンターのスピンブレード",
+  "item.bagusmob.snake_pottery_sherd": "蛇の壺の欠片",
   "entity.bagusmob.tengu": "天狗",
   "entity.bagusmob.ninjar": "ニンジャー",
   "entity.bagusmob.modifiger": "改変者",
   "entity.bagusmob.viler_vex": "卑怯なヴェックス",
   "entity.bagusmob.burner_hog": "バーナーホッグ",
+  "entity.bagusmob.pot_snake": "ツボヘビ",
   "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった"
 }

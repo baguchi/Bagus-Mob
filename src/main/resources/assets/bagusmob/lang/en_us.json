@@ -3,6 +3,7 @@
   "item.bagusmob.ninjar_spawn_egg": "Ninjar Spawn Egg",
   "item.bagusmob.modifiger_spawn_egg": "Modifiger Spawn Egg",
   "item.bagusmob.viler_vex_spawn_egg": "Viler Vex Spawn Egg",
+  "item.bagusmob.pot_snake_spawn_egg": "Pot Snake Spawn Egg",
   "item.bagusmob.sharped_leaf": "Shaped Leaf",
   "item.bagusmob.dagger": "Dagger",
   "item.bagusmob.ninja_hood": "Ninja Hood",
@@ -13,6 +14,7 @@
   "item.bagusmob.burner_hog_spawn_egg": "Burner Hog Spawn Egg",
   "item.bagusmob.beast_cudgel": "Beast Cudgel",
   "item.bagusmob.spin_blade": "Hunter's Spin Blade",
+  "item.bagusmob.snake_pottery_sherd": "Snake Pottery Sherd",
   "entity.bagusmob.tengu": "Tengu",
   "entity.bagusmob.ninjar": "Ninjar",
   "entity.bagusmob.modifiger": "Modifiger",
@@ -21,5 +23,6 @@
   "entity.bagusmob.rudehog": "RudeHog",
   "entity.bagusmob.hunter_boar": "Hunter Boar",
   "entity.bagusmob.burner_hog": "Burner Hog",
+  "entity.bagusmob.pot_snake": "Pot Snake",
   "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade"
 }

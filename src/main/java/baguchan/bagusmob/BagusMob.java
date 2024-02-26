@@ -2,6 +2,7 @@ package baguchan.bagusmob;
 
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import baguchan.bagusmob.registry.ModItemRegistry;
+import baguchan.bagusmob.registry.ModPotPatternRegistry;
 import baguchan.bagusmob.registry.ModSensors;
 import baguchan.bagusmob.utils.JigsawHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -26,12 +27,14 @@ public class BagusMob {
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
 		ModSensors.SENSOR_TYPES.register(modEventBus);
+        ModPotPatternRegistry.POT_PATTERNS.register(modEventBus);
 		// Register the commonSetup method for modloading
 		modEventBus.addListener(this::commonSetup);
 		NeoForge.EVENT_BUS.addListener(this::serverStart);
 	}
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModPotPatternRegistry.expandVanilla();
 		greedLoaded = ModList.get().isLoaded("greedandbleed");
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
 		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 2, 2, 3, 3, 4});

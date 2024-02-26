@@ -16,6 +16,7 @@ public class ModCreativeTabs {
             event.accept(ModItemRegistry.RUDEHOG_SPAWNEGG.get());
             event.accept(ModItemRegistry.HUNTER_BOAR_SPAWNEGG.get());
             event.accept(ModItemRegistry.BURNER_HOG_SPAWNEGG.get());
+            event.accept(ModItemRegistry.POT_SNAKE_SPAWNEGG.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());
@@ -26,5 +27,8 @@ public class ModCreativeTabs {
 			event.accept(ModItemRegistry.BEAST_CUDGEL.get());
 			event.accept(ModItemRegistry.SPIN_BLADE.get());
 		}
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItemRegistry.SNAKE_POTTERY_SHERD.get());
+        }
 	}
 }
