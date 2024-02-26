@@ -24,10 +24,8 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -75,10 +73,10 @@ public class PotSnake extends Monster {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, false));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, true));
+        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, PotSnake.class)).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.95D) {
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.95D) {
             @Override
             public boolean canUse() {
                 return !isHiding() && super.canUse();
@@ -141,9 +139,9 @@ public class PotSnake extends Monster {
     protected void spawnBreakingParticle(int count) {
         BlockState blockstate = Blocks.TERRACOTTA.defaultBlockState();
         for (int i = 0; i < count; i++) {
-            double d0 = this.getX() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width;
-            double d1 = this.getY() + (this.random.nextDouble()) * (double) this.getDimensions(this.getPose()).height;
-            double d2 = this.getZ() + (this.random.nextDouble() - 0.5) * (double) this.getDimensions(this.getPose()).width;
+            double d0 = this.getX() + (this.random.nextDouble() - 0.5);
+            double d1 = this.getY() + (this.random.nextDouble());
+            double d2 = this.getZ() + (this.random.nextDouble() - 0.5);
             this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate), d0, d1, d2, 0F, 0F, 0F);
         }
     }
@@ -213,6 +211,7 @@ public class PotSnake extends Monster {
             this.setRot(0, 0);
             this.xRotO = 0F;
             this.yRotO = 0F;
+            this.yBodyRot = 0F;
         }
     }
 
