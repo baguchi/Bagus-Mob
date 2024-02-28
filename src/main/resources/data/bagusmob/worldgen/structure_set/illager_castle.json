@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "bagusmob:illager_castle",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 48544758,
+    "spacing": 38,
+    "separation": 22,
+    "type": "minecraft:random_spread"
+  }
+}

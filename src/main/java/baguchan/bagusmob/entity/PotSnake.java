@@ -85,7 +85,7 @@ public class PotSnake extends Monster {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.26F).add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.ATTACK_DAMAGE, 2.0D);
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.26F).add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 
     @Override
