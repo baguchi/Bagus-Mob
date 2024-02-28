@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -61,11 +62,13 @@ public class Ninjar extends AbstractIllager {
 	public final AnimationState disappearAnimationState = new AnimationState();
 
     public int attackAnimationTick;
-    private final int attackAnimationLength = (int) (20 * 0.4F);
-    private final int attackAnimationLeftActionPoint = (int) ((int) attackAnimationLength - (3));
+	public int hidingTick;
+	private final int attackAnimationLength = (int) (20 * 0.4F + 5);
+	private final int attackAnimationLeftActionPoint = (int) ((int) attackAnimationLength - (3 + 5));
 	public Ninjar(EntityType<? extends Ninjar> p_32105_, Level p_32106_) {
 		super(p_32105_, p_32106_);
 		this.xpReward = 10;
+		((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
 	}
 
 	@Override
@@ -94,8 +97,14 @@ public class Ninjar extends AbstractIllager {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(0, new AppearGoal(this, 20));
 		this.goalSelector.addGoal(0, new DisappearGoal(this, 20));
-		this.goalSelector.addGoal(2, new RaiderOpenDoorGoal(this));
-		this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength));
+		this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
+		this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength) {
+			@Override
+			protected void doTheAnimation() {
+				super.doTheAnimation();
+				hidingTick = 0;
+			}
+		});
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
@@ -165,7 +174,8 @@ public class Ninjar extends AbstractIllager {
 		if (!this.level().isClientSide) {
 			if (this.isInvisible() && (this.hurtTime > 0 || this.getTarget() == null || this.isCelebrating())) {
 				this.setInvisible(false);
-			} else if (!this.isInvisible() && this.hurtTime <= 0 && this.tickCount % 100 == 0 && (this.getTarget() != null && !this.isCelebrating())) {
+				this.hidingTick = 0;
+			} else if (!this.isInvisible() && this.hurtTime <= 0 && ++this.hidingTick >= 200 && (this.getTarget() != null && !this.isCelebrating())) {
 				this.setInvisible(true);
 			}
 		}
@@ -312,6 +322,7 @@ public class Ninjar extends AbstractIllager {
 		super.addAdditionalSaveData(p_250330_);
 		p_250330_.putBoolean("IsDisappear", this.getPose() == Pose.DIGGING);
 		p_250330_.putBoolean("IsAppear", this.getPose() == Pose.EMERGING);
+		p_250330_.putInt("HidingTick", this.hidingTick);
 	}
 
 	public void readAdditionalSaveData(CompoundTag p_250781_) {
@@ -322,6 +333,7 @@ public class Ninjar extends AbstractIllager {
 		if (p_250781_.getBoolean("IsAppear")) {
 			this.setPose(Pose.EMERGING);
 		}
+		this.hidingTick = p_250781_.getInt("HidingTick");
 	}
 
 	@Override
