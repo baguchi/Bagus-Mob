@@ -29,7 +29,7 @@ displayName = "BagusMob" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile = "bagusmob.png" #optional
 # A text field displayed in the mod UI
-credits = "Azzy help animation for tengu Falling animation. and Mcfella help Viler Vex!" #optional
+credits = "Azzy help animation for tengu Falling animation. and Mcfella help Viler Vex! thanks TruffleHistorian for making structure!" #optional
 # A text field displayed in the mod UI
 authors = "bagu_chan" #optional
 # Display Test controls the display for your mod in the server connection screen
