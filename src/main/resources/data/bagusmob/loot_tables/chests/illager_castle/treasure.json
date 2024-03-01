@@ -3,47 +3,13 @@
     {
       "rolls": {
         "min": 8,
-        "max": 10
+        "max": 12
       },
-      "name": "main",
       "entries": [
         {
-          "type": "item",
-          "name": "minecraft:emerald",
+          "type": "minecraft:item",
           "weight": 5,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_ingot",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2,
-                "max": 3
-              }
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "bagusmob:dagger",
-          "weight": 5
-        },
-        {
-          "type": "item",
-          "name": "minecraft:gold_ingot",
-          "weight": 10,
+          "name": "minecraft:emerald",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -55,15 +21,43 @@
           ]
         },
         {
-          "type": "item",
-          "name": "minecraft:diamond",
+          "type": "minecraft:item",
           "weight": 1,
+          "name": "minecraft:diamond",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "min": 1,
                 "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:gold_ingot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:iron_ingot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 3
               }
             }
           ]
