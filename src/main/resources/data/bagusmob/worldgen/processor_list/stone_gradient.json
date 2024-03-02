@@ -71,6 +71,11 @@
           }
         }
       ]
+    },
+    {
+      "processor_type": "bagus_lib:base",
+      "block": "minecraft:end_stone",
+      "replace_block": "minecraft:cobblestone"
     }
   ]
 }
