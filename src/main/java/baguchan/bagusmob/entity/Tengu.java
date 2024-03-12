@@ -1,6 +1,6 @@
 package baguchan.bagusmob.entity;
 
-import bagu_chan.bagus_lib.entity.goal.AnimatedAttackGoal;
+import bagu_chan.bagus_lib.entity.goal.AnimateAttackGoal;
 import baguchan.bagusmob.entity.goal.JumpTheSkyGoal;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import com.google.common.collect.Maps;
@@ -63,7 +63,7 @@ public class Tengu extends AbstractIllager {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new JumpTheSkyGoal(this));
         this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-        this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.0F, 19, 19 - 12));
+        this.goalSelector.addGoal(4, new AnimateAttackGoal(this, 1.0F, 16, 19));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers(AbstractIllager.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));

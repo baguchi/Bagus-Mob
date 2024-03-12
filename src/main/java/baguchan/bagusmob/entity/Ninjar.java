@@ -1,6 +1,6 @@
 package baguchan.bagusmob.entity;
 
-import bagu_chan.bagus_lib.entity.goal.AnimatedAttackGoal;
+import bagu_chan.bagus_lib.entity.goal.AnimateAttackGoal;
 import baguchan.bagusmob.entity.goal.AppearGoal;
 import baguchan.bagusmob.entity.goal.DisappearGoal;
 import baguchan.bagusmob.registry.ModItemRegistry;
@@ -64,7 +64,7 @@ public class Ninjar extends AbstractIllager {
     public int attackAnimationTick;
 	public int hidingTick;
 	private final int attackAnimationLength = (int) (20 * 0.4F + 5);
-	private final int attackAnimationLeftActionPoint = (int) ((int) attackAnimationLength - (3 + 5));
+	private final int attackAnimationActionPoint = (int) ((3 + 5));
 	public Ninjar(EntityType<? extends Ninjar> p_32105_, Level p_32106_) {
 		super(p_32105_, p_32106_);
 		this.xpReward = 10;
@@ -98,7 +98,7 @@ public class Ninjar extends AbstractIllager {
 		this.goalSelector.addGoal(0, new AppearGoal(this, 20));
 		this.goalSelector.addGoal(0, new DisappearGoal(this, 20));
 		this.goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-		this.goalSelector.addGoal(4, new AnimatedAttackGoal(this, 1.2D, attackAnimationLeftActionPoint, attackAnimationLength) {
+		this.goalSelector.addGoal(4, new AnimateAttackGoal(this, 1.2D, attackAnimationActionPoint, attackAnimationLength) {
 			@Override
 			protected void doTheAnimation() {
 				super.doTheAnimation();
