@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
-  "loader": "forge:separate_transforms",
+  "loader": "neoforge:separate_transforms",
   "textures": {
     "layer0": "bagusmob:item/spin_blade_gui_thrown"
   },
