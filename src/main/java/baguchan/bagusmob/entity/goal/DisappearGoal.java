@@ -1,6 +1,9 @@
 package baguchan.bagusmob.entity.goal;
 
 import baguchan.bagusmob.entity.Ninjar;
+import baguchan.bagusmob.world.TeleportExplosionDamageCalculator;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
@@ -35,7 +38,11 @@ public class DisappearGoal extends Goal {
 	public void tick() {
 		if (++tick > this.maxTick) {
 			this.mob.setPose(Pose.EMERGING);
-			this.mob.level().explode(this.mob, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 1.5F, Level.ExplosionInteraction.NONE);
+			this.mob.level().explode(this.mob, null, new TeleportExplosionDamageCalculator(), this.mob.getX(), this.mob.getY(), this.mob.getZ(), 1.0F, false,
+					Level.ExplosionInteraction.NONE,
+					ParticleTypes.GUST,
+					ParticleTypes.GUST_EMITTER,
+					SoundEvents.WIND_BURST);
 			for (int i = 0; i < 6; i++) {
 				if (this.mob.teleport()) {
 					break;

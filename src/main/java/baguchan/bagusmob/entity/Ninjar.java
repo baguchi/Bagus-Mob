@@ -151,8 +151,8 @@ public class Ninjar extends AbstractIllager {
 			if (flag2) {
 				this.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(this));
 				if (!this.isSilent()) {
-					this.level().playSound((Player) null, this.xo, this.yo, this.zo, ModSoundEvents.NINJAR_TELEPORT.get(), this.getSoundSource(), 1.0F, 1.0F);
-					this.playSound(ModSoundEvents.NINJAR_TELEPORT.get(), 1.0F, 1.0F);
+					this.level().playSound((Player) null, this.xo, this.yo, this.zo, ModSoundEvents.NINJAR_TELEPORT.get(), this.getSoundSource(), 2.0F, 1.0F);
+					this.playSound(ModSoundEvents.NINJAR_TELEPORT.get(), 2.0F, 1.0F);
 				}
 			}
 
