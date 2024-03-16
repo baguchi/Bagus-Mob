@@ -1,9 +1,6 @@
 package baguchan.bagusmob;
 
-import baguchan.bagusmob.registry.ModEntityRegistry;
-import baguchan.bagusmob.registry.ModItemRegistry;
-import baguchan.bagusmob.registry.ModPotPatternRegistry;
-import baguchan.bagusmob.registry.ModSensors;
+import baguchan.bagusmob.registry.*;
 import baguchan.bagusmob.utils.JigsawHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.raid.Raid;
@@ -24,6 +21,7 @@ public class BagusMob {
 
 	public BagusMob(IEventBus modEventBus) {
 
+		ModSoundEvents.SOUND_EVENTS.register(modEventBus);
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
 		ModSensors.SENSOR_TYPES.register(modEventBus);

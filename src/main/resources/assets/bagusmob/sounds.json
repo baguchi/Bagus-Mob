@@ -1,0 +1,9 @@
+{
+  "mob.ninjar.teleport": {
+    "sounds": [
+      "bagusmob:mob/ninjar/ninjar_move",
+      "bagusmob:mob/ninjar/ninjar_move2"
+    ],
+    "subtitle": "subtitles.bagusmob.ninjar.idle"
+  }
+}
