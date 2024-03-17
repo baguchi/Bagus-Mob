@@ -21,6 +21,7 @@ public class ModItemRegistry {
     public static final Supplier<Item> NINJAR_SPAWNEGG = ITEM_REGISTRY.register("ninjar_spawn_egg", () -> new DeferredSpawnEggItem(ModEntityRegistry.NINJAR, 0x323237, 0x959B9B, (new Item.Properties())));
     public static final Supplier<Item> SHARPED_LEAF = ITEM_REGISTRY.register("sharped_leaf", () -> new ShapedLeafItem((new Item.Properties().durability(128))));
     public static final Supplier<Item> DAGGER = ITEM_REGISTRY.register("dagger", () -> new DaggerItem((new Item.Properties().durability(242))));
+    public static final Supplier<Item> KATANA = ITEM_REGISTRY.register("katana", () -> new KatanaItem((new Item.Properties().durability(542))));
 
     public static final Supplier<Item> NINJA_BOOTS = ITEM_REGISTRY.register("ninja_boots", () -> new NinjaArmorItem(ArmorItem.Type.BOOTS, (new Item.Properties())));
     public static final Supplier<Item> NINJA_CHESTPLATE = ITEM_REGISTRY.register("ninja_chestplate", () -> new NinjaArmorItem(ArmorItem.Type.CHESTPLATE, (new Item.Properties())));
@@ -39,5 +40,12 @@ public class ModItemRegistry {
 
 		ItemProperties.register(SPIN_BLADE.get(), new ResourceLocation(BagusMob.MODID, "thrown"), (stack, world, entity, idk) ->
 				SpinBladeItem.getThrownUuid(stack) != null ? 1 : 0);
-	}
+
+        ItemProperties.register(
+                ModItemRegistry.KATANA.get(),
+                new ResourceLocation("blocking"),
+                (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
+        );
+    }
+
 }

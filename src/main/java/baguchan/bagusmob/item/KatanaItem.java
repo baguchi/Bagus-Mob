@@ -3,6 +3,8 @@ package baguchan.bagusmob.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -11,16 +13,18 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.common.ToolActions;
 
 import java.util.UUID;
 
-public class BeastWeaponItem extends Item implements Vanishable {
+public class KatanaItem extends Item implements Vanishable {
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float BASE_DAMAGE = 8.0F;
     public static final float SHOOT_POWER = 2.5F;
@@ -30,14 +34,13 @@ public class BeastWeaponItem extends Item implements Vanishable {
 
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
-    public BeastWeaponItem(Properties p_43381_) {
+    public KatanaItem(Properties p_43381_) {
         super(p_43381_);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 8.0D, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double) -2.95F, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(BASE_ATTACK_KNOCKBACK_UUID, "Tool modifier", (double) 1.75F, AttributeModifier.Operation.ADDITION));
-        builder.put(NeoForgeMod.BLOCK_REACH.value(), new AttributeModifier(BASE_BLOCK_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
-        builder.put(NeoForgeMod.ENTITY_REACH.value(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "Tool modifier", (double) 1.0F, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 7.0D, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double) -2.7F, AttributeModifier.Operation.ADDITION));
+        builder.put(NeoForgeMod.BLOCK_REACH.value(), new AttributeModifier(BASE_BLOCK_REACH_UUID, "Tool modifier", (double) 0.5F, AttributeModifier.Operation.ADDITION));
+        builder.put(NeoForgeMod.ENTITY_REACH.value(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "Tool modifier", (double) 0.5F, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
     }
 
@@ -47,7 +50,7 @@ public class BeastWeaponItem extends Item implements Vanishable {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return (super.canApplyAtEnchantingTable(stack, enchantment) || enchantment == Enchantments.SHARPNESS || enchantment == Enchantments.KNOCKBACK || enchantment == Enchantments.MOB_LOOTING);
+        return (super.canApplyAtEnchantingTable(stack, enchantment) || enchantment == Enchantments.SHARPNESS || enchantment == Enchantments.MOB_LOOTING);
     }
 
     public boolean hurtEnemy(ItemStack p_43390_, LivingEntity p_43391_, LivingEntity p_43392_) {
@@ -67,8 +70,29 @@ public class BeastWeaponItem extends Item implements Vanishable {
         return true;
     }
 
+    public UseAnim getUseAnimation(ItemStack p_43105_) {
+        return UseAnim.BLOCK;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack p_43107_) {
+        return 72000;
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level p_43099_, Player p_43100_, InteractionHand p_43101_) {
+        ItemStack itemstack = p_43100_.getItemInHand(p_43101_);
+        p_43100_.startUsingItem(p_43101_);
+        return InteractionResultHolder.consume(itemstack);
+    }
+
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
         return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
+    }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ToolAction toolAction) {
+        return net.neoforged.neoforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction) || ToolActions.SHIELD_BLOCK == toolAction;
     }
 
     public int getEnchantmentValue() {

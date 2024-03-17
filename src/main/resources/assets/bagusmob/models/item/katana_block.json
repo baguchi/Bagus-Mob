@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "textures": {
+    "layer0": "bagusmob:item/katana_gui"
+  },
+  "base": {
+    "parent": "bagusmob:item/katana_handheld_block"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "bagusmob:item/katana_gui"
+    },
+    "fixed": {
+      "parent": "bagusmob:item/katana_gui"
+    }
+  }
+}

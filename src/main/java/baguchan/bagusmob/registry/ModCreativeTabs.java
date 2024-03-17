@@ -21,6 +21,7 @@ public class ModCreativeTabs {
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());
 			event.accept(ModItemRegistry.DAGGER.get());
+            event.accept(ModItemRegistry.KATANA.get());
 			event.accept(ModItemRegistry.NINJA_HOOD.get());
 			event.accept(ModItemRegistry.NINJA_CHESTPLATE.get());
 			event.accept(ModItemRegistry.NINJA_BOOTS.get());
