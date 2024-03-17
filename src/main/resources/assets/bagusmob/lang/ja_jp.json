@@ -22,5 +22,6 @@
   "entity.bagusmob.viler_vex": "卑怯なヴェックス",
   "entity.bagusmob.burner_hog": "バーナーホッグ",
   "entity.bagusmob.pot_snake": "ツボヘビ",
-  "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった"
+  "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった",
+  "subtitles.bagusmob.ninjar.teleport": "ニンジャーが消える"
 }

@@ -25,5 +25,6 @@
   "entity.bagusmob.hunter_boar": "Hunter Boar",
   "entity.bagusmob.burner_hog": "Burner Hog",
   "entity.bagusmob.pot_snake": "Pot Snake",
-  "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade"
+  "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade",
+  "subtitles.bagusmob.ninjar.teleport": "Ninjar Disappear"
 }
