@@ -23,5 +23,6 @@
   "entity.bagusmob.burner_hog": "バーナーホッグ",
   "entity.bagusmob.pot_snake": "ツボヘビ",
   "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった",
+  "enchantment.bagusmob.perfect_guard": "パーフェクトガード",
   "subtitles.bagusmob.ninjar.teleport": "ニンジャーが消える"
 }

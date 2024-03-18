@@ -26,5 +26,6 @@
   "entity.bagusmob.burner_hog": "Burner Hog",
   "entity.bagusmob.pot_snake": "Pot Snake",
   "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade",
+  "enchantment.bagusmob.perfect_guard": "Perfect Guard",
   "subtitles.bagusmob.ninjar.teleport": "Ninjar Disappear"
 }

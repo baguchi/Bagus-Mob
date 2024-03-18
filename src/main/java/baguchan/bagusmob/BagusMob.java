@@ -23,6 +23,7 @@ public class BagusMob {
 
 		ModSoundEvents.SOUND_EVENTS.register(modEventBus);
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
+		ModEnchantments.ENCHANTMENTS.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
 		ModSensors.SENSOR_TYPES.register(modEventBus);
         ModPotPatternRegistry.POT_PATTERNS.register(modEventBus);

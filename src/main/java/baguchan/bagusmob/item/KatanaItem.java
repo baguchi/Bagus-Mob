@@ -37,8 +37,8 @@ public class KatanaItem extends Item implements Vanishable {
     public KatanaItem(Properties p_43381_) {
         super(p_43381_);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 7.0D, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double) -2.7F, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", 5.5D, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", (double) -2.8F, AttributeModifier.Operation.ADDITION));
         builder.put(NeoForgeMod.BLOCK_REACH.value(), new AttributeModifier(BASE_BLOCK_REACH_UUID, "Tool modifier", (double) 0.5F, AttributeModifier.Operation.ADDITION));
         builder.put(NeoForgeMod.ENTITY_REACH.value(), new AttributeModifier(BASE_ENTITY_REACH_UUID, "Tool modifier", (double) 0.5F, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
@@ -50,7 +50,7 @@ public class KatanaItem extends Item implements Vanishable {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return (super.canApplyAtEnchantingTable(stack, enchantment) || enchantment == Enchantments.SHARPNESS || enchantment == Enchantments.MOB_LOOTING);
+        return (super.canApplyAtEnchantingTable(stack, enchantment) || enchantment == Enchantments.SHARPNESS || enchantment == Enchantments.MOB_LOOTING || enchantment == Enchantments.SWEEPING_EDGE);
     }
 
     public boolean hurtEnemy(ItemStack p_43390_, LivingEntity p_43391_, LivingEntity p_43392_) {
