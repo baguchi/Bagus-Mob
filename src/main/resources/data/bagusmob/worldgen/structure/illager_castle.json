@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "start_pool": "bagusmob:illager_castle/center",
-  "size": 3,
+  "size": 4,
   "max_distance_from_center": 96,
   "biomes": "#bagusmob:has_structure/illager_castle",
   "terrain_adaptation": "none",
