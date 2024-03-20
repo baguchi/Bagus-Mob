@@ -21,7 +21,6 @@ import net.minecraft.world.entity.HumanoidArm;
 
 public class SamuraiModel<T extends Samurai> extends HierarchicalModel<T> implements ArmedModel, HeadedModel, IArmor {
     private final ModelPart root;
-    private final ModelPart roots;
     private final ModelPart head;
     private final ModelPart body;
     private final ModelPart right_arm;
@@ -31,57 +30,40 @@ public class SamuraiModel<T extends Samurai> extends HierarchicalModel<T> implem
 
     public SamuraiModel(ModelPart root) {
         this.root = root;
-        this.roots = root.getChild("roots");
-        this.head = this.roots.getChild("head");
-        this.body = this.roots.getChild("body");
-        this.right_arm = this.roots.getChild("right_arm");
-        this.left_arm = this.roots.getChild("left_arm");
-        this.right_leg = this.roots.getChild("right_leg");
-        this.left_leg = this.roots.getChild("left_leg");
+        this.head = this.root.getChild("head");
+        this.body = this.root.getChild("body");
+        this.right_arm = this.root.getChild("right_arm");
+        this.left_arm = this.root.getChild("left_arm");
+        this.right_leg = this.root.getChild("right_leg");
+        this.left_leg = this.root.getChild("left_leg");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition roots = partdefinition.addOrReplaceChild("roots", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition head = roots.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8.0F, 10.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -24.0F, 0.0F));
+        PartDefinition hat = head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(38, 0).addBox(-6.0F, -4.0F, -6.0F, 12.0F, 3.0F, 12.0F, new CubeDeformation(0.25F))
+                .texOffs(60, 15).addBox(-6.5F, -1.0F, -6.5F, 13.0F, 1.0F, 13.0F, new CubeDeformation(0.25F))
+                .texOffs(74, 0).addBox(-2.0F, -5.5F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -6.0F, 0.0F, -0.0436F, 0.0F, 0.0F));
+
+        PartDefinition bone = hat.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -1.0F, -0.5F, 8.0F, 8.0F, 1.0F, new CubeDeformation(0.25F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.5F, -0.2618F, 0.0F, 0.0F));
 
         PartDefinition nose = head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
-        PartDefinition hat = head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, -9.5F, 0.0F));
+        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 18).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 36).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 18.0F, 6.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition bone = hat.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(76, 0).addBox(-4.0F, -2.0F, -4.0F, 8.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition left_arm = partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(44, 20).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, 2.0F, 0.0F));
 
-        PartDefinition bone2 = bone.addOrReplaceChild("bone2", CubeListBuilder.create().texOffs(50, 0).addBox(-5.0F, -2.0F, -4.0F, 5.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.48F));
+        PartDefinition right_arm = partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(44, 20).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, 2.0F, 0.0F));
 
-        PartDefinition bone6 = bone2.addOrReplaceChild("bone6", CubeListBuilder.create().texOffs(100, 0).addBox(-5.0F, -2.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -3.5F, 0.2618F, -0.5236F, 0.0F));
+        PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 20).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(2.0F, 12.0F, 0.0F));
 
-        PartDefinition bone7 = bone2.addOrReplaceChild("bone7", CubeListBuilder.create().texOffs(100, 0).addBox(-5.0F, -2.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 3.5F, -0.2618F, 0.5236F, 0.0F));
+        PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 12.0F, 0.0F));
 
-        PartDefinition bone8 = bone2.addOrReplaceChild("bone8", CubeListBuilder.create().texOffs(100, 0).addBox(-5.0F, -2.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.75F, 3.0F, 3.5F, 0.2182F, 2.3562F, 0.829F));
-
-        PartDefinition bone9 = bone2.addOrReplaceChild("bone9", CubeListBuilder.create().texOffs(100, 0).addBox(-5.0F, -2.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.75F, 3.0F, -3.0F, -0.2618F, -2.3562F, 0.9163F));
-
-        PartDefinition bone3 = bone.addOrReplaceChild("bone3", CubeListBuilder.create().texOffs(50, 0).addBox(0.0F, -2.0F, -4.0F, 5.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.48F));
-
-        PartDefinition bone4 = bone.addOrReplaceChild("bone4", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -2.0F, 0.0F, 8.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 3.0F, -0.48F, 0.0F, 0.0F));
-
-        PartDefinition bone5 = bone.addOrReplaceChild("bone5", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -2.0F, -5.0F, 8.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -3.0F, 0.48F, 0.0F, 0.0F));
-
-        PartDefinition left_leg = roots.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -12.0F, 0.0F));
-
-        PartDefinition right_leg = roots.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, -12.0F, 0.0F));
-
-        PartDefinition right_arm = roots.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 46).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -22.0F, 0.0F));
-
-        PartDefinition left_arm = roots.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(40, 46).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, -22.0F, 0.0F));
-
-        PartDefinition body = roots.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).addBox(-4.0F, -12.0F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 38).addBox(-4.0F, -12.0F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(0.25F)), PartPose.offset(0.0F, -12.0F, 0.0F));
-
-        return LayerDefinition.create(meshdefinition, 128, 64);
+        return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override
@@ -144,32 +126,27 @@ public class SamuraiModel<T extends Samurai> extends HierarchicalModel<T> implem
     }
 
     public void translateToHand(HumanoidArm p_102925_, PoseStack p_102926_) {
-        this.roots.translateAndRotate(p_102926_);
         this.getArm(p_102925_).translateAndRotate(p_102926_);
     }
 
     @Override
     public void translateToHead(ModelPart modelPart, PoseStack poseStack) {
-        this.roots.translateAndRotate(poseStack);
         modelPart.translateAndRotate(poseStack);
     }
 
     @Override
     public void translateToChest(ModelPart modelPart, PoseStack poseStack) {
-        this.roots.translateAndRotate(poseStack);
         modelPart.translateAndRotate(poseStack);
         poseStack.translate(0, -(24F / 16F), 0);
     }
 
     @Override
     public void translateToLeg(ModelPart modelPart, PoseStack poseStack) {
-        this.roots.translateAndRotate(poseStack);
         modelPart.translateAndRotate(poseStack);
     }
 
     @Override
     public void translateToChestPat(ModelPart modelPart, PoseStack poseStack) {
-        this.roots.translateAndRotate(poseStack);
         modelPart.translateAndRotate(poseStack);
     }
 
