@@ -20,6 +20,7 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.TENGU.get(), TenguRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.POT_SNAKE.get(), PotSnakeRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.NINJAR.get(), NinjarRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.SAMURAI.get(), SamuraiRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.SLASH_AIR.get(), SlashAirRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.RUDEHOG.get(), RudeHogRenderer::new);
 		event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), (p_174165_) -> new HunterBoarRenderer(p_174165_));
@@ -36,6 +37,7 @@ public class ClientRenderingRegistry {
         event.registerLayerDefinition(ModModelLayers.RUDEHOG, RudeHogModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPIN_BLADE, SpinBladeModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BURNER_HOG, BurnerHogModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.SAMURAI, SamuraiModel::createBodyLayer);
     }
 
     @SubscribeEvent

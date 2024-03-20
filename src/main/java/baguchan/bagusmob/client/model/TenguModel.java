@@ -100,13 +100,18 @@ public class TenguModel<T extends Tengu> extends HierarchicalModel<T> implements
 		this.animate(entityIn.slashRightAnimationState, TenguAnimations.SLASH_RIGHT, ageInTicks);
 		this.animate(entityIn.slashLeftAnimationState, TenguAnimations.SLASH_LEFT, ageInTicks);
 		this.animate(entityIn.fallAnimationState, TenguAnimations.STUN, ageInTicks);
-		this.animateWalk(TenguAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
-        if (entityIn.isCelebrating()) {
-            this.animateWalk(IllagerAnimations.CEREBRATE, ageInTicks, 1, 1, 1);
-        }
-        if (!entityIn.slashRightAnimationState.isStarted() && !entityIn.slashLeftAnimationState.isStarted()) {
-            this.animateWalk(HumanoidAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
-        }
+		if (riding) {
+			this.applyStatic(HumanoidAnimations.SIT);
+		} else {
+			this.animateWalk(TenguAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+			if (!entityIn.slashRightAnimationState.isStarted() && !entityIn.slashLeftAnimationState.isStarted()) {
+				this.animateWalk(HumanoidAnimations.WALK_SWING, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+			}
+		}
+		if (entityIn.isCelebrating()) {
+			this.animateWalk(IllagerAnimations.CEREBRATE, ageInTicks, 1, 1, 1);
+		}
+
 	}
 
 	@Override
