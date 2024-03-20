@@ -36,7 +36,8 @@ public class BagusMob {
         ModPotPatternRegistry.expandVanilla();
 		greedLoaded = ModList.get().isLoaded("greedandbleed");
 		Raid.RaiderType.create("tengu", ModEntityRegistry.TENGU.get(), new int[]{0, 1, 2, 0, 2, 2, 3, 3});
-		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 2, 2, 3, 3, 4});
+		Raid.RaiderType.create("ninjar", ModEntityRegistry.NINJAR.get(), new int[]{0, 0, 1, 0, 1, 2, 2, 3});
+		Raid.RaiderType.create("samurai", ModEntityRegistry.SAMURAI.get(), new int[]{0, 0, 0, 1, 1, 1, 2, 2});
 	}
 
 	private void serverStart(final ServerAboutToStartEvent event) {
