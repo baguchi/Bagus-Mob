@@ -42,6 +42,12 @@ public class BeastWeaponItem extends Item {
     }
 
     @Override
+    public boolean hurtEnemy(ItemStack p_43278_, LivingEntity p_43279_, LivingEntity p_43280_) {
+        return true;
+    }
+
+
+    @Override
     public void postHurtEnemy(ItemStack p_345716_, LivingEntity p_345817_, LivingEntity p_346003_) {
         p_345716_.hurtAndBreak(1, p_346003_, EquipmentSlot.MAINHAND);
     }

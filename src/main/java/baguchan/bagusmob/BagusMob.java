@@ -23,6 +23,7 @@ public class BagusMob {
 		ModSoundEvents.SOUND_EVENTS.register(modEventBus);
 		ModItemRegistry.ITEM_REGISTRY.register(modEventBus);
 		ModEntityRegistry.ENTITIES_REGISTRY.register(modEventBus);
+		ModArmorMaterials.ARMOR_MATERIALS.register(modEventBus);
 		ModSensors.SENSOR_TYPES.register(modEventBus);
         ModPotPatternRegistry.POT_PATTERNS.register(modEventBus);
 		// Register the commonSetup method for modloading

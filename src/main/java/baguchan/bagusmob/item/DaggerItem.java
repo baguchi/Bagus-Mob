@@ -47,8 +47,13 @@ public class DaggerItem extends Item {
 	}
 
 	public boolean hurtEnemy(ItemStack p_43278_, LivingEntity p_43279_, LivingEntity p_43280_) {
-		p_43278_.hurtAndBreak(1, p_43280_, EquipmentSlot.MAINHAND);
+
 		return true;
+	}
+
+	@Override
+	public void postHurtEnemy(ItemStack p_345553_, LivingEntity p_345771_, LivingEntity p_346282_) {
+		p_345553_.hurtAndBreak(1, p_346282_, EquipmentSlot.MAINHAND);
 	}
 
 	@Override
