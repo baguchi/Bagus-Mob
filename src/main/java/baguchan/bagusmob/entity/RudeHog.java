@@ -7,7 +7,6 @@ import baguchan.bagusmob.registry.ModItemRegistry;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -27,6 +26,7 @@ import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -81,12 +81,12 @@ public class RudeHog extends Piglin {
 
     @Nullable
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_34717_, DifficultyInstance p_34718_, MobSpawnType p_34719_, @Nullable SpawnGroupData p_34720_, @Nullable CompoundTag p_34721_) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_34717_, DifficultyInstance p_34718_, MobSpawnType p_34719_, @Nullable SpawnGroupData p_34720_) {
         if (p_34719_ != MobSpawnType.STRUCTURE) {
             this.spawnPartner(p_34717_, p_34718_, p_34720_);
         }
         RudeHogAi.initMemories(this, p_34717_.getRandom());
-        return super.finalizeSpawn(p_34717_, p_34718_, p_34719_, p_34720_, p_34721_);
+        return super.finalizeSpawn(p_34717_, p_34718_, p_34719_, p_34720_);
     }
 
     private void spawnPartner(ServerLevelAccessor p_33882_, DifficultyInstance p_33883_, @javax.annotation.Nullable SpawnGroupData p_33885_) {
@@ -94,7 +94,7 @@ public class RudeHog extends Piglin {
         if (mob != null) {
 
             mob.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-            mob.finalizeSpawn(p_33882_, p_33883_, MobSpawnType.JOCKEY, p_33885_, (CompoundTag) null);
+            mob.finalizeSpawn(p_33882_, p_33883_, MobSpawnType.JOCKEY, p_33885_);
             mob.setBaby(false);
             p_33882_.addFreshEntity(mob);
             this.startRiding(mob, true);
@@ -164,13 +164,13 @@ public class RudeHog extends Piglin {
     }
 
     public boolean canReplaceCurrentItem(ItemStack p_34788_) {
-        EquipmentSlot equipmentslot = Mob.getEquipmentSlotForItem(p_34788_);
+        EquipmentSlot equipmentslot = this.getEquipmentSlotForItem(p_34788_);
         ItemStack itemstack = this.getItemBySlot(equipmentslot);
         return this.canReplaceCurrentItem(p_34788_, itemstack);
     }
 
     public boolean canReplaceCurrentItem(ItemStack p_34712_, ItemStack p_34713_) {
-        if (EnchantmentHelper.hasBindingCurse(p_34713_)) {
+        if (EnchantmentHelper.has(p_34713_, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) {
             return false;
         } else {
             boolean flag = RudeHogAi.isLovedItem(p_34712_) || p_34712_.is(Items.CROSSBOW);

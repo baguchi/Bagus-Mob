@@ -116,9 +116,9 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         this.setAggressive(this.brain.hasMemoryValue(MemoryModuleType.ATTACK_TARGET));
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_IMMUNE_TO_ZOMBIFICATION, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_IMMUNE_TO_ZOMBIFICATION, false);
     }
 
     public void addAdditionalSaveData(CompoundTag p_34529_) {

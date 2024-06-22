@@ -2,7 +2,6 @@ package baguchan.bagusmob.mixin;
 
 import baguchan.bagusmob.entity.Tengu;
 import baguchan.bagusmob.registry.ModItemRegistry;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,14 +35,6 @@ public abstract class LivingEntityMixin extends Entity {
 			callbackInfo.cancel();
 		}
 	}
-
-    @Inject(method = "handleEntityEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
-    public void hurt(byte p_20975_, CallbackInfo ci) {
-        if (this.getUseItem().is(ModItemRegistry.KATANA.get())) {
-            this.playSound(SoundEvents.ANVIL_PLACE, 1.0F, 1.25F + this.random.nextFloat() * 0.25F);
-            ci.cancel();
-        }
-    }
 
     @Override
     public boolean isInvisible() {

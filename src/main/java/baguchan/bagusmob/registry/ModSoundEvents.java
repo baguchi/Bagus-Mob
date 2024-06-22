@@ -14,7 +14,7 @@ public class ModSoundEvents {
     public static final Supplier<SoundEvent> NINJAR_TELEPORT = createEvent("mob.ninjar.teleport");
 
     private static Supplier<SoundEvent> createEvent(String sound) {
-        ResourceLocation name = new ResourceLocation(BagusMob.MODID, sound);
+        ResourceLocation name = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, sound);
         return SOUND_EVENTS.register(sound, () -> SoundEvent.createVariableRangeEvent(name));
     }
 }

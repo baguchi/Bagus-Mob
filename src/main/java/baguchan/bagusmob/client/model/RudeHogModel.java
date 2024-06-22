@@ -100,13 +100,13 @@ public class RudeHogModel<T extends RudeHog> extends HierarchicalModel<T> implem
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        right_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        right_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        left_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        right_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        right_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        left_leg.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 
     @Override

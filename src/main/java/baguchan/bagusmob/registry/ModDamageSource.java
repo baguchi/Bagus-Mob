@@ -7,6 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
 
 public interface ModDamageSource {
-    ResourceKey<DamageType> SPIN_BLADE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(BagusMob.MODID, "spin_blade"));
+    ResourceKey<DamageType> SPIN_BLADE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "spin_blade"));
 
 }

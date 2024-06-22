@@ -11,21 +11,14 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -52,8 +45,6 @@ public class SpinBlade extends Projectile {
         this.setPos(shootingEntity.getX(), shootingEntity.getEyeY() - 0.1F, shootingEntity.getZ());
         setOwner(shootingEntity);
         setItemStack(boomerang);
-
-        this.entityData.set(PIERCING_LEVEL, (byte) EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, boomerang));
     }
 
     public SpinBlade(Level world, LivingEntity entity, ItemStack boomerang) {
@@ -69,18 +60,17 @@ public class SpinBlade extends Projectile {
         super.onHitEntity(result);
         Entity shooter = getOwner();
         if (result.getEntity() != shooter) {
-            int power = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, getItemStack());
+            int power = 0;
             int damage = (int) ((5.0D + Math.min(1, power) + Math.max(0, power - 1) * 0.5D));
 
             if (this.isOnFire()) {
-                result.getEntity().setSecondsOnFire(5);
+                result.getEntity().igniteForSeconds(5);
             }
 
             if (damage > 0) {
                 if (result.getEntity().hurt(this.spinBladeAttack(shooter), damage)) {
                     if (shooter instanceof LivingEntity) {
-                        getItemStack().hurtAndBreak(1, (LivingEntity) shooter, p_222182_1_ -> {
-                        });
+                        getItemStack().hurtAndBreak(1, (LivingEntity) shooter, EquipmentSlot.MAINHAND);
                     }
                 }
             }
@@ -157,21 +147,6 @@ public class SpinBlade extends Projectile {
         }
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
         boolean flag = false;
-        if (hitresult.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockpos = ((BlockHitResult) hitresult).getBlockPos();
-            BlockState blockstate = this.level().getBlockState(blockpos);
-            if (blockstate.is(Blocks.NETHER_PORTAL)) {
-                this.handleInsidePortal(blockpos);
-                flag = true;
-            } else if (blockstate.is(Blocks.END_GATEWAY)) {
-                BlockEntity blockentity = this.level().getBlockEntity(blockpos);
-                if (blockentity instanceof TheEndGatewayBlockEntity && TheEndGatewayBlockEntity.canEntityTeleport(this)) {
-                    TheEndGatewayBlockEntity.teleportEntity(this.level(), blockpos, blockstate, this, (TheEndGatewayBlockEntity) blockentity);
-                }
-
-                flag = true;
-            }
-        }
 
         if (hitresult.getType() != HitResult.Type.MISS && !flag && !EventHooks.onProjectileImpact(this, hitresult)) {
             this.onHit(hitresult);
@@ -222,11 +197,11 @@ public class SpinBlade extends Projectile {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(PIERCING_LEVEL, Byte.valueOf((byte) 0));
-        this.entityData.define(RETURNING, Boolean.valueOf(false));
-        this.entityData.define(ITEMSTACK, ItemStack.EMPTY);
-        this.entityData.define(IN_GROUND, Boolean.valueOf(false));
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(PIERCING_LEVEL, (byte) 0);
+        builder.define(RETURNING, false);
+        builder.define(ITEMSTACK, ItemStack.EMPTY);
+        builder.define(IN_GROUND, false);
     }
 
     @Override
@@ -241,7 +216,7 @@ public class SpinBlade extends Projectile {
         super.readAdditionalSaveData(nbt);
 
         setReturning(nbt.getBoolean("returning"));
-        this.entityData.set(PIERCING_LEVEL, (byte) EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, getItemStack()));
+        //this.entityData.set(PIERCING_LEVEL, (byte) EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, getItemStack()));
     }
 
     public boolean isReturning() {

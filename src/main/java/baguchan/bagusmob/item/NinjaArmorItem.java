@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.ClientHooks;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 public class NinjaArmorItem extends ArmorItem {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BagusMob.MODID, "textures/models/ninja_armor.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/models/ninja_armor.png");
 
     public NinjaArmorItem(ArmorItem.Type type, Item.Properties properties) {
         super(ModArmorMaterials.NINJA_ARMOR, type, properties);
@@ -81,7 +82,7 @@ public class NinjaArmorItem extends ArmorItem {
     }
 
     @Override
-    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return TEXTURE.toString();
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return TEXTURE;
     }
 }

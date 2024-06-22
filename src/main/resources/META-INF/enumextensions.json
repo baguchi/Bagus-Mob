@@ -1,0 +1,22 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/entity/raid/Raid$RaiderType",
+      "name": "BAGUSMOB_NINJAR",
+      "constructor": "(Ljava/util/function/Supplier;[I)V",
+      "parameters": {
+        "class": "baguchan/bagusmob/registry/RaiderEnumParams",
+        "field": "NINJAR"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/entity/raid/Raid$RaiderType",
+      "name": "BAGUSMOB_TENGU",
+      "constructor": "(Ljava/util/function/Supplier;[I)V",
+      "parameters": {
+        "class": "baguchan/bagusmob/registry/RaiderEnumParams",
+        "field": "TENGU"
+      }
+    }
+  ]
+}

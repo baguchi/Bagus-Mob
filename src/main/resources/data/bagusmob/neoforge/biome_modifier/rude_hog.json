@@ -2,7 +2,7 @@
   "type": "neoforge:add_spawns",
   "biomes": "#bagusmob:piglin_hunter_spawnable",
   "spawners": {
-    "type": "bagusmob:rude_hog",
+    "type": "bagusmob:rudehog",
     "weight": 1,
     "minCount": 1,
     "maxCount": 1

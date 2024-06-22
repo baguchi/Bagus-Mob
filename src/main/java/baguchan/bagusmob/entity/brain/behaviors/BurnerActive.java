@@ -63,7 +63,7 @@ public class BurnerActive<E extends BurnerHog> extends Behavior<E> {
                     double d3 = Math.sqrt(d0 * d0 + d2 * d2);
                     double d4 = Math.sqrt(Math.sqrt(d3)) * 0.5D;
                     for (int i = 0; i < 2; i++) {
-                        SmallFireball entity = new SmallFireball(p_22551_, p_22552_, p_22552_.getRandom().triangle(d0, 2.5D * d4), p_22552_.getRandom().triangle(d1, 2.5D * d4), p_22552_.getRandom().triangle(d2, 2.5D * d4));
+                        SmallFireball entity = new SmallFireball(p_22551_, p_22552_, new Vec3(p_22552_.getRandom().triangle(d0, 2.5D * d4), p_22552_.getRandom().triangle(d1, 2.5D * d4), p_22552_.getRandom().triangle(d2, 2.5D * d4)));
                         entity.setPos(p_22552_.position().x(), p_22552_.getEyeY() - 0.1F, p_22552_.position().z());
                         p_22551_.addFreshEntity(entity);
                     }

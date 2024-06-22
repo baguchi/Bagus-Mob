@@ -1,19 +1,21 @@
 package baguchan.bagusmob.entity;
 
+import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.registry.ModItemRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -26,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,22 +35,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class PotSnake extends Monster {
     public static final EntityDimensions POT_SNAKE_DIMENSIONS = EntityDimensions.fixed(0.95F, 1.0F);
 
-    private static final UUID COVERED_ARMOR_MODIFIER_UUID = UUID.fromString("22444c92-4e28-bb40-9931-58a10ce4381e");
+    private static final ResourceLocation COVERED_ARMOR_MODIFIER_UUID = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "pot_snake");
     private static final AttributeModifier COVERED_ARMOR_MODIFIER = new AttributeModifier(
-            COVERED_ARMOR_MODIFIER_UUID, "Covered armor bonus", 10.0, AttributeModifier.Operation.ADDITION
+            COVERED_ARMOR_MODIFIER_UUID, 10.0, AttributeModifier.Operation.ADD_VALUE
     );
     private static final EntityDataAccessor<Boolean> HIDING = SynchedEntityData.defineId(PotSnake.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<ItemStack> POT = SynchedEntityData.defineId(PotSnake.class, EntityDataSerializers.ITEM_STACK);
@@ -64,10 +62,10 @@ public class PotSnake extends Monster {
         super(p_27557_, p_27558_);
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(POT, Items.DECORATED_POT.getDefaultInstance());
-        this.entityData.define(HIDING, true);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(POT, ItemStack.EMPTY);
+        builder.define(HIDING, true);
     }
 
     protected void registerGoals() {
@@ -86,6 +84,17 @@ public class PotSnake extends Monster {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.26F).add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 2.0D);
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player p_21472_, InteractionHand p_21473_) {
+        ItemStack stack = p_21472_.getItemInHand(p_21473_);
+        if (stack.is(Blocks.DECORATED_POT.asItem())) {
+            setPot(stack.copy());
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(p_21472_, p_21473_);
     }
 
     @Override
@@ -154,7 +163,7 @@ public class PotSnake extends Monster {
     public void setPot(ItemStack p_34565_) {
         this.entityData.set(POT, p_34565_);
         if (!this.level().isClientSide) {
-            this.getAttribute(Attributes.ARMOR).removeModifier(COVERED_ARMOR_MODIFIER.getId());
+            this.getAttribute(Attributes.ARMOR).removeModifier(COVERED_ARMOR_MODIFIER);
             if (!p_34565_.isEmpty()) {
                 this.getAttribute(Attributes.ARMOR).addPermanentModifier(COVERED_ARMOR_MODIFIER);
             } else {
@@ -183,14 +192,16 @@ public class PotSnake extends Monster {
     @Override
     public void addAdditionalSaveData(CompoundTag p_21484_) {
         super.addAdditionalSaveData(p_21484_);
-        p_21484_.put("Pot", this.getPot().save(new CompoundTag()));
+        if (!this.getPot().isEmpty()) {
+            p_21484_.put("Pot", this.getPot().save(this.registryAccess()));
+        }
         p_21484_.putBoolean("Hiding", this.isHiding());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag p_21450_) {
         super.readAdditionalSaveData(p_21450_);
-        this.setPot(ItemStack.of(p_21450_.getCompound("Pot")));
+        this.setPot(ItemStack.parse(this.registryAccess(), p_21450_.getCompound("Pot")).orElse(ItemStack.EMPTY));
         this.setHiding(p_21450_.getBoolean("Hiding"));
     }
 
@@ -219,7 +230,7 @@ public class PotSnake extends Monster {
     public boolean hurt(DamageSource p_21016_, float p_21017_) {
         boolean flag = super.hurt(p_21016_, p_21017_);
         if (flag && this.isHasPot() && p_21016_.is(DamageTypeTags.IS_PROJECTILE)) {
-            for (Item item : loadDropSherd()) {
+            for (Item item : this.getPot().getOrDefault(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY).ordered()) {
                 spawnAtLocation(item);
             }
             this.setHiding(false);
@@ -229,10 +240,10 @@ public class PotSnake extends Monster {
     }
 
     @Override
-    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
-        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+    protected void dropCustomDeathLoot(ServerLevel p_348683_, DamageSource p_21385_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_348683_, p_21385_, p_21387_);
         if (isHasPot()) {
-            for (Item item : loadDropSherd()) {
+            for (Item item : this.getPot().getOrDefault(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY).ordered()) {
                 spawnAtLocation(item);
             }
             this.setHiding(false);
@@ -240,40 +251,19 @@ public class PotSnake extends Monster {
         }
     }
 
-    public List<Item> loadDropSherd() {
-        CompoundTag tag = BlockItem.getBlockEntityData(this.getPot());
-        if (tag != null && tag.contains("sherds", 9) && tag.contains("sherds", 9)) {
-            ListTag listtag = tag.getList("sherds", 8);
-            List<Item> list = new ArrayList();
-            list.add(itemFromTag(listtag, 0));
-            list.add(itemFromTag(listtag, 1));
-            list.add(itemFromTag(listtag, 2));
-            list.add(itemFromTag(listtag, 3));
-            return list;
-        }
-        return List.of();
-    }
-
-    private static Item itemFromTag(ListTag p_285179_, int p_285060_) {
-        if (p_285060_ >= p_285179_.size()) {
-            return Items.BRICK;
-        } else {
-            Tag tag = p_285179_.get(p_285060_);
-            return BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(tag.getAsString()));
-        }
-    }
-
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_, MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_, @Nullable CompoundTag p_146750_) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_146746_, DifficultyInstance p_146747_, MobSpawnType p_146748_, @Nullable SpawnGroupData p_146749_) {
         ItemStack stack = Items.DECORATED_POT.getDefaultInstance();
-        DecoratedPotBlockEntity.Decorations decoratedpotblockentity$decorations = new DecoratedPotBlockEntity.Decorations(ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get());
+        PotDecorations decoratedpotblockentity$decorations = new PotDecorations(ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get(), ModItemRegistry.SNAKE_POTTERY_SHERD.get());
         if (random.nextBoolean()) {
             stack = DecoratedPotBlockEntity.createDecoratedPotItem(decoratedpotblockentity$decorations);
         }
-        this.setPot(stack);
+        if (this.getPot().isEmpty()) {
+            this.setPot(stack);
+        }
         this.setHiding(true);
 
-        return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_, p_146750_);
+        return super.finalizeSpawn(p_146746_, p_146747_, p_146748_, p_146749_);
     }
 
     @Override
@@ -287,7 +277,7 @@ public class PotSnake extends Monster {
     }
 
     @Override
-    public EntityDimensions getDimensions(Pose p_149361_) {
-        return this.isHasPot() ? POT_SNAKE_DIMENSIONS.scale(this.getScale()) : super.getDimensions(p_149361_);
+    protected EntityDimensions getDefaultDimensions(Pose p_316700_) {
+        return this.isHasPot() ? POT_SNAKE_DIMENSIONS.scale(this.getScale()) : super.getDefaultDimensions(p_316700_);
     }
 }

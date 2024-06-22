@@ -3,10 +3,11 @@ package baguchan.bagusmob.entity;
 import bagu_chan.bagus_lib.entity.goal.AnimateAttackGoal;
 import baguchan.bagusmob.entity.goal.JumpTheSkyGoal;
 import baguchan.bagusmob.registry.ModItemRegistry;
-import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -31,14 +32,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 import javax.annotation.Nullable;
-import java.util.Map;
 
 public class Tengu extends AbstractIllager {
 
@@ -132,7 +129,7 @@ public class Tengu extends AbstractIllager {
     public boolean isAlliedTo(Entity p_33314_) {
         if (super.isAlliedTo(p_33314_)) {
             return true;
-        } else if (p_33314_ instanceof LivingEntity && ((LivingEntity) p_33314_).getMobType() == MobType.ILLAGER) {
+        } else if (p_33314_ instanceof LivingEntity && ((LivingEntity) p_33314_).getType().is(EntityTypeTags.ILLAGER)) {
             return this.getTeam() == null && p_33314_.getTeam() == null;
         } else {
             return false;
@@ -171,13 +168,13 @@ public class Tengu extends AbstractIllager {
         }
     }
 
-    public EntityDimensions getDimensions(Pose p_36166_) {
-        if (p_36166_ == Pose.FALL_FLYING) {
+    @Override
+    protected EntityDimensions getDefaultDimensions(Pose p_316700_) {
+        if (p_316700_ == Pose.FALL_FLYING) {
             return EntityDimensions.scalable(0.8F, 0.8F);
         }
-        return super.getDimensions(p_36166_);
+        return super.getDefaultDimensions(p_316700_);
     }
-
 
     @Override
     public void aiStep() {
@@ -215,12 +212,12 @@ public class Tengu extends AbstractIllager {
     }
 
     @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_34088_, DifficultyInstance p_34089_, MobSpawnType p_34090_, @Nullable SpawnGroupData p_34091_, @Nullable CompoundTag p_34092_) {
-        SpawnGroupData spawngroupdata = super.finalizeSpawn(p_34088_, p_34089_, p_34090_, p_34091_, p_34092_);
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_34088_, DifficultyInstance p_34089_, MobSpawnType p_34090_, @Nullable SpawnGroupData p_34091_) {
+        SpawnGroupData spawngroupdata = super.finalizeSpawn(p_34088_, p_34089_, p_34090_, p_34091_);
         ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
         RandomSource randomsource = p_34088_.getRandom();
         this.populateDefaultEquipmentSlots(randomsource, p_34089_);
-        this.populateDefaultEquipmentEnchantments(randomsource, p_34089_);
+        this.populateDefaultEquipmentEnchantments(p_34088_, randomsource, p_34089_);
         return spawngroupdata;
     }
 
@@ -231,7 +228,7 @@ public class Tengu extends AbstractIllager {
     }
 
     @Override
-    public void applyRaidBuffs(int p_37844_, boolean p_37845_) {
+    public void applyRaidBuffs(ServerLevel p_348605_, int p_37844_, boolean p_37845_) {
         ItemStack itemstack = new ItemStack(ModItemRegistry.SHARPED_LEAF.get());
         Raid raid = this.getCurrentRaid();
         int i = 1;
@@ -240,11 +237,6 @@ public class Tengu extends AbstractIllager {
         }
 
         boolean flag = this.random.nextFloat() <= raid.getEnchantOdds();
-        if (flag) {
-            Map<Enchantment, Integer> map = Maps.newHashMap();
-            map.put(Enchantments.SHARPNESS, i);
-            EnchantmentHelper.setEnchantments(map, itemstack);
-        }
 
         this.setItemSlot(EquipmentSlot.MAINHAND, itemstack);
     }

@@ -22,18 +22,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "bagusmob:katana"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 3,
           "name": "minecraft:diamond",
           "functions": [

@@ -15,7 +15,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RudeHogRenderer<T extends RudeHog> extends MobRenderer<T, RudeHogModel<T>> {
-    private static final ResourceLocation RUDEHOG = new ResourceLocation(BagusMob.MODID, "textures/entity/piglin/rudehog.png");
+    private static final ResourceLocation RUDEHOG = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/piglin/rudehog.png");
 
     public RudeHogRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new RudeHogModel<>(renderManagerIn.bakeLayer(ModModelLayers.RUDEHOG)), 0.5F);

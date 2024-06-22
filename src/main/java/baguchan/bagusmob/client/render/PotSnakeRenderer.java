@@ -13,7 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PotSnakeRenderer<T extends PotSnake> extends MobRenderer<T, PotSnakeModel<T>> {
-    private static final ResourceLocation SNAKE = new ResourceLocation(BagusMob.MODID, "textures/entity/pot_snake.png");
+    private static final ResourceLocation SNAKE = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/pot_snake.png");
 
     public PotSnakeRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new PotSnakeModel<>(renderManagerIn.bakeLayer(ModModelLayers.POT_SNAKE)), 0.3F);

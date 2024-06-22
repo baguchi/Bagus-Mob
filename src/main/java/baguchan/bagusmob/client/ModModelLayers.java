@@ -5,17 +5,17 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
-	public static ModelLayerLocation TENGU = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "tengu"), "tengu");
-    public static ModelLayerLocation POT_SNAKE = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "pot_snake"), "pot_snake");
-    public static ModelLayerLocation NINJAR = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "ninjar"), "ninjar");
+    public static ModelLayerLocation TENGU = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "tengu"), "main");
+    public static ModelLayerLocation POT_SNAKE = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "pot_snake"), "main");
+    public static ModelLayerLocation NINJAR = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "ninjar"), "main");
 
-	public static final ModelLayerLocation MODIFIGER = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "modifiger"), "modifiger");
-	public static ModelLayerLocation VILER_VEX = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "viler_vex"), "viler_vex");
-    public static ModelLayerLocation NINJA_ARMOR = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "ninja_armor"), "ninja_armor");
+    public static final ModelLayerLocation MODIFIGER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "modifiger"), "main");
+    public static ModelLayerLocation VILER_VEX = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "viler_vex"), "main");
+    public static ModelLayerLocation NINJA_ARMOR = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "ninja_armor"), "main");
 
-    public static ModelLayerLocation RUDEHOG = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "rudehog"), "rudehog");
-    public static ModelLayerLocation SPIN_BLADE = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "spin_blade"), "spin_blade");
-    public static ModelLayerLocation BURNER_HOG = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "burner_hog"), "burner_hog");
-    public static ModelLayerLocation SAMURAI = new ModelLayerLocation(new ResourceLocation(BagusMob.MODID, "samurai"), "samurai");
+    public static ModelLayerLocation RUDEHOG = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "rudehog"), "main");
+    public static ModelLayerLocation SPIN_BLADE = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "spin_blade"), "main");
+    public static ModelLayerLocation BURNER_HOG = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "burner_hog"), "main");
+    public static ModelLayerLocation SAMURAI = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "samurai"), "main");
 
 }

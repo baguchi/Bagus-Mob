@@ -3,10 +3,10 @@ package baguchan.bagusmob.registry;
 import baguchan.bagusmob.BagusMob;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = BagusMob.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = BagusMob.MODID)
 public class ModCreativeTabs {
 	@SubscribeEvent
 	public static void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -21,7 +21,6 @@ public class ModCreativeTabs {
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());
 			event.accept(ModItemRegistry.DAGGER.get());
-            event.accept(ModItemRegistry.KATANA.get());
 			event.accept(ModItemRegistry.NINJA_HOOD.get());
 			event.accept(ModItemRegistry.NINJA_CHESTPLATE.get());
 			event.accept(ModItemRegistry.NINJA_BOOTS.get());

@@ -13,7 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class BurnerHogRenderer<T extends BurnerHog> extends MobRenderer<T, BurnerHogModel<T>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BagusMob.MODID, "textures/entity/piglin/burner_hog.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/piglin/burner_hog.png");
 
     public BurnerHogRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new BurnerHogModel<>(renderManagerIn.bakeLayer(ModModelLayers.BURNER_HOG)), 0.5F);

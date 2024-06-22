@@ -12,13 +12,14 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SpinBladeRenderer extends EntityRenderer<SpinBlade> {
-    private static final ResourceLocation LOCATION = new ResourceLocation(BagusMob.MODID, "textures/entity/spin_blade.png");
+    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/spin_blade.png");
     private final SpinBladeModel<SpinBlade> model;
 
     public SpinBladeRenderer(EntityRendererProvider.Context renderManager) {
@@ -35,7 +36,7 @@ public class SpinBladeRenderer extends EntityRenderer<SpinBlade> {
 
         stackIn.translate(0.0F, -1.501F, 0.0F);
         VertexConsumer vertexconsumer = bufferIn.getBuffer(this.model.renderType(LOCATION));
-        this.model.renderToBuffer(stackIn, vertexconsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(stackIn, vertexconsumer, packedLightIn, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.colorFromFloat(1F, 1F, 1F, 1F));
 
         stackIn.popPose();
         super.render(entityIn, entityYaw, partialTicks, stackIn, bufferIn, packedLightIn);

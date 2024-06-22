@@ -41,8 +41,8 @@ public class DisappearGoal extends Goal {
 			this.mob.level().explode(this.mob, null, new TeleportExplosionDamageCalculator(), this.mob.getX(), this.mob.getY(), this.mob.getZ(), 1.0F, false,
 					Level.ExplosionInteraction.NONE,
 					ParticleTypes.GUST,
-					ParticleTypes.GUST_EMITTER,
-					SoundEvents.WIND_BURST);
+					ParticleTypes.GUST_EMITTER_LARGE,
+					SoundEvents.BREEZE_WIND_CHARGE_BURST);
 			for (int i = 0; i < 6; i++) {
 				if (this.mob.teleport()) {
 					break;

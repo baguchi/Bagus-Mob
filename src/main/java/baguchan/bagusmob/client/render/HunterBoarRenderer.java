@@ -11,8 +11,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class HunterBoarRenderer<T extends HunterBoar> extends HoglinRenderer {
-    private static final ResourceLocation HOGLIN_LOCATION = new ResourceLocation(BagusMob.MODID, "textures/entity/hoglin.png");
-    private static final ResourceLocation GB_HOGLIN_LOCATION = new ResourceLocation(BagusMob.MODID, "textures/entity/gb_hoglin.png");
+    private static final ResourceLocation HOGLIN_LOCATION = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/hoglin.png");
+    private static final ResourceLocation GB_HOGLIN_LOCATION = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/gb_hoglin.png");
 
     public HunterBoarRenderer(EntityRendererProvider.Context p_174165_) {
         super(p_174165_);

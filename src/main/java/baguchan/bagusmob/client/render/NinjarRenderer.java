@@ -14,7 +14,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class NinjarRenderer<T extends Ninjar> extends MobRenderer<T, NinjarModel<T>> {
-	private static final ResourceLocation ILLAGER = new ResourceLocation(BagusMob.MODID, "textures/entity/ninjar.png");
+	private static final ResourceLocation ILLAGER = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/entity/ninjar.png");
 
 	public NinjarRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new NinjarModel<>(renderManagerIn.bakeLayer(ModModelLayers.NINJAR)), 0.5F);
