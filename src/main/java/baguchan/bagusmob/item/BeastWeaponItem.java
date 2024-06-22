@@ -61,6 +61,6 @@ public class BeastWeaponItem extends Item {
 
 
     public int getEnchantmentValue() {
-        return 1;
+        return 10;
     }
 }
