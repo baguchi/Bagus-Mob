@@ -20,7 +20,7 @@ public class ItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider p_256380_) {
         this.tag(ItemTags.DECORATED_POT_SHERDS).add(ModItemRegistry.SNAKE_POTTERY_SHERD.get());
-        this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).add(ModItemRegistry.SHARPED_LEAF.get()).add(ModItemRegistry.BEAST_CUDGEL.get()).add(ModItemRegistry.DAGGER.get());
+        this.tag(ItemTags.SWORD_ENCHANTABLE).add(ModItemRegistry.SHARPED_LEAF.get()).add(ModItemRegistry.BEAST_CUDGEL.get()).add(ModItemRegistry.DAGGER.get());
         this.tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItemRegistry.SHARPED_LEAF.get()).add(ModItemRegistry.BEAST_CUDGEL.get()).add(ModItemRegistry.DAGGER.get());
         this.tag(ItemTags.HEAD_ARMOR).add(ModItemRegistry.NINJA_HOOD.get());
         this.tag(ItemTags.CHEST_ARMOR).add(ModItemRegistry.NINJA_CHESTPLATE.get());
