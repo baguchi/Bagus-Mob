@@ -16,8 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+
 
 public class ShapedLeafItem extends Item {
 	public ShapedLeafItem(Item.Properties properties) {
@@ -81,8 +82,7 @@ public class ShapedLeafItem extends Item {
 		p_345553_.hurtAndBreak(1, p_346282_, EquipmentSlot.MAINHAND);
 	}
 
-	@Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-		return toolAction == ToolActions.SWORD_SWEEP;
+	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+		return itemAbility == ItemAbilities.SWORD_SWEEP;
 	}
 }
