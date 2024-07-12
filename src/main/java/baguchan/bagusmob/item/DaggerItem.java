@@ -12,8 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+
 
 public class DaggerItem extends Item {
 	public DaggerItem(Properties properties) {
@@ -57,7 +58,7 @@ public class DaggerItem extends Item {
 	}
 
 	@Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-		return toolAction == ToolActions.SWORD_DIG;
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+		return itemAbility == ItemAbilities.SWORD_DIG;
 	}
 }
