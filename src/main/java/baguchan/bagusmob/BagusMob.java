@@ -1,7 +1,7 @@
 package baguchan.bagusmob;
 
+import bagu_chan.bagus_lib.util.JigsawHelper;
 import baguchan.bagusmob.registry.*;
-import baguchan.bagusmob.utils.JigsawHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
