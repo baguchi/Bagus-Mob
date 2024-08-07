@@ -22,19 +22,11 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
-
 public class NinjaArmorItem extends ArmorItem {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "textures/models/ninja_armor.png");
 
     public NinjaArmorItem(ArmorItem.Type type, Item.Properties properties) {
         super(ModArmorMaterials.NINJA_ARMOR, type, properties);
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        super.initializeClient(consumer);
-        consumer.accept(new NinjaArmorRender());
     }
 
     @Override

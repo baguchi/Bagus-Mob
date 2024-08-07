@@ -2,6 +2,7 @@ package baguchan.bagusmob.entity;
 
 import bagu_chan.bagus_lib.entity.goal.AnimateAttackGoal;
 import baguchan.bagusmob.entity.goal.JumpTheSkyGoal;
+import baguchan.bagusmob.entity.projectile.SlashAir;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;

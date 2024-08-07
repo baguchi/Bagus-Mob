@@ -3,6 +3,7 @@ package baguchan.bagusmob.client;
 import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.client.model.*;
 import baguchan.bagusmob.client.render.*;
+import baguchan.bagusmob.item.NinjaArmorItem;
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import baguchan.bagusmob.registry.ModItemRegistry;
 import net.neoforged.api.distmarker.Dist;
@@ -11,6 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = BagusMob.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
@@ -25,6 +27,8 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), (p_174165_) -> new HunterBoarRenderer(p_174165_));
         event.registerEntityRenderer(ModEntityRegistry.SPIN_BLADE.get(), SpinBladeRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.BURNER_HOG.get(), BurnerHogRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.SOUL.get(), SoulRenderer::new);
+        event.registerEntityRenderer(ModEntityRegistry.SOILTH.get(), SoilthRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -36,6 +40,13 @@ public class ClientRenderingRegistry {
         event.registerLayerDefinition(ModModelLayers.RUDEHOG, RudeHogModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPIN_BLADE, SpinBladeModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BURNER_HOG, BurnerHogModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.SOILTH, SoilthModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.SOUL, SoulModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void clientExtensionRegistry(RegisterClientExtensionsEvent event) {
+        event.registerItem(new NinjaArmorItem.NinjaArmorRender(), ModItemRegistry.NINJA_HOOD.get(), ModItemRegistry.NINJA_CHESTPLATE.get(), ModItemRegistry.NINJA_BOOTS.get());
 	}
 
     @SubscribeEvent

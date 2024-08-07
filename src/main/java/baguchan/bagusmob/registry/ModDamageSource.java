@@ -8,5 +8,6 @@ import net.minecraft.world.damagesource.DamageType;
 
 public interface ModDamageSource {
     ResourceKey<DamageType> SPIN_BLADE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "spin_blade"));
+    ResourceKey<DamageType> SOUL = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "soul"));
 
 }

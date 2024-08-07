@@ -1,4 +1,4 @@
-package baguchan.bagusmob.entity;
+package baguchan.bagusmob.entity.projectile;
 
 import baguchan.bagusmob.registry.ModEntityRegistry;
 import net.minecraft.core.particles.ParticleTypes;

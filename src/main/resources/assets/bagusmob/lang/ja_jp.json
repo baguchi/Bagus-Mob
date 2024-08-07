@@ -5,6 +5,7 @@
   "item.bagusmob.viler_vex_spawn_egg": "卑怯なヴェックスのスポーンエッグ",
   "item.bagusmob.pot_snake_spawn_egg": "ツボヘビのスポーンエッグ",
   "item.bagusmob.samurai_spawn_egg": "サムライのスポーンエッグ",
+  "item.bagusmob.soilth_spawn_egg": "ソイルスのスポーンエッグ",
   "item.bagusmob.sharped_leaf": "尖った葉",
   "item.bagusmob.dagger": "ダガー",
   "item.bagusmob.katana": "刀",
@@ -24,6 +25,8 @@
   "entity.bagusmob.burner_hog": "バーナーホッグ",
   "entity.bagusmob.pot_snake": "ツボヘビ",
   "entity.bagusmob.samurai": "サムライ",
+  "entity.bagusmob.soilth": "ソイルス",
+  "entity.bagusmob.soul": "魂",
   "death.attack.bagusmob.spin_blade": "%1$sは、%2$sのスピンブレードにあたった",
   "enchantment.bagusmob.perfect_guard": "パーフェクトガード",
   "subtitles.bagusmob.ninjar.teleport": "ニンジャーが消える"

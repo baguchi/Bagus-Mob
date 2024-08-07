@@ -5,6 +5,7 @@
   "item.bagusmob.viler_vex_spawn_egg": "Viler Vex Spawn Egg",
   "item.bagusmob.pot_snake_spawn_egg": "Pot Snake Spawn Egg",
   "item.bagusmob.samurai_spawn_egg": "Samurai Spawn Egg",
+  "item.bagusmob.soilth_spawn_egg": "Soilth Spawn Egg",
   "item.bagusmob.sharped_leaf": "Shaped Leaf",
   "item.bagusmob.dagger": "Dagger",
   "item.bagusmob.katana": "Katana",
@@ -27,6 +28,8 @@
   "entity.bagusmob.burner_hog": "Burner Hog",
   "entity.bagusmob.pot_snake": "Pot Snake",
   "entity.bagusmob.samurai": "Samurai",
+  "entity.bagusmob.soilth": "Soilth",
+  "entity.bagusmob.soul": "Soul",
   "death.attack.bagusmob.spin_blade": "%1$s was hit by %2$s 's Spin Blade",
   "enchantment.bagusmob.perfect_guard": "Perfect Guard",
   "subtitles.bagusmob.ninjar.teleport": "Ninjar Disappear"

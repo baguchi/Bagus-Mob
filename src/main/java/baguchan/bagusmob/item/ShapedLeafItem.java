@@ -1,6 +1,6 @@
 package baguchan.bagusmob.item;
 
-import baguchan.bagusmob.entity.SlashAir;
+import baguchan.bagusmob.entity.projectile.SlashAir;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

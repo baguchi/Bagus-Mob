@@ -1,6 +1,6 @@
 package baguchan.bagusmob.client.render;
 
-import baguchan.bagusmob.entity.SlashAir;
+import baguchan.bagusmob.entity.projectile.SlashAir;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;

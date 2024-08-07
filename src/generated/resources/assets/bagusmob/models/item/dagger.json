@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "bagusmob:item/katana"
+    "layer0": "bagusmob:item/dagger"
   }
 }

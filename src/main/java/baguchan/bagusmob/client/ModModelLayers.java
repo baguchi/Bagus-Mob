@@ -18,4 +18,7 @@ public class ModModelLayers {
     public static ModelLayerLocation BURNER_HOG = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "burner_hog"), "main");
     public static ModelLayerLocation SAMURAI = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "samurai"), "main");
 
+    public static ModelLayerLocation SOILTH = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "soilth"), "main");
+    public static ModelLayerLocation SOUL = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BagusMob.MODID, "soul"), "main");
+
 }

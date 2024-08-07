@@ -17,6 +17,7 @@ public class ModCreativeTabs {
             event.accept(ModItemRegistry.HUNTER_BOAR_SPAWNEGG.get());
             event.accept(ModItemRegistry.BURNER_HOG_SPAWNEGG.get());
             event.accept(ModItemRegistry.POT_SNAKE_SPAWNEGG.get());
+            event.accept(ModItemRegistry.SOILTH_SPAWNEGG.get());
 		}
 		if (event.getTabKey() == CreativeModeTabs.COMBAT) {
 			event.accept(ModItemRegistry.SHARPED_LEAF.get());

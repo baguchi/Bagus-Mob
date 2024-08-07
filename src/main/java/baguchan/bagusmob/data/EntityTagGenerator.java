@@ -20,6 +20,8 @@ public class EntityTagGenerator extends EntityTypeTagsProvider {
     protected void addTags(HolderLookup.Provider p_255894_) {
         this.tag(EntityTypeTags.ILLAGER).add(ModEntityRegistry.NINJAR.get()).add(ModEntityRegistry.TENGU.get());
         this.tag(EntityTypeTags.RAIDERS).add(ModEntityRegistry.NINJAR.get()).add(ModEntityRegistry.TENGU.get());
+
+        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(ModEntityRegistry.SOILTH.get());
     }
 
 }

@@ -29,6 +29,7 @@ public class ModItemRegistry {
     public static final Supplier<Item> HUNTER_BOAR_SPAWNEGG = ITEM_REGISTRY.register("hunter_boar_spawn_egg", () -> new DeferredSpawnEggItem(ModEntityRegistry.HUNTER_BOAR, 0x85424C, 0xFCED6B, (new Item.Properties())));
     public static final Supplier<Item> BURNER_HOG_SPAWNEGG = ITEM_REGISTRY.register("burner_hog_spawn_egg", () -> new DeferredSpawnEggItem(ModEntityRegistry.BURNER_HOG, 0xF2BA86, 0x545054, (new Item.Properties())));
     public static final Supplier<Item> POT_SNAKE_SPAWNEGG = ITEM_REGISTRY.register("pot_snake_spawn_egg", () -> new DeferredSpawnEggItem(ModEntityRegistry.POT_SNAKE, 0x1E4516, 0x72A268, (new Item.Properties())));
+    public static final Supplier<Item> SOILTH_SPAWNEGG = ITEM_REGISTRY.register("soilth_spawn_egg", () -> new DeferredSpawnEggItem(ModEntityRegistry.SOILTH, 0x25C6CD, 0x3D2E25, (new Item.Properties())));
 
     public static final Supplier<Item> SNAKE_POTTERY_SHERD = ITEM_REGISTRY.register("snake_pottery_sherd", () -> new Item((new Item.Properties())));
 

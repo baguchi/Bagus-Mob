@@ -19,10 +19,13 @@ public class DataGenerators {
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        event.getGenerator().addProvider(event.includeClient(), new ItemModelGenerators(packOutput, event.getExistingFileHelper()));
+
         BlockTagGenerator blocktags = new BlockTagGenerator(packOutput, lookupProvider, event.getExistingFileHelper());
         event.getGenerator().addProvider(event.includeServer(), blocktags);
 
         event.getGenerator().addProvider(event.includeServer(), new ItemTagGenerator(packOutput, lookupProvider, blocktags.contentsGetter(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(event.includeServer(), new EntityTagGenerator(packOutput, lookupProvider, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(event.includeServer(), new DamageTypeTagGenerator(packOutput, lookupProvider, event.getExistingFileHelper()));
     }
 }
