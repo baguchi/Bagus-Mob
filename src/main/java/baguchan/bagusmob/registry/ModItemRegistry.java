@@ -4,10 +4,12 @@ import baguchan.bagusmob.BagusMob;
 import baguchan.bagusmob.item.*;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -34,7 +36,7 @@ public class ModItemRegistry {
     public static final Supplier<Item> SNAKE_POTTERY_SHERD = ITEM_REGISTRY.register("snake_pottery_sherd", () -> new Item((new Item.Properties())));
 
     public static final Supplier<Item> BEAST_CUDGEL = ITEM_REGISTRY.register("beast_cudgel", () -> new BeastWeaponItem((new Item.Properties()).durability(520).attributes(BeastWeaponItem.createAttributes()).rarity(Rarity.UNCOMMON)));
-    public static final Supplier<Item> SPIN_BLADE = ITEM_REGISTRY.register("spin_blade", () -> new SpinBladeItem((new Item.Properties()).durability(320).rarity(Rarity.UNCOMMON)));
+    public static final Supplier<Item> SPIN_BLADE = ITEM_REGISTRY.register("spin_blade", () -> new SpinBladeItem((new Item.Properties()).durability(320).rarity(Rarity.UNCOMMON).component(DataComponents.CUSTOM_DATA, CustomData.EMPTY)));
 
 	@OnlyIn(Dist.CLIENT)
 	public static void addItemModelProperties() {
