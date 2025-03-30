@@ -27,9 +27,7 @@ public class ClientRenderingRegistry {
 		event.registerEntityRenderer(ModEntityRegistry.HUNTER_BOAR.get(), (p_174165_) -> new HunterBoarRenderer(p_174165_));
         event.registerEntityRenderer(ModEntityRegistry.SPIN_BLADE.get(), SpinBladeRenderer::new);
         event.registerEntityRenderer(ModEntityRegistry.BURNER_HOG.get(), BurnerHogRenderer::new);
-        event.registerEntityRenderer(ModEntityRegistry.SOUL.get(), SoulRenderer::new);
-        event.registerEntityRenderer(ModEntityRegistry.SOILTH.get(), SoilthRenderer::new);
-	}
+    }
 
 	@SubscribeEvent
 	public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -40,8 +38,6 @@ public class ClientRenderingRegistry {
         event.registerLayerDefinition(ModModelLayers.RUDEHOG, RudeHogModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPIN_BLADE, SpinBladeModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BURNER_HOG, BurnerHogModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.SOILTH, SoilthModel::createBodyLayer);
-        event.registerLayerDefinition(ModModelLayers.SOUL, SoulModel::createBodyLayer);
     }
 
     @SubscribeEvent

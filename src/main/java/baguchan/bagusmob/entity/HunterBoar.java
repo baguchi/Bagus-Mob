@@ -1,6 +1,7 @@
 package baguchan.bagusmob.entity;
 
 import bagu_chan.bagus_lib.util.BrainUtils;
+import baguchan.bagusmob.registry.ModSensors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
@@ -31,20 +32,19 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zoglin;
-import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.hoglin.HoglinBase;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.schedule.Activity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
 
-public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
+public class HunterBoar extends Monster implements Enemy, HoglinBase {
     private static final EntityDataAccessor<Boolean> DATA_IMMUNE_TO_ZOMBIFICATION = SynchedEntityData.defineId(HunterBoar.class, EntityDataSerializers.BOOLEAN);
 
-    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super HunterBoar>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HOGLIN_SPECIFIC_SENSOR);
+    protected static final ImmutableList<? extends SensorType<? extends Sensor<? super HunterBoar>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModSensors.BOAR_SENSOR.get());
     protected static final ImmutableList<? extends MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.BREED_TARGET, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_VISIBLE_ADULT_PIGLIN, MemoryModuleType.AVOID_TARGET, MemoryModuleType.VISIBLE_ADULT_PIGLIN_COUNT, MemoryModuleType.VISIBLE_ADULT_HOGLIN_COUNT, MemoryModuleType.NEAREST_VISIBLE_ADULT_HOGLINS, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.NEAREST_REPELLENT, MemoryModuleType.PACIFIED);
     private int timeInOverworld;
     private int attackAnimationRemainingTicks;
@@ -55,16 +55,13 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
     }
 
     @Override
-    public boolean isFood(ItemStack p_34562_) {
-        return false;
-    }
-
-    protected Brain.Provider<HunterBoar> revampBrainProvider() {
+    protected Brain.Provider<HunterBoar> brainProvider() {
         return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
     }
 
-    protected Brain<?> makeBrain(Dynamic<?> p_34221_) {
-        Brain<HunterBoar> brain = this.revampBrainProvider().makeBrain(p_34221_);
+    @Override
+    protected Brain<HunterBoar> makeBrain(Dynamic<?> p_34221_) {
+        Brain<HunterBoar> brain = this.brainProvider().makeBrain(p_34221_);
         initCoreActivity(brain);
         initIdleActivity(brain);
         initFightActivity(brain);
@@ -136,8 +133,14 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         this.timeInOverworld = p_34519_.getInt("TimeInOverworld");
     }
 
+    @Override
+    public Brain<HunterBoar> getBrain() {
+        return (Brain<HunterBoar>) super.getBrain();
+    }
+
+    @Override
     protected void customServerAiStep() {
-        this.level().getProfiler().push("boarBrain");
+        this.level().getProfiler().push("hunterBoarBrain");
         this.getBrain().tick((ServerLevel) this.level(), this);
         this.level().getProfiler().pop();
         this.updateActivity();
@@ -243,18 +246,13 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         }
 
     }
-
-    public double getPassengersRidingOffset() {
-        return (double) this.getBbHeight() - (this.isBaby() ? 0.2D : 0.15D);
-    }
-
     public boolean hurt(DamageSource p_34214_, float p_34215_) {
         boolean flag = super.hurt(p_34214_, p_34215_);
         if (this.level().isClientSide) {
             return false;
         } else if (flag && p_34214_.getEntity() instanceof LivingEntity) {
             LivingEntity livingentity = (LivingEntity) p_34214_.getEntity();
-            if (this.canAttack(livingentity) && !BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(this, livingentity, 4.0D)) {
+            if (this.isAlliedTo(livingentity) && !BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(this, livingentity, 4.0D)) {
                 this.setAttackTarget(livingentity);
                 if (this.getControllingPassenger() != null) {
                     this.getControllingPassenger().getBrain().setMemory(MemoryModuleType.ATTACK_TARGET, livingentity);
@@ -265,5 +263,13 @@ public class HunterBoar extends Hoglin implements Enemy, HoglinBase {
         } else {
             return flag;
         }
+    }
+
+    @Override
+    public boolean isAlliedTo(Entity p_20355_) {
+        if (p_20355_ instanceof AbstractPiglin abstractPiglin) {
+            return true;
+        }
+        return super.isAlliedTo(p_20355_);
     }
 }

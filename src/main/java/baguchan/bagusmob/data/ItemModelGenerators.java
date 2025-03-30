@@ -34,7 +34,6 @@ public class ItemModelGenerators extends ItemModelProvider {
         egg(ModItemRegistry.RUDEHOG_SPAWNEGG);
         egg(ModItemRegistry.NINJAR_SPAWNEGG);
         egg(ModItemRegistry.POT_SNAKE_SPAWNEGG);
-        egg(ModItemRegistry.SOILTH_SPAWNEGG);
         egg(ModItemRegistry.TENGU_SPAWNEGG);
     }
 

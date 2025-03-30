@@ -18,9 +18,7 @@ public class DamageTypeTagGenerator extends DamageTypeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.Provider p_255894_) {
-        this.tag(DamageTypeTags.NO_KNOCKBACK).add(ModDamageSource.SOUL);
-        this.tag(DamageTypeTags.WITCH_RESISTANT_TO).add(ModDamageSource.SOUL);
-        this.tag(DamageTypeTags.PANIC_CAUSES).add(ModDamageSource.SOUL).add(ModDamageSource.SPIN_BLADE);
+        this.tag(DamageTypeTags.PANIC_CAUSES).add(ModDamageSource.SPIN_BLADE);
     }
 
 }

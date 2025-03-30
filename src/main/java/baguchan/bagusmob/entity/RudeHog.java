@@ -76,13 +76,12 @@ public class RudeHog extends Piglin {
     @Override
     protected void populateDefaultEquipmentSlots(RandomSource p_219189_, DifficultyInstance p_219190_) {
         this.setItemInHand(InteractionHand.MAIN_HAND, ModItemRegistry.BEAST_CUDGEL.get().getDefaultInstance());
-        this.setGuaranteedDrop(EquipmentSlot.MAINHAND);
     }
 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_34717_, DifficultyInstance p_34718_, MobSpawnType p_34719_, @Nullable SpawnGroupData p_34720_) {
-        if (p_34719_ != MobSpawnType.STRUCTURE) {
+        if (p_34719_ != MobSpawnType.STRUCTURE && p_34719_ != MobSpawnType.SPAWN_EGG) {
             this.spawnPartner(p_34717_, p_34718_, p_34720_);
         }
         RudeHogAi.initMemories(this, p_34717_.getRandom());
