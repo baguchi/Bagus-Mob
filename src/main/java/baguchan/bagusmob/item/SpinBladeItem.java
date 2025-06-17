@@ -63,7 +63,7 @@ public class SpinBladeItem extends Item {
 
     @Nullable
     public static UUID getThrownUuid(ItemStack stack) {
-        if (stack.get(DataComponents.CUSTOM_DATA) != null) {
+        if (!stack.get(DataComponents.CUSTOM_DATA).isEmpty()) {
             return stack.get(DataComponents.CUSTOM_DATA).copyTag().getUUID(THROWN_UUID_KEY);
         }
 
